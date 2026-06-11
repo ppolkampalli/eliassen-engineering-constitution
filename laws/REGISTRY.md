@@ -1,6 +1,6 @@
 # Law Registry
 
-**Constitution v1.0.0** · Ratified 2026-06-01 · 51 laws
+**Constitution v1.0.0** · Ratified 2026-06-01 · 52 laws
 
 Human-readable index of every law. Machine-readable mirror: [registry.json](registry.json).
 Look up any law from the command line: `./scripts/law-lookup.sh LAW-2.3`.
@@ -48,6 +48,7 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | [LAW-7.3](article-7-ai-governance/LAW-7.3.md) | AI Audit Trail | 7 — AI Governance | ACTIVE | 1.0 | quality, devops | review |
 | [LAW-7.4](article-7-ai-governance/LAW-7.4.md) | Identical Standards for AI Code | 7 — AI Governance | ACTIVE | 1.0 | quality, security | review |
 | [LAW-7.5](article-7-ai-governance/LAW-7.5.md) | Mandatory Escalation on Uncertainty | 7 — AI Governance | ACTIVE | 1.0 | quality, security | persona |
+| [LAW-7.6](article-7-ai-governance/LAW-7.6.md) | AI-Era Code-Health Metrics | 7 — AI Governance | ACTIVE | 1.0 | quality, architect | review |
 | [LAW-8.1](article-8-requirements-domain/LAW-8.1.md) | Acceptance Criteria Before Implementation | 8 — Requirements & Domain | ACTIVE | 1.0 | product-owner | persona |
 | [LAW-8.2](article-8-requirements-domain/LAW-8.2.md) | Business Rules Are Documented and Cited | 8 — Requirements & Domain | ACTIVE | 1.0 | industry-sme | review |
 | [LAW-8.3](article-8-requirements-domain/LAW-8.3.md) | Regulatory Mapping | 8 — Requirements & Domain | ACTIVE | 1.0 | industry-sme | review |
@@ -72,8 +73,8 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | 4 | Architecture | 5 |
 | 5 | Security | 6 |
 | 6 | Review & Documentation | 5 |
-| 7 | AI Governance | 5 |
+| 7 | AI Governance | 6 |
 | 8 | Requirements & Domain | 4 |
 | 9 | Operations & Cost | 4 |
 | 10 | Agentic Development | 5 |
-| | **Total** | **51** |
+| | **Total** | **52** |

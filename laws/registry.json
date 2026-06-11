@@ -672,6 +672,24 @@
       ]
     },
     {
+      "id": "LAW-7.6",
+      "title": "AI-Era Code-Health Metrics",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Projects track duplication, churn, and moved-vs-copied ratios per release; sustained regression is ticketed, actionable technical debt — and metrics are never individual performance measures.",
+      "rationale_summary": "AI generation makes duplicating code cheaper than abstracting it, and the industry-scale result is measured: across 211M changed lines (2020–2024), copy-pasted code rose from 8.3% to 12.3% of changes while moved/refactored code collapsed from 25% to under 10% — copy/paste exceeded refactoring for the first time on record (GitClear 2025).",
+      "file": "laws/article-7-ai-governance/LAW-7.6.md",
+      "amendments": [
+        "AMD-2026-005"
+      ]
+    },
+    {
       "id": "LAW-8.1",
       "title": "Acceptance Criteria Before Implementation",
       "article": 8,

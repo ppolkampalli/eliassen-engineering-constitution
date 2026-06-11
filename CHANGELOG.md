@@ -20,6 +20,10 @@ versions follow the constitution versioning rules in
   [AMD-2026-004](amendments/records/AMD-2026-004-mutation-testing-law.md):
   StrykerJS mutation runs in CI; AI-generated tests accepted only when they kill
   additional mutants; ratcheting mutation-score baseline.
+- **LAW-7.6 AI-Era Code-Health Metrics** via
+  [AMD-2026-005](amendments/records/AMD-2026-005-ai-code-health-metrics.md):
+  duplication/churn/moved-vs-copied tracked per release; sustained regression is
+  ticketed refactoring work; never an individual performance measure.
 
 ### Changed
 

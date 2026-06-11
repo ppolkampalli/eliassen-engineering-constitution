@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-005
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-7.6]
 reviewers_required: [quality, security, architect]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-005: Ratify LAW-7.6 — AI-Era Code-Health Metrics
@@ -57,10 +57,10 @@ code-health vendor — motive noted, dataset unmatched.)
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Quality | | | | |
-| Security | | | | Article 7 co-enforcement |
-| Architect | | | | Refactoring scheduling |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
+| Security | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Article 7 co-enforcement |
+| Architect | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Refactoring scheduling |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-7.6 enters force at v1.0.
