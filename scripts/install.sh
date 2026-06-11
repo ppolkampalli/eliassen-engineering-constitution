@@ -52,8 +52,9 @@ echo "  source: $SRC"
 echo "  target: $TARGET"
 echo ""
 
-echo "CLAUDE.md → project root"
+echo "Steering files → project root (LAW-10.4: ship both CLAUDE.md and AGENTS.md)"
 copy "$SRC/CLAUDE.md" "$TARGET/CLAUDE.md"
+copy "$SRC/AGENTS.md" "$TARGET/AGENTS.md"
 
 echo "Tooling configs → project root"
 copy "$SRC/configs/.eslintrc.json"        "$TARGET/.eslintrc.json"

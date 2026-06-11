@@ -18,6 +18,7 @@ for everyone or not at all).
 | `@typescript-eslint/explicit-function-return-type: warn` | LAW-2.4 | Explicit return types (exported surfaces enforced to error level in review) |
 | `import/order` (builtin → external → internal, alphabetized, newlines between) | LAW-2.5 | Import ordering |
 | `import/no-cycle: error` | LAW-4.3 | No circular dependencies |
+| `complexity: ["warn", 5]`, `max-lines-per-function: ["warn", 40]` | LAW-2.6 v1.1 | Advisory thresholds — review scrutiny beyond CC 5 / ~40 LOC, not automatic rejection |
 | `no-eval: error`, `no-implied-eval: error` | Article 5 (LAW-5.1 spirit) | Eval-class injection surface removed |
 | `no-console: warn` (allow `warn`/`error`) | LAW-5.3 (log hygiene), LAW-1.1 | Stray debug logging flagged |
 | `extends: ...recommended + type-checked + prettier` | LAW-1.3, LAW-2.2 | One shared baseline; formatting delegated to Prettier |

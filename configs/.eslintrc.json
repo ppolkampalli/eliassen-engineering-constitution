@@ -48,6 +48,8 @@
       }
     ],
     "import/no-cycle": "error",
+    "complexity": ["warn", 5],
+    "max-lines-per-function": ["warn", { "max": 40, "skipBlankLines": true, "skipComments": true }],
     "no-eval": "error",
     "no-implied-eval": "error",
     "no-console": ["warn", { "allow": ["warn", "error"] }]

@@ -102,6 +102,7 @@ mkdir -p "$TARGET/docs/constitution" "$TARGET/.claude" "$TARGET/.husky" \
          "$TARGET/.github/workflows" "$TARGET/docs"
 
 sync_file "$SRC/CLAUDE.md"                       "$TARGET/CLAUDE.md"
+sync_file "$SRC/AGENTS.md"                       "$TARGET/AGENTS.md"
 sync_file "$SRC/configs/.eslintrc.json"          "$TARGET/.eslintrc.json"
 sync_file "$SRC/configs/.prettierrc.json"        "$TARGET/.prettierrc.json"
 sync_file "$SRC/configs/tsconfig.base.json"      "$TARGET/tsconfig.base.json"
