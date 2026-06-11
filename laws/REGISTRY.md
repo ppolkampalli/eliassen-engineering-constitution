@@ -1,6 +1,6 @@
 # Law Registry
 
-**Constitution v1.0.0** · Ratified 2026-06-01 · 56 laws
+**Constitution v1.1.0** · Ratified 2026-06-01 · 56 laws
 
 Human-readable index of every law. Machine-readable mirror: [registry.json](registry.json).
 Look up any law from the command line: `./scripts/law-lookup.sh LAW-2.3`.
