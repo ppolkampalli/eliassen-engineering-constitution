@@ -184,17 +184,18 @@
       "title": "Function Size and Responsibility",
       "article": 2,
       "status": "ACTIVE",
-      "version": "1.0",
+      "version": "1.1",
       "owner_personas": [
         "software-engineer",
         "quality"
       ],
       "enforcement": "review",
-      "statement": "Functions do one thing, are at most 30 lines (target 10–15), and contain no magic numbers — meaningful literals are named constants.",
-      "rationale_summary": "Function size is the most reliable cheap proxy for responsibility creep: a 60-line function almost always interleaves concerns that must be understood — and tested (LAW-3.4) — together.",
+      "statement": "Functions do one thing with depth of abstraction as the goal; complexity ≤5 and ~40 lines are advisory review thresholds, fragmenting a coherent responsibility to satisfy a number is itself a violation, and meaningful literals are named constants.",
+      "rationale_summary": "Complexity, not length, is what defeats readers: a linear 35-line function can pass the 30-second test (LAW-1.1) while a \"compliant\" web of six 8-line fragments fails it — over-decomposition produces shallow interfaces and entanglement, where understanding one method requires reading several (Ousterhout, Martin–Ousterhout debate 2024–25).",
       "file": "laws/article-2-code-standards/LAW-2.6.md",
       "amendments": [
-        "AMD-2026-001"
+        "AMD-2026-001",
+        "AMD-2026-006"
       ]
     },
     {

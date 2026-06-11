@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-006
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-2.6]
 reviewers_required: [software-engineer, quality]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-006: Modernize LAW-2.6 — Complexity and Abstraction Depth over Line Count
@@ -62,9 +62,9 @@ Ousterhout/empirical citations; Related Laws unchanged.
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Software Engineer | | | | |
-| Quality | | | | |
+| Software Engineer | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-2.6 → v1.1.

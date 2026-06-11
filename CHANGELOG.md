@@ -31,6 +31,10 @@ versions follow the constitution versioning rules in
   [AMD-2026-003](amendments/records/AMD-2026-003-canon-tdd-agent-guardrail.md):
   Canon TDD cadence (test list, one test at a time) and the agent guardrail —
   failing tests may never be deleted, skipped, or weakened to achieve green.
+- **LAW-2.6 → v1.1** via
+  [AMD-2026-006](amendments/records/AMD-2026-006-function-size-modernization.md):
+  30-line cap replaced with cyclomatic-complexity ≤5 and ~40-LOC advisory
+  thresholds; depth of abstraction stated as the design goal.
 
 ## [1.0.0] — 2026-06-01
 
