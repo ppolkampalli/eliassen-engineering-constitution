@@ -88,6 +88,9 @@ echo "Law registry → docs/constitution/ (offline law citability)"
 copy "$SRC/laws/REGISTRY.md"    "$TARGET/docs/constitution/REGISTRY.md"
 copy "$SRC/laws/registry.json"  "$TARGET/docs/constitution/registry.json"
 
+echo "Workflow catalog → docs/constitution/workflows/ (LAW-10.6)"
+copy_tree "$SRC/workflows" "$TARGET/docs/constitution/workflows"
+
 echo ""
 echo "Done: $installed installed, $skipped skipped$( [ "$FORCE" != "--force" ] && [ $skipped -gt 0 ] && echo ' (use --force to overwrite)' )."
 echo ""

@@ -1,0 +1,71 @@
+{
+  "workflow_catalog_version": "1.0.0",
+  "governed_by": "LAW-10.6",
+  "override_rules": {
+    "project_override_path": "workflows/",
+    "precedence": "project file with same id replaces catalog entry",
+    "invariant": "hard stages from the org catalog may not be removed or softened by project overrides or conversational deviation",
+    "conversational_overrides": "permitted for hard:false stages; every applied deviation is recorded on the work item with approver and rationale"
+  },
+  "workflows": [
+    {
+      "id": "WF-FEATURE",
+      "title": "New Feature Development",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "New feature, enhancement, or user-facing behavior change",
+      "chain": "product-owner(requirements*) -> architect(design) -> quality(test-definition*) -> software-engineer(implement*) -> quality(code-review*+human) -> security(security-review^) -> devops(release-readiness*)",
+      "file": "workflows/WF-FEATURE.md"
+    },
+    {
+      "id": "WF-RESEARCH",
+      "title": "Product Research & Prioritization",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "A product requirement or problem needs investigation, idea generation, and prioritization before committing to build",
+      "chain": "product-owner(framing*) -> software-engineer(investigate) -> architect(ideate) -> product-owner(prioritize*+human)",
+      "file": "workflows/WF-RESEARCH.md"
+    },
+    {
+      "id": "WF-BUG",
+      "title": "Bug Fix",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "A defect: existing behavior deviates from documented or expected behavior",
+      "chain": "software-engineer(reproduce-and-fix*) -> quality(verify*) -> [unresolved: product-owner(resolve-or-escalate+human)]",
+      "file": "workflows/WF-BUG.md"
+    },
+    {
+      "id": "WF-SECBUG",
+      "title": "Security Bug",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "A vulnerability or suspected security defect - confirmed or reported",
+      "chain": "security(triage*) -> architect(approach) -> software-engineer(fix*) -> quality(verify*) -> security(close*+human)",
+      "file": "workflows/WF-SECBUG.md"
+    },
+    {
+      "id": "WF-REFACTOR",
+      "title": "Structural Refactor",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "Structural change with no intended behavior change: module reorganization, pattern migration, debt paydown, domain extraction",
+      "chain": "architect(adr*) -> quality(baseline*) -> software-engineer(implement*) -> quality(verify*+human)",
+      "file": "workflows/WF-REFACTOR.md"
+    },
+    {
+      "id": "WF-AMENDMENT",
+      "title": "Constitution Amendment",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "trigger": "A law needs to be created, modified, or repealed - any change to the constitution's laws",
+      "chain": "law-clerk(proposal*) -> persona-council(review*) -> HUMAN(decision*) -> law-clerk(enactment*) -> devops(propagation)",
+      "file": "workflows/WF-AMENDMENT.md"
+    }
+  ],
+  "legend": {
+    "*": "hard stage - not overridable",
+    "^": "conditionally hard - escalates to hard when the diff touches the gating laws' surfaces",
+    "+human": "required human checkpoint"
+  }
+}

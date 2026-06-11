@@ -127,5 +127,11 @@ sync_file "$SRC/checklists/pre-commit-checklist.md"  "$TARGET/docs/pre-commit-ch
 sync_file "$SRC/laws/REGISTRY.md"                "$TARGET/docs/constitution/REGISTRY.md"
 sync_file "$SRC/laws/registry.json"              "$TARGET/docs/constitution/registry.json"
 
+# Workflow catalog (org defaults; project-local workflows/ overrides are untouched)
+rm -rf "$TARGET/docs/constitution/workflows"
+mkdir -p "$TARGET/docs/constitution/workflows"
+cp -R "$SRC/workflows/." "$TARGET/docs/constitution/workflows/"
+echo "  updated: docs/constitution/workflows/ (full refresh)"
+
 echo ""
 echo "Update complete. Verify with: $SRC/scripts/validate.sh $TARGET"

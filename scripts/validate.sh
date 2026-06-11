@@ -49,6 +49,8 @@ check_file "docs/code-review-checklist.md"
 check_file "docs/standards.md"
 check_file "docs/constitution/REGISTRY.md"
 check_file "docs/constitution/registry.json"
+check_file "docs/constitution/workflows/registry.json"
+check_file ".claude/skills/workflow-orchestrator/SKILL.md"
 
 echo ""
 echo "Configuration integrity"
