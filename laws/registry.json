@@ -289,6 +289,24 @@
       ]
     },
     {
+      "id": "LAW-3.6",
+      "title": "Mutation Testing Verifies Test Effectiveness",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "automated",
+      "statement": "Test effectiveness is verified by mutation testing; AI-generated tests are accepted only when they kill mutants beyond the existing suite, and mutation-score baselines ratchet upward, never down.",
+      "rationale_summary": "Coverage proves code ran; mutation score proves tests notice when code breaks.",
+      "file": "laws/article-3-testing-quality/LAW-3.6.md",
+      "amendments": [
+        "AMD-2026-004"
+      ]
+    },
+    {
       "id": "LAW-4.1",
       "title": "Layered Architecture",
       "article": 4,

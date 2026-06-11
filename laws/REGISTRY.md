@@ -1,6 +1,6 @@
 # Law Registry
 
-**Constitution v1.0.0** · Ratified 2026-06-01 · 50 laws
+**Constitution v1.0.0** · Ratified 2026-06-01 · 51 laws
 
 Human-readable index of every law. Machine-readable mirror: [registry.json](registry.json).
 Look up any law from the command line: `./scripts/law-lookup.sh LAW-2.3`.
@@ -26,6 +26,7 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | [LAW-3.3](article-3-testing-quality/LAW-3.3.md) | Test Structure | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | review |
 | [LAW-3.4](article-3-testing-quality/LAW-3.4.md) | Test Isolation | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | review |
 | [LAW-3.5](article-3-testing-quality/LAW-3.5.md) | No Skipped or Hollow Tests | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | review |
+| [LAW-3.6](article-3-testing-quality/LAW-3.6.md) | Mutation Testing Verifies Test Effectiveness | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | automated |
 | [LAW-4.1](article-4-architecture/LAW-4.1.md) | Layered Architecture | 4 — Architecture | ACTIVE | 1.0 | architect | review |
 | [LAW-4.2](article-4-architecture/LAW-4.2.md) | SOLID Compliance | 4 — Architecture | ACTIVE | 1.0 | architect | review |
 | [LAW-4.3](article-4-architecture/LAW-4.3.md) | No Circular Dependencies | 4 — Architecture | ACTIVE | 1.0 | architect | automated |
@@ -67,7 +68,7 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 |---|---|---|
 | 1 | Foundational Principles | 5 |
 | 2 | Code Standards | 6 |
-| 3 | Testing & Quality | 5 |
+| 3 | Testing & Quality | 6 |
 | 4 | Architecture | 5 |
 | 5 | Security | 6 |
 | 6 | Review & Documentation | 5 |
@@ -75,4 +76,4 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | 8 | Requirements & Domain | 4 |
 | 9 | Operations & Cost | 4 |
 | 10 | Agentic Development | 5 |
-| | **Total** | **50** |
+| | **Total** | **51** |

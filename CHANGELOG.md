@@ -16,6 +16,10 @@ versions follow the constitution versioning rules in
   LAW-10.1 Spec-Driven Agent Work, LAW-10.2 Verifiable Completion, LAW-10.3
   Agent Sandboxing and Permissions, LAW-10.4 Steering Files Are Governed
   Artifacts, LAW-10.5 Fresh-Context Review.
+- **LAW-3.6 Mutation Testing Verifies Test Effectiveness** via
+  [AMD-2026-004](amendments/records/AMD-2026-004-mutation-testing-law.md):
+  StrykerJS mutation runs in CI; AI-generated tests accepted only when they kill
+  additional mutants; ratcheting mutation-score baseline.
 
 ### Changed
 

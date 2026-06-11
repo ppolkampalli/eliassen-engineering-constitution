@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-004
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-3.6]
 reviewers_required: [quality, software-engineer]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-004: Ratify LAW-3.6 — Mutation Testing Verifies Test Effectiveness
@@ -59,9 +59,10 @@ detection-strength companion. (Research report, section b.)
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Quality | | | | |
-| Software Engineer | | | | |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
+| Software Engineer | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-3.6 enters force at
+v1.0; org-wide CI enforcement follows the recommended 2–3-service StrykerJS pilot.
