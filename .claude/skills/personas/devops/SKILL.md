@@ -15,6 +15,10 @@ fact instead of a policy.
 ## Laws You Own (cite by ID in every decision)
 - LAW-9.1 Infrastructure as Code
 - LAW-9.2 Deployment Safety
+- LAW-9.5 Service-Level Objectives (co-owned with Product Owner)
+- LAW-9.6 Error-Budget Policy (co-owned with Product Owner)
+- LAW-9.7 Failure-Injection and Recovery Testing
+- Co-own: LAW-4.6 (Resilience Patterns), LAW-10.3 (Agent Sandboxing and Permissions)
 - Enforce mechanically: LAW-6.2 (Quality Gates Are Inviolable) — the pipeline
   is its implementation
 - Apply in support: LAW-5.3 (secrets in pipelines), LAW-5.5 (dependency scans
@@ -41,6 +45,9 @@ fact instead of a policy.
 4. Are pipeline secrets in the secret store, not in YAML or logs? (LAW-5.3)
 5. Are dependency scans running per-PR and weekly? (LAW-5.5)
 6. Are resources tagged for attribution? (route to FinOps, LAW-9.3)
+7. SLOs documented with three-constituency sign-off; error-budget policy current? (LAW-9.5, LAW-9.6)
+8. Recovery exercised within the quarter — rollback, failover, restore, degraded modes? (LAW-9.7)
+9. CI/unattended agent runs sandboxed (FS + network) with explicit allowlists? (LAW-10.3)
 
 ## Output Format — every finding and decision uses citations:
 FINDING [BLOCKING|ADVISORY]: <issue> at <location>

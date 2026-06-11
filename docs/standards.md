@@ -23,30 +23,38 @@ single quotes, semicolons, ES5 trailing commas.
 inline justification and Quality persona approval. Exported functions declare
 return types. All strict tsconfig flags on (see configs/tsconfig.base.json).
 
-**Structure (LAW-2.5, LAW-2.6):** Imports stdlib → third-party → local,
-alphabetized. Functions ≤30 lines (target 10–15), one responsibility, no magic
-numbers.
+**Structure (LAW-2.5, LAW-2.6 v1.1):** Imports stdlib → third-party → local,
+alphabetized. Functions: one responsibility, depth of abstraction as the goal;
+complexity ≤5 and ~40 lines are advisory review thresholds; no magic numbers.
 
 ## Testing (Article 3)
 
-- Failing test before implementation; red-green-refactor (LAW-3.1)
+- Canon TDD: test list → one failing test at a time → green → refactor; never
+  delete/skip/weaken a failing test to reach green (LAW-3.1 v1.1)
 - Floors: 80% business logic, 100% utilities, 70% controllers — CI-enforced,
   never lowered (LAW-3.2)
 - AAA structure; "should <expectation> when <scenario>" names (LAW-3.3)
 - Unit tests: externals mocked, <1s, order-independent (LAW-3.4)
 - No unticketed `.skip`; every test must be able to fail (LAW-3.5)
+- Mutation testing (StrykerJS): AI-generated tests must kill additional
+  mutants; mutation-score baselines ratchet upward (LAW-3.6)
 
 Full guide: [testing-guide.md](testing-guide.md).
 
 ## Architecture (Article 4)
 
-- Presentation → Application → Domain → Persistence; dependencies point down;
-  domain imports no framework (LAW-4.1)
+- Domain-first organization: top-level modules mirror business domains, with
+  Presentation → Application → Domain logic → Persistence inside each;
+  cross-domain access via public interfaces; modular-monolith default with
+  ADR-gated service extraction (LAW-4.1 v1.1)
 - SOLID, applied via the one-line tests in LAW-4.2
 - `import/no-cycle: error` (LAW-4.3)
 - Sanctioned patterns: DI (external deps), Repository (persistence), Factory
   (complex construction), Strategy (variant behavior); others need an ADR (LAW-4.4)
 - ADR in `docs/adr/` **before** structurally significant merges (LAW-4.5, LAW-1.4)
+- Resilience on every network boundary: explicit timeouts, bounded
+  backoff+jitter retries, idempotency keys, circuit breakers with defined
+  degraded modes (LAW-4.6)
 
 ## Security (Article 5)
 
@@ -72,6 +80,8 @@ Full guide: [testing-guide.md](testing-guide.md).
 - `[Claude-assisted]` tag + PR disclosure (LAW-7.3)
 - Same standards, verify-never-assume review (LAW-7.4)
 - Stop and ask on ambiguity — never guess (LAW-7.5)
+- Duplication/churn metrics per release; regressions become ticketed
+  refactoring work; never individual KPIs (LAW-7.6)
 
 ## Requirements & Ops (Articles 8–9)
 
@@ -79,6 +89,18 @@ Full guide: [testing-guide.md](testing-guide.md).
   compliance map maintained (LAW-8.3); scope changes need PO sign-off (LAW-8.4)
 - IaC only (LAW-9.1); rollback before release (LAW-9.2); cost estimates + tags
   (LAW-9.3); licenses evaluated, copyleft → legal (LAW-9.4)
+- SLOs with product+dev+ops sign-off (LAW-9.5); error budgets with
+  release-freeze consequences and >20% postmortem trigger (LAW-9.6); quarterly
+  failure-injection/game days — untested recovery is assumed broken (LAW-9.7)
+
+## Agentic Development (Article 10)
+
+- Substantial agent work starts from a reviewed plan naming the bearing laws (LAW-10.1)
+- Define a runnable check first; present evidence, not assertions (LAW-10.2)
+- Autonomous runs: filesystem AND network sandbox + explicit tool allowlists (LAW-10.3)
+- CLAUDE.md/AGENTS.md are code: reviewed, concise, pruned; always-rules become
+  hooks, not prose (LAW-10.4)
+- Agent output is reviewed by a context that didn't produce it (LAW-10.5)
 
 ## Looking Things Up
 

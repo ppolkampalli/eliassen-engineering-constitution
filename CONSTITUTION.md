@@ -1,6 +1,6 @@
 # The Engineering Constitution
 
-**Eliassen Group** · Version 1.0.0 · Ratified 2026-06-01 via [AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md)
+**Eliassen Group** · Version 1.1.0 · Ratified 2026-06-01 via [AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md) · Amended 2026-06-11 via [AMD-2026-002…009](amendments/records/)
 
 ---
 
@@ -58,19 +58,20 @@ specification lives in
 
 ---
 
-## The Nine Articles
+## The Ten Articles
 
 | Article | Domain | Laws | Summary |
 |---|---|---|---|
 | [1 — Foundational Principles](laws/article-1-foundational-principles/) | Principles | 1.1–1.5 | Readable code, built-in quality, zero-exception consistency, intentional architecture, universal security responsibility |
-| [2 — Code Standards](laws/article-2-code-standards/) | Code | 2.1–2.6 | Naming table, Prettier formatting, no `any`, explicit return types, import order, ≤30-line single-purpose functions |
-| [3 — Testing & Quality](laws/article-3-testing-quality/) | Tests | 3.1–3.5 | Test-first, CI-enforced coverage floors (80/100/70), AAA structure, isolated <1s unit tests, no skipped or hollow tests |
-| [4 — Architecture](laws/article-4-architecture/) | Design | 4.1–4.5 | Four-layer architecture, SOLID one-line tests, no cycles, sanctioned patterns (DI/Repository/Factory/Strategy), ADRs before merge |
+| [2 — Code Standards](laws/article-2-code-standards/) | Code | 2.1–2.6 | Naming table, Prettier formatting, no `any`, explicit return types, import order, single-purpose functions (CC≤5/~40-LOC advisory) |
+| [3 — Testing & Quality](laws/article-3-testing-quality/) | Tests | 3.1–3.6 | Canon TDD with agent guardrail, coverage floors (80/100/70), AAA structure, isolated <1s unit tests, no hollow tests, mutation testing |
+| [4 — Architecture](laws/article-4-architecture/) | Design | 4.1–4.6 | Domain-first modular monolith with layers within, SOLID, no cycles, sanctioned patterns, ADRs before merge, resilience patterns |
 | [5 — Security](laws/article-5-security/) | Security | 5.1–5.6 | Allowlist input validation, parameterized queries, no secrets in code, established auth only, dependency hygiene, TLS 1.2+/at-rest encryption |
-| [6 — Review & Documentation](laws/article-6-review-documentation/) | Review | 6.1–6.5 | Two approvals incl. domain expert, inviolable quality gates, JSDoc on public APIs, WHY-comments, docs in the same PR |
-| [7 — AI Governance](laws/article-7-ai-governance/) | AI | 7.1–7.5 | Human accountability, IP/data protection, `[Claude-assisted]` audit trail, identical standards for AI code, mandatory escalation on uncertainty |
+| [6 — Review & Documentation](laws/article-6-review-documentation/) | Review | 6.1–6.5 | Two approvals incl. domain expert, inviolable quality gates, JSDoc on public APIs, abstraction + WHY comments, docs in the same PR |
+| [7 — AI Governance](laws/article-7-ai-governance/) | AI | 7.1–7.6 | Human accountability, IP/data protection, `[Claude-assisted]` audit trail, identical standards, escalation on uncertainty, code-health metrics |
 | [8 — Requirements & Domain](laws/article-8-requirements-domain/) | Domain | 8.1–8.4 | Acceptance criteria before code, cited business rules, regulatory mapping, scope discipline |
-| [9 — Operations & Cost](laws/article-9-operations-cost/) | Ops | 9.1–9.4 | Infrastructure as code, reversible deployments, cost impact review + tagging, license compliance |
+| [9 — Operations & Cost](laws/article-9-operations-cost/) | Ops | 9.1–9.7 | IaC, reversible deployments, cost review + tagging, license compliance, SLOs, error budgets, failure-injection testing |
+| [10 — Agentic Development](laws/article-10-agentic-development/) | Agents | 10.1–10.5 | Spec-driven agent work, verifiable completion, sandboxing + permissions, governed steering files, fresh-context review |
 
 ---
 
@@ -83,12 +84,12 @@ Eight personas — defined as skills in [.claude/skills/personas/](.claude/skill
 | Persona | Domain | Owned Laws |
 |---|---|---|
 | Industry SME | Domain rules, regulation | 8.2, 8.3 |
-| Product Owner | Requirements, scope | 8.1, 8.4 |
-| Quality | Testing, review standards | 3.1–3.5, 6.1, 6.2, co-owns 2.3 |
-| Architect | Design, patterns, ADRs | 4.1–4.5, 1.4 |
-| Software Engineer | Implementation (default) | 2.1–2.6 |
-| DevOps | CI/CD, infra, deploys | 9.1, 9.2, enforces 6.2 |
-| Security | Article 5 + AI data | 5.1–5.6, co-enforces 7.2, 1.5 |
+| Product Owner | Requirements, scope | 8.1, 8.4, co-owns 9.5, 9.6, 10.1 |
+| Quality | Testing, review standards | 3.1–3.6, 6.1, 6.2, 10.2, 10.5, co-owns 2.3, 7.6 |
+| Architect | Design, patterns, ADRs | 4.1–4.6, 1.4, co-owns 7.6 |
+| Software Engineer | Implementation (default) | 2.1–2.6, 10.1, 10.4 |
+| DevOps | CI/CD, infra, deploys, reliability | 9.1, 9.2, 9.5–9.7, co-owns 4.6, 10.3; enforces 6.2 |
+| Security | Article 5 + AI data + agents | 5.1–5.6, 10.3, co-enforces 7.2, 1.5 |
 | FinOps | Cost, licensing | 9.3, 9.4 |
 
 **Authority ladder** (applies wherever personas conflict):

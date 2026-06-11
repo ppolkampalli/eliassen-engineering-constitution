@@ -33,11 +33,12 @@ Two approvals required, one domain expert, no self-approval (LAW-6.1).
 
 ## Architecture
 
-- [ ] Dependencies point downward; no layer skips (LAW-4.1)
+- [ ] Domain-first organization; dependencies point downward; cross-domain access via public interfaces only (LAW-4.1)
 - [ ] SOLID one-line tests pass on new/changed units (LAW-4.2)
 - [ ] No new import cycles (LAW-4.3)
 - [ ] DI/Repository/Factory/Strategy used where their situations apply (LAW-4.4)
-- [ ] ADR present for significant structural decisions (LAW-4.5, LAW-1.4)
+- [ ] ADR present for significant structural decisions; service extraction cites a documented criterion (LAW-4.5, LAW-4.1, LAW-1.4)
+- [ ] Network-boundary calls: explicit timeouts, bounded backoff+jitter retries, idempotency keys, breaker/degraded mode (LAW-4.6)
 
 ## Security (escalate to Security persona / security-checker for depth)
 
@@ -60,8 +61,10 @@ Two approvals required, one domain expert, no self-approval (LAW-6.1).
 
 - [ ] Verify, never assume: claimed APIs checked against real docs (LAW-7.4)
 - [ ] Edge cases tested, not trusted (LAW-7.4)
-- [ ] Generated tests inspected for hollowness (LAW-3.5)
+- [ ] Generated tests inspected for hollowness; mutation report shows added kills (LAW-3.5, LAW-3.6)
 - [ ] Author can explain every line (LAW-7.1)
+- [ ] Substantial agent work followed a reviewed plan; evidence of the runnable check presented (LAW-10.1, LAW-10.2)
+- [ ] Reviewed by a context that did not produce it; no failing checks deleted/weakened (LAW-10.5)
 
 ## Ops (when infra/deploy touched)
 

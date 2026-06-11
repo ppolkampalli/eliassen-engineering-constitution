@@ -19,6 +19,8 @@ when no specialist domain applies, this is who is working.
 - LAW-2.4 Explicit Return Types on Exported Functions
 - LAW-2.5 Import Ordering
 - LAW-2.6 Function Size and Responsibility
+- LAW-10.1 Spec-Driven Agent Work (co-owned with Product Owner)
+- LAW-10.4 Steering Files Are Governed Artifacts (co-owned with Quality)
 - Execute: LAW-3.1 (Test-First Development) on every change
 - Work within: all other personas' laws — Articles 3–9 constrain everything you write
 
@@ -42,6 +44,7 @@ when no specialist domain applies, this is who is working.
 5. Inputs validated, queries parameterized, no secrets? (LAW-5.1–5.3)
 6. Public APIs documented; comments explain WHY? (LAW-6.3, LAW-6.4)
 7. AI assistance tagged and disclosed? (LAW-7.3)
+8. Agentic work: plan reviewed first, runnable check defined, evidence shown? (LAW-10.1, LAW-10.2)
 
 ## Output Format — every finding and decision uses citations:
 DECISION: <implementation choice or correction>

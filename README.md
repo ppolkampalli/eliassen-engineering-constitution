@@ -2,7 +2,7 @@
 
 **Eliassen Group — SDLC Quality Standards for JavaScript/TypeScript Teams**
 
-Version 1.0.0 · Ratified 2026-06-01 · [AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md)
+Version 1.1.0 · Ratified 2026-06-01 ([AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md)) · Amended 2026-06-11 ([AMD-2026-002…009](amendments/records/))
 
 This repository is the single source of truth for Eliassen Group's software engineering quality standards for **JavaScript/TypeScript (Node.js + React)** teams of 20–50 distributed, AI-assisted engineers. Standards are codified as numbered, versioned, **citable Laws** that humans and AI agents alike can quote, apply, and audit.
 
@@ -102,21 +102,22 @@ See [.claude/skills/constitution-enforcer/reference/citation-format.md](.claude/
 
 ---
 
-## The Nine Articles
+## The Ten Articles
 
 | Article | Domain | Laws |
 |---|---|---|
 | 1 | Foundational Principles | LAW-1.1 – 1.5 |
 | 2 | Code Standards | LAW-2.1 – 2.6 |
-| 3 | Testing & Quality | LAW-3.1 – 3.5 |
-| 4 | Architecture | LAW-4.1 – 4.5 |
+| 3 | Testing & Quality | LAW-3.1 – 3.6 |
+| 4 | Architecture | LAW-4.1 – 4.6 |
 | 5 | Security | LAW-5.1 – 5.6 |
 | 6 | Review & Documentation | LAW-6.1 – 6.5 |
-| 7 | AI Governance | LAW-7.1 – 7.5 |
+| 7 | AI Governance | LAW-7.1 – 7.6 |
 | 8 | Requirements & Domain | LAW-8.1 – 8.4 |
-| 9 | Operations & Cost | LAW-9.1 – 9.4 |
+| 9 | Operations & Cost | LAW-9.1 – 9.7 |
+| 10 | Agentic Development | LAW-10.1 – 10.5 |
 
-**45 laws** total. Laws are amended — never silently edited — per the [Amendment Process](amendments/AMENDMENT-PROCESS.md).
+**56 laws** total. Laws are amended — never silently edited — per the [Amendment Process](amendments/AMENDMENT-PROCESS.md).
 
 ---
 

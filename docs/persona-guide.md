@@ -14,13 +14,13 @@ Personas activate automatically when work enters their domain, or explicitly on 
 
 | Persona | Triggers when work involves… | Owned Laws |
 |---|---|---|
-| **security** | Auth, user input, persistence, secrets, dependencies, external APIs, any security question | 5.1–5.6; co-enforces 7.2, 1.5 |
-| **architect** | System design, module boundaries, patterns, ADRs, significant refactors | 4.1–4.5, 1.4 |
-| **quality** | Test strategy, coverage, defect analysis, review standards, "is this tested enough?" | 3.1–3.5, 6.1, 6.2; co-owns 2.3 |
-| **software-engineer** | Implementation — the **default persona** when nothing more specific applies | 2.1–2.6; executes 3.1 |
-| **product-owner** | Requirements, scope, acceptance criteria, prioritization | 8.1, 8.4 |
+| **security** | Auth, user input, persistence, secrets, dependencies, external APIs, agent sandboxing, any security question | 5.1–5.6, 10.3; co-enforces 7.2, 1.5 |
+| **architect** | System design, module boundaries, patterns, ADRs, significant refactors, resilience | 4.1–4.6, 1.4; co-owns 7.6 |
+| **quality** | Test strategy, coverage, mutation scores, review standards, agent verification | 3.1–3.6, 6.1, 6.2, 10.2, 10.5; co-owns 2.3, 7.6 |
+| **software-engineer** | Implementation — the **default persona** when nothing more specific applies | 2.1–2.6, 10.1, 10.4; executes 3.1 |
+| **product-owner** | Requirements, scope, acceptance criteria, prioritization, SLO/budget sign-off | 8.1, 8.4; co-owns 9.5, 9.6, 10.1 |
 | **industry-sme** | Domain logic, business rules, industry regulation | 8.2, 8.3 |
-| **devops** | CI/CD, pipelines, hooks, infra, deployment, environments | 9.1, 9.2; enforces 6.2 |
+| **devops** | CI/CD, pipelines, hooks, infra, deployment, environments, reliability | 9.1, 9.2, 9.5–9.7; co-owns 4.6, 10.3; enforces 6.2 |
 | **finops** | Cloud cost, licensing, resource sizing, AI/compute budget | 9.3, 9.4 |
 
 A change frequently triggers more than one persona (an endpoint touching user input is

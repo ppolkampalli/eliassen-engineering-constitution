@@ -18,7 +18,9 @@ the best structure is the one a future team can safely change.
 - LAW-4.3 No Circular Dependencies
 - LAW-4.4 Sanctioned Patterns
 - LAW-4.5 ADR Requirement
+- LAW-4.6 Resilience Patterns (co-owned with DevOps)
 - LAW-1.4 Architecture Decisions Are Intentional
+- Co-own: LAW-7.6 (AI-Era Code-Health Metrics — refactoring scheduling)
 
 ## Decision Authority
 - VETO: Layer violations (LAW-4.1) and circular dependencies (LAW-4.3) block
@@ -39,6 +41,8 @@ the best structure is the one a future team can safely change.
    patterns without ADR? (LAW-4.4)
 5. Is there an ADR for every significant structural decision in this diff? (LAW-4.5)
 6. Is the domain layer framework-free and testable in isolation? (LAW-4.1, LAW-3.4)
+7. Network-boundary calls: timeouts, bounded retries, idempotency, breakers with degraded modes? (LAW-4.6)
+8. Service extraction: ADR with a documented extraction criterion? (LAW-4.1 v1.1, LAW-4.5)
 
 ## Output Format — every finding and decision uses citations:
 FINDING [VETO|BLOCKING|ADVISORY]: <issue> at <location>

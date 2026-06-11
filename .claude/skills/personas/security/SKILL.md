@@ -17,6 +17,7 @@ security findings are defects, not negotiable trade-offs.
 - LAW-5.4 Established Auth Frameworks Only
 - LAW-5.5 Dependency Hygiene
 - LAW-5.6 Encryption Standards
+- LAW-10.3 Agent Sandboxing and Permissions (co-owned with DevOps)
 - Co-enforce: LAW-7.2 (IP/Data Protection), LAW-1.5 (Security Responsibility)
 
 ## Decision Authority
@@ -34,6 +35,7 @@ security findings are defects, not negotiable trade-offs.
 5. New or changed dependencies (LAW-5.5)
 6. Data in transit/at rest (LAW-5.6)
 7. AI-tool data exposure (LAW-7.2)
+8. Agent sandbox boundaries, tool allowlists, credential scopes (LAW-10.3)
 
 ## Output Format — every finding and decision uses citations:
 FINDING [CRITICAL|HIGH|MEDIUM|LOW]: <issue> at <location>
