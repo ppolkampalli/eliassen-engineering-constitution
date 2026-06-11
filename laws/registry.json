@@ -1,0 +1,792 @@
+{
+  "constitution_version": "1.0.0",
+  "ratified": "2026-06-01",
+  "laws": [
+    {
+      "id": "LAW-1.1",
+      "title": "Code is Written for Humans First",
+      "article": 1,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "review",
+      "statement": "Code is written for human readers first; any function must be understandable within 30 seconds, and comments explain WHY, never WHAT.",
+      "rationale_summary": "In a distributed team of 20–50 engineers, code is read tens of times for every time it is written.",
+      "file": "laws/article-1-foundational-principles/LAW-1.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-1.2",
+      "title": "Quality is Built-In, Never Added Later",
+      "article": 1,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality"
+      ],
+      "enforcement": "review",
+      "statement": "Quality is built in at the moment code is written, never deferred; a TODO without a tracked ticket and context is a defect.",
+      "rationale_summary": "Deferred quality is debt issued at predatory interest: unaddressed tech debt was one of the six founding pain points of this constitution.",
+      "file": "laws/article-1-foundational-principles/LAW-1.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-1.3",
+      "title": "Consistency Enables Collaboration",
+      "article": 1,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "devops"
+      ],
+      "enforcement": "automated",
+      "statement": "All projects use identical tooling and conventions with zero project-level exceptions; conventions change only by amendment, for everyone.",
+      "rationale_summary": "Inconsistent standards across projects were a founding pain point: every project-specific convention is a tax on every engineer who moves between projects, and on every reviewer reading an unfamiliar repo.",
+      "file": "laws/article-1-foundational-principles/LAW-1.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-1.4",
+      "title": "Architecture Decisions Are Intentional",
+      "article": 1,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "System structure is the product of deliberate, recorded decisions; significant architectural choices require an ADR before merge.",
+      "rationale_summary": "Undocumented architecture is rediscovered at the worst possible time — by the next engineer, mid-incident, or during an audit.",
+      "file": "laws/article-1-foundational-principles/LAW-1.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-1.5",
+      "title": "Security is Everybody's Responsibility",
+      "article": 1,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "Security defects block merge regardless of author or deadline; only a named human security lead may override a CRITICAL finding, recorded in the PR.",
+      "rationale_summary": "Security vulnerabilities reaching production was a founding pain point of this constitution.",
+      "file": "laws/article-1-foundational-principles/LAW-1.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.1",
+      "title": "Naming Conventions",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "Identifiers follow the constitution's naming table: camelCase variables/functions, PascalCase types without I-prefix, UPPER_SNAKE_CASE constants, is/has/can booleans, kebab-case files.",
+      "rationale_summary": "Names are the primary interface between code and reader.",
+      "file": "laws/article-2-code-standards/LAW-2.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.2",
+      "title": "Formatting via Prettier",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "All code is formatted by Prettier with the shared config (2-space, 100-char, single quotes, semicolons, ES5 trailing commas); formatting is never manual.",
+      "rationale_summary": "Every minute spent formatting — or arguing about formatting in review — is waste, and review bottlenecks were a founding pain point.",
+      "file": "laws/article-2-code-standards/LAW-2.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.3",
+      "title": "Prohibition of the any Type",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "The `any` type is prohibited. Use `unknown` with type narrowing.",
+      "rationale_summary": "any silently disables TypeScript's type checking for that value and everything it touches, defeating the purpose of strict mode and allowing type errors to reach production.",
+      "file": "laws/article-2-code-standards/LAW-2.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.4",
+      "title": "Explicit Return Types on Exported Functions",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "Every exported function declares its return type explicitly; a public signature is a written contract, not an inference.",
+      "rationale_summary": "Inferred return types on public surfaces make the contract whatever the implementation happens to return: an internal refactor silently changes the API and the breakage surfaces in distant consumers, attributed to the wrong commit.",
+      "file": "laws/article-2-code-standards/LAW-2.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.5",
+      "title": "Import Ordering",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "Imports are grouped stdlib → third-party → local, alphabetized within groups, enforced by ESLint — never maintained by hand.",
+      "rationale_summary": "A file's imports are its dependency manifest.",
+      "file": "laws/article-2-code-standards/LAW-2.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-2.6",
+      "title": "Function Size and Responsibility",
+      "article": 2,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "review",
+      "statement": "Functions do one thing, are at most 30 lines (target 10–15), and contain no magic numbers — meaningful literals are named constants.",
+      "rationale_summary": "Function size is the most reliable cheap proxy for responsibility creep: a 60-line function almost always interleaves concerns that must be understood — and tested (LAW-3.4) — together.",
+      "file": "laws/article-2-code-standards/LAW-2.6.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-3.1",
+      "title": "Test-First Development",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "persona",
+      "statement": "Tests are written before implementation; a failing test demonstrating expected behavior exists before the code that makes it pass.",
+      "rationale_summary": "A test written after the implementation tends to assert what the code does, not what it should do — it inherits the implementation's bugs as expectations.",
+      "file": "laws/article-3-testing-quality/LAW-3.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-3.2",
+      "title": "Coverage Floors",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "automated",
+      "statement": "CI enforces coverage floors — 80% business logic, 100% utilities, 70% controllers — and they may not be lowered to make a build pass.",
+      "rationale_summary": "Low test coverage was a founding pain point: untested paths are where production incidents live.",
+      "file": "laws/article-3-testing-quality/LAW-3.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-3.3",
+      "title": "Test Structure",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "review",
+      "statement": "Tests follow Arrange-Act-Assert with one action per test, named 'should <expectation> when <scenario>'.",
+      "rationale_summary": "Tests are the executable specification of the system — they are read most often at the worst time: when they fail, in CI, by someone who didn't write them.",
+      "file": "laws/article-3-testing-quality/LAW-3.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-3.4",
+      "title": "Test Isolation",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "review",
+      "statement": "Unit tests mock all external dependencies, complete in under one second, and never depend on another test's execution or ordering.",
+      "rationale_summary": "Tests that touch real dependencies are slow, flaky, and ambiguous: a failure might mean broken code, a down service, or a dirty database, and engineers learn to re-run instead of investigate — at which point the suite's signal is dead.",
+      "file": "laws/article-3-testing-quality/LAW-3.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-3.5",
+      "title": "No Skipped or Hollow Tests",
+      "article": 3,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "review",
+      "statement": "No .skip without a tracked ticket; every test must assert on behavior and be able to fail when that behavior breaks.",
+      "rationale_summary": "A skipped test is a known blind spot; without a ticket it is a permanent one that silently exempts a behavior from the safety net while still appearing in the suite.",
+      "file": "laws/article-3-testing-quality/LAW-3.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.1",
+      "title": "Layered Architecture",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Applications use Presentation → Application → Domain → Persistence layering with dependencies pointing downward only; the domain layer imports no framework.",
+      "rationale_summary": "Layering is what keeps change local.",
+      "file": "laws/article-4-architecture/LAW-4.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.2",
+      "title": "SOLID Compliance",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "All modules comply with SOLID, verified by the one-line tests — one reason to change, open to extension, substitutable subtypes, lean interfaces, depend on abstractions.",
+      "rationale_summary": "SOLID is the difference between a system that absorbs change and one that shatters under it.",
+      "file": "laws/article-4-architecture/LAW-4.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.3",
+      "title": "No Circular Dependencies",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "automated",
+      "statement": "Circular dependencies are prohibited at any distance; import/no-cycle is a build error, and shared concepts are extracted into a module beneath both.",
+      "rationale_summary": "A cycle means neither module can be understood, tested, loaded, or replaced without the other — they are one module wearing two names, and every module in the cycle inherits the union of all their reasons to change.",
+      "file": "laws/article-4-architecture/LAW-4.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.4",
+      "title": "Sanctioned Patterns",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "DI, Repository, Factory, and Strategy are required in their defined situations; novel patterns require an ADR explaining why the sanctioned set was insufficient.",
+      "rationale_summary": "A small sanctioned vocabulary means every engineer and agent reads every codebase fluently: a *Repository always means the same thing, in every project (LAW-1.3 applied to design).",
+      "file": "laws/article-4-architecture/LAW-4.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.5",
+      "title": "ADR Requirement",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Significant structural decisions are recorded as an ADR in docs/adr/ before the implementing change merges.",
+      "rationale_summary": "The most expensive question in a legacy system is \"can we change this?\" — and it's expensive precisely because nobody recorded why it is the way it is.",
+      "file": "laws/article-4-architecture/LAW-4.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.1",
+      "title": "Universal Input Validation",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "All external data is validated at the boundary with allowlist validation before use; failing data is rejected, never sanitized into acceptability.",
+      "rationale_summary": "Nearly every injection class — SQL, XSS, command, path traversal, deserialization — begins as unvalidated external data reaching code that trusts it.",
+      "file": "laws/article-5-security/LAW-5.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.2",
+      "title": "Parameterized Queries Only",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "Queries are built exclusively with parameterized statements; concatenating or interpolating any runtime value into query text is prohibited.",
+      "rationale_summary": "SQL injection has been the most exploited vulnerability class for over two decades, and every instance begins with one engineer concatenating \"just this one\" value.",
+      "file": "laws/article-5-security/LAW-5.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.3",
+      "title": "Secrets Never in Code",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "automated",
+      "statement": "Secrets never appear in code, committed config, images, or logs — runtime env/secret manager only; a committed secret is rotated, not removed.",
+      "rationale_summary": "Version control never forgets: a secret committed once survives in history through every clone, fork, and backup, beyond the reach of any later deletion.",
+      "file": "laws/article-5-security/LAW-5.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.4",
+      "title": "Established Auth Frameworks Only",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "Auth uses established frameworks (OAuth2/OIDC, vetted JWT, SAML) exclusively; custom cryptography, session, or token schemes are categorically prohibited.",
+      "rationale_summary": "Cryptographic and auth code fails silently: it works perfectly in every demo and falls only to an adversary — timing side channels, padding oracles, token confusion, session fixation — failure modes that don't appear in tests (so LAW-3.2 coverage cannot save you) and that took the field decades to discover.",
+      "file": "laws/article-5-security/LAW-5.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.5",
+      "title": "Dependency Hygiene",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "automated",
+      "statement": "Dependencies are scanned weekly and per-PR; criticals are patched within 24 hours, lockfiles are committed, and versions are pinned exactly.",
+      "rationale_summary": "A modern Node.js application is mostly other people's code — typically hundreds of transitive packages, each a potential entry point.",
+      "file": "laws/article-5-security/LAW-5.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-5.6",
+      "title": "Encryption Standards",
+      "article": 5,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "Data in transit uses TLS 1.2+ everywhere including internal traffic; sensitive data at rest is encrypted to current standards with managed keys.",
+      "rationale_summary": "Plaintext transport makes every network segment a wiretap point; \"internal\" networks stop being a defense the moment any single host, container, or VPC peering is compromised — which is why zero-trust practice encrypts everywhere, not just at the edge.",
+      "file": "laws/article-5-security/LAW-5.6.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-6.1",
+      "title": "Two-Approval Review",
+      "article": 6,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "Every merge requires two approvals including one domain expert; authors never approve their own changes.",
+      "rationale_summary": "A single reviewer under deadline pressure converges on rubber-stamping; two reviewers with one required domain expert keep the review honest and catch the class of defects only context can see — a correct-looking change that violates a domain invariant.",
+      "file": "laws/article-6-review-documentation/LAW-6.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-6.2",
+      "title": "Quality Gates Are Inviolable",
+      "article": 6,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality"
+      ],
+      "enforcement": "automated",
+      "statement": "No change merges unless lint, type-check, tests, coverage, format, and security gates are all green; no override path exists for anyone.",
+      "rationale_summary": "A gate with an override path is a suggestion, and every suggestion loses to a deadline eventually.",
+      "file": "laws/article-6-review-documentation/LAW-6.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-6.3",
+      "title": "Public API Documentation",
+      "article": 6,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Every public function carries JSDoc with description, @param, @returns, @throws, and an @example for non-trivial surfaces.",
+      "rationale_summary": "A public function's signature says what types it takes; only its documentation says what it *means* — units, invariants, side effects, failure modes.",
+      "file": "laws/article-6-review-documentation/LAW-6.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-6.4",
+      "title": "Comments Explain WHY",
+      "article": 6,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Comments explain WHY — business rules, trade-offs, constraints — never WHAT; code needing a WHAT comment must be rewritten instead.",
+      "rationale_summary": "Code states WHAT perfectly and WHY not at all — intent, constraint, and context exist only in the author's head unless written down, and they are precisely what the next maintainer (or AI agent) needs before safely changing anything.",
+      "file": "laws/article-6-review-documentation/LAW-6.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-6.5",
+      "title": "Docs Travel With Code",
+      "article": 6,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "architect"
+      ],
+      "enforcement": "review",
+      "statement": "Documentation is updated in the same PR as the change it describes; a behavior change leaving stale docs is incomplete and must not merge.",
+      "rationale_summary": "Documentation updated \"later\" is documentation updated never — the context evaporates the moment the PR merges and the author moves on.",
+      "file": "laws/article-6-review-documentation/LAW-6.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-7.1",
+      "title": "Human Accountability",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "A human engineer owns every merged line regardless of how it was produced; AI assists, humans approve, and 'the AI wrote it' is never a defense.",
+      "rationale_summary": "Accountability is what keeps quality real when generation becomes cheap.",
+      "file": "laws/article-7-ai-governance/LAW-7.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-7.2",
+      "title": "IP and Data Protection",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security",
+        "quality"
+      ],
+      "enforcement": "persona",
+      "statement": "No PII, secrets, payment/health data, client-confidential material, or proprietary algorithms may be sent to AI tools outside the approved list.",
+      "rationale_summary": "A prompt is an outbound data transfer: anything pasted into an AI tool leaves the organization's control and may be retained, logged, or used for training under terms we never reviewed.",
+      "file": "laws/article-7-ai-governance/LAW-7.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-7.3",
+      "title": "AI Audit Trail",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "AI involvement is disclosed at the point of record: [Claude-assisted] commit tag and the PR's AI Assistance section describing what was generated and what was verified.",
+      "rationale_summary": "Provenance enables every downstream safeguard.",
+      "file": "laws/article-7-ai-governance/LAW-7.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-7.4",
+      "title": "Identical Standards for AI Code",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "security"
+      ],
+      "enforcement": "review",
+      "statement": "AI-generated code meets every constitutional standard with no relaxation; review verifies, never assumes — plausibility is not correctness.",
+      "rationale_summary": "AI output is optimized to look right — that is precisely what makes it dangerous to review casually.",
+      "file": "laws/article-7-ai-governance/LAW-7.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-7.5",
+      "title": "Mandatory Escalation on Uncertainty",
+      "article": 7,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "security"
+      ],
+      "enforcement": "persona",
+      "statement": "On ambiguous requirements, lasting architectural choices, or unresolved security questions, agents stop and ask — guessing is prohibited even when the guess is correct.",
+      "rationale_summary": "Agents fail differently from humans: a human carrying an assumption mentions it at standup; an agent compiles it into the system, invisibly and at scale.",
+      "file": "laws/article-7-ai-governance/LAW-7.5.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-8.1",
+      "title": "Acceptance Criteria Before Implementation",
+      "article": 8,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "product-owner"
+      ],
+      "enforcement": "persona",
+      "statement": "No implementation begins without written acceptance criteria defining observable behaviors, in-scope edge cases, and verification.",
+      "rationale_summary": "Undefined \"done\" is how the same feature gets built three times: once as the engineer imagined it, once as the PM meant it, once as the client needed it.",
+      "file": "laws/article-8-requirements-domain/LAW-8.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-8.2",
+      "title": "Business Rules Are Documented and Cited",
+      "article": 8,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "industry-sme"
+      ],
+      "enforcement": "review",
+      "statement": "Every implemented business rule cites its documented source at the implementation site and in its covering test.",
+      "rationale_summary": "Uncited domain logic becomes archaeology: five years later, nobody knows whether if (days > 90) writeOff() is a regulation, a client preference, or a bug that shipped — so nobody dares change it, and nobody can verify it's still correct.",
+      "file": "laws/article-8-requirements-domain/LAW-8.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-8.3",
+      "title": "Regulatory Mapping",
+      "article": 8,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "industry-sme"
+      ],
+      "enforcement": "review",
+      "statement": "Regulated projects maintain a compliance map from each requirement to the code and controls satisfying it, updated in the same PR as changes to mapped paths.",
+      "rationale_summary": "Compliance that lives in engineers' heads fails exactly when tested — at audit time and at incident time, both of which demand evidence, not assurance.",
+      "file": "laws/article-8-requirements-domain/LAW-8.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-8.4",
+      "title": "Scope Discipline",
+      "article": 8,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "product-owner"
+      ],
+      "enforcement": "persona",
+      "statement": "Changes outside agreed scope require explicit Product Owner sign-off before implementation; adjacent improvements are ticketed, not smuggled.",
+      "rationale_summary": "Scope creep is invisible until it isn't: each \"small extra\" seems free, but it widens the review surface (raising the odds defects hide in the unrequested parts), invalidates estimates, and ships behavior no stakeholder agreed to — which in client work can mean contractual exposure.",
+      "file": "laws/article-8-requirements-domain/LAW-8.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-9.1",
+      "title": "Infrastructure as Code",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "All infrastructure is defined in version-controlled code and changed only through reviewed commits; console-clicked resources are prohibited.",
+      "rationale_summary": "Hand-built infrastructure is unreproducible by definition: when the region fails or the account must be rebuilt, the click sequence that created production exists nowhere.",
+      "file": "laws/article-9-operations-cost/LAW-9.1.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-9.2",
+      "title": "Deployment Safety",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "Every deployment is reversible with the rollback documented before release; a deploy without a rollback plan does not proceed.",
+      "rationale_summary": "Every deploy is a hypothesis; rollback is the safety net that makes shipping frequently rational.",
+      "file": "laws/article-9-operations-cost/LAW-9.2.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-9.3",
+      "title": "Cost Impact Assessment",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "finops"
+      ],
+      "enforcement": "persona",
+      "statement": "Changes with material cost impact include a PR cost estimate and FinOps review; all cloud resources carry attribution tags; cost never overrides security.",
+      "rationale_summary": "Cloud spend is the rare cost that engineers commit in code and finance discovers on an invoice — a single misjudged instance class or unbounded log retention compounds silently at 730 hours a month.",
+      "file": "laws/article-9-operations-cost/LAW-9.3.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-9.4",
+      "title": "License Compliance",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "finops"
+      ],
+      "enforcement": "persona",
+      "statement": "Every dependency license (including transitives) is evaluated before adoption; copyleft and source-available licenses require human legal sign-off.",
+      "rationale_summary": "A license is a contract accepted by npm install, and in client- delivery work the exposure is double: copyleft obligations can attach to the *client's* proprietary codebase, converting a free library into a legal incident and a contractual breach.",
+      "file": "laws/article-9-operations-cost/LAW-9.4.md",
+      "amendments": [
+        "AMD-2026-001"
+      ]
+    }
+  ]
+}
