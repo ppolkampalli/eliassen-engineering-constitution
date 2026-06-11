@@ -35,6 +35,10 @@ versions follow the constitution versioning rules in
   [AMD-2026-006](amendments/records/AMD-2026-006-function-size-modernization.md):
   30-line cap replaced with cyclomatic-complexity ≤5 and ~40-LOC advisory
   thresholds; depth of abstraction stated as the design goal.
+- **LAW-6.4 → v1.1** via
+  [AMD-2026-007](amendments/records/AMD-2026-007-comment-philosophy.md):
+  interface comments recognized as part of the abstraction; missing comments
+  treated as costlier than imperfect ones; WHAT-restatement still prohibited.
 
 ## [1.0.0] — 2026-06-01
 

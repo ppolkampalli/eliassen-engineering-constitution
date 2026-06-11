@@ -41,7 +41,7 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | [LAW-6.1](article-6-review-documentation/LAW-6.1.md) | Two-Approval Review | 6 — Review & Documentation | ACTIVE | 1.0 | quality | automated |
 | [LAW-6.2](article-6-review-documentation/LAW-6.2.md) | Quality Gates Are Inviolable | 6 — Review & Documentation | ACTIVE | 1.0 | quality | automated |
 | [LAW-6.3](article-6-review-documentation/LAW-6.3.md) | Public API Documentation | 6 — Review & Documentation | ACTIVE | 1.0 | quality, architect | review |
-| [LAW-6.4](article-6-review-documentation/LAW-6.4.md) | Comments Explain WHY | 6 — Review & Documentation | ACTIVE | 1.0 | quality, architect | review |
+| [LAW-6.4](article-6-review-documentation/LAW-6.4.md) | Comments Explain WHY | 6 — Review & Documentation | ACTIVE | 1.1 | quality, architect | review |
 | [LAW-6.5](article-6-review-documentation/LAW-6.5.md) | Docs Travel With Code | 6 — Review & Documentation | ACTIVE | 1.0 | quality, architect | review |
 | [LAW-7.1](article-7-ai-governance/LAW-7.1.md) | Human Accountability | 7 — AI Governance | ACTIVE | 1.0 | quality, security | review |
 | [LAW-7.2](article-7-ai-governance/LAW-7.2.md) | IP and Data Protection | 7 — AI Governance | ACTIVE | 1.0 | security, quality | persona |

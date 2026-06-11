@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-007
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-6.4]
 reviewers_required: [quality, architect]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-007: Adopt the Ousterhout Comment Position in LAW-6.4
@@ -62,9 +62,9 @@ LAW-6.3's rationale gains a cross-reference at enactment (no statement change to
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Quality | | | | |
-| Architect | | | | |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
+| Architect | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-6.4 → v1.1.

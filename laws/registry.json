@@ -551,17 +551,18 @@
       "title": "Comments Explain WHY",
       "article": 6,
       "status": "ACTIVE",
-      "version": "1.0",
+      "version": "1.1",
       "owner_personas": [
         "quality",
         "architect"
       ],
       "enforcement": "review",
-      "statement": "Comments explain WHY — business rules, trade-offs, constraints — never WHAT; code needing a WHAT comment must be rewritten instead.",
+      "statement": "Interface comments are part of the abstraction and WHY comments capture what code cannot express; a missing comment costs more than an imperfect one, while comments restating the implementation remain prohibited.",
       "rationale_summary": "Code states WHAT perfectly and WHY not at all — intent, constraint, and context exist only in the author's head unless written down, and they are precisely what the next maintainer (or AI agent) needs before safely changing anything.",
       "file": "laws/article-6-review-documentation/LAW-6.4.md",
       "amendments": [
-        "AMD-2026-001"
+        "AMD-2026-001",
+        "AMD-2026-007"
       ]
     },
     {
