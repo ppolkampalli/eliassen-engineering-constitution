@@ -1,0 +1,7 @@
+* text=auto
+*.sh text eol=lf
+hooks/pre-commit text eol=lf
+*.md text
+*.json text
+*.yml text
+*.js text
