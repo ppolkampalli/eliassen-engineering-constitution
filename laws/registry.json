@@ -202,17 +202,18 @@
       "title": "Test-First Development",
       "article": 3,
       "status": "ACTIVE",
-      "version": "1.0",
+      "version": "1.1",
       "owner_personas": [
         "quality",
         "software-engineer"
       ],
       "enforcement": "persona",
-      "statement": "Tests are written before implementation; a failing test demonstrating expected behavior exists before the code that makes it pass.",
+      "statement": "Tests are written before implementation per Canon TDD — test list, one failing test at a time, red-green-refactor — and no agent or engineer may delete, skip, or weaken a failing test to achieve green.",
       "rationale_summary": "A test written after the implementation tends to assert what the code does, not what it should do — it inherits the implementation's bugs as expectations.",
       "file": "laws/article-3-testing-quality/LAW-3.1.md",
       "amendments": [
-        "AMD-2026-001"
+        "AMD-2026-001",
+        "AMD-2026-003"
       ]
     },
     {

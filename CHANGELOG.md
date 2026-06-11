@@ -17,6 +17,13 @@ versions follow the constitution versioning rules in
   Agent Sandboxing and Permissions, LAW-10.4 Steering Files Are Governed
   Artifacts, LAW-10.5 Fresh-Context Review.
 
+### Changed
+
+- **LAW-3.1 → v1.1** via
+  [AMD-2026-003](amendments/records/AMD-2026-003-canon-tdd-agent-guardrail.md):
+  Canon TDD cadence (test list, one test at a time) and the agent guardrail —
+  failing tests may never be deleted, skipped, or weakened to achieve green.
+
 ## [1.0.0] — 2026-06-01
 
 ### Added

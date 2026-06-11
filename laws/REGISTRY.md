@@ -21,7 +21,7 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | [LAW-2.4](article-2-code-standards/LAW-2.4.md) | Explicit Return Types on Exported Functions | 2 — Code Standards | ACTIVE | 1.0 | software-engineer, quality | automated |
 | [LAW-2.5](article-2-code-standards/LAW-2.5.md) | Import Ordering | 2 — Code Standards | ACTIVE | 1.0 | software-engineer, quality | automated |
 | [LAW-2.6](article-2-code-standards/LAW-2.6.md) | Function Size and Responsibility | 2 — Code Standards | ACTIVE | 1.0 | software-engineer, quality | review |
-| [LAW-3.1](article-3-testing-quality/LAW-3.1.md) | Test-First Development | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | persona |
+| [LAW-3.1](article-3-testing-quality/LAW-3.1.md) | Test-First Development | 3 — Testing & Quality | ACTIVE | 1.1 | quality, software-engineer | persona |
 | [LAW-3.2](article-3-testing-quality/LAW-3.2.md) | Coverage Floors | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | automated |
 | [LAW-3.3](article-3-testing-quality/LAW-3.3.md) | Test Structure | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | review |
 | [LAW-3.4](article-3-testing-quality/LAW-3.4.md) | Test Isolation | 3 — Testing & Quality | ACTIVE | 1.0 | quality, software-engineer | review |
