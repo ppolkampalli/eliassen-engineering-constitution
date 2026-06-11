@@ -1,0 +1,47 @@
+# Enforces: LAW-5.5 (Dependency Hygiene — per-PR + weekly scans),
+# LAW-5.1/5.2 (CodeQL injection queries), LAW-1.5 (security blocks merge).
+# Installed into .github/workflows/ by scripts/install.sh.
+name: security
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # LAW-5.5: dependencies are scanned at least weekly
+    - cron: '0 6 * * 1'
+
+jobs:
+  dependency-audit:
+    name: Dependency Audit (LAW-5.5)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: npm audit (fail on HIGH+; criticals patched ≤24h per LAW-5.5)
+        run: npm audit --audit-level=high
+      - name: Verify lockfile committed and exact (LAW-5.5)
+        run: |
+          test -f package-lock.json || { echo "::error::package-lock.json missing — [LAW-5.5 v1.0] lockfiles are committed and versions pinned"; exit 1; }
+
+  codeql:
+    name: CodeQL Analysis (LAW-5.1/5.2 surfaces)
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-extended
+      - uses: github/codeql-action/analyze@v3
+
+# LAW-1.5 / LAW-6.2: both jobs are required status checks. A security
+# finding blocks merge regardless of author or deadline; CRITICAL override
+# only by a named human security lead, recorded in the PR.
