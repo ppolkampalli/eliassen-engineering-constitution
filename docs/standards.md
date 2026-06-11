@@ -101,6 +101,9 @@ Full guide: [testing-guide.md](testing-guide.md).
 - CLAUDE.md/AGENTS.md are code: reviewed, concise, pruned; always-rules become
   hooks, not prose (LAW-10.4)
 - Agent output is reviewed by a context that didn't produce it (LAW-10.5)
+- Nontrivial work follows a declared workflow (WF-FEATURE/RESEARCH/BUG/SECBUG/
+  REFACTOR/AMENDMENT); deviations recorded; hard stages never overridable
+  (LAW-10.6; catalog: workflows/, orchestrated by workflow-orchestrator)
 
 ## Looking Things Up
 

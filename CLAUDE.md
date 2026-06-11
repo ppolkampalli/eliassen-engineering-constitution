@@ -1,6 +1,6 @@
 # Engineering Constitution — Project Rules
 
-This project is governed by the **Eliassen Group Engineering Constitution v1.1.0**.
+This project is governed by the **Eliassen Group Engineering Constitution v1.2.0**.
 Laws are citable by ID. Full registry: `docs/constitution/REGISTRY.md` (installed copy)
 or the `engineering-constitution` repository. Look up any law: `./scripts/law-lookup.sh LAW-X.Y`
 (in the constitution repo) or read `docs/constitution/registry.json`.
@@ -16,7 +16,7 @@ or the `engineering-constitution` repository. Look up any law: `./scripts/law-lo
 7. **AI Governance** — human accountability (LAW-7.1), data protection (LAW-7.2), audit trail (LAW-7.3), identical standards (LAW-7.4), escalate on uncertainty (LAW-7.5), code-health metrics (LAW-7.6)
 8. **Requirements & Domain** — acceptance criteria first (LAW-8.1), cited business rules (LAW-8.2), regulatory mapping (LAW-8.3), scope discipline (LAW-8.4)
 9. **Operations & Cost** — infrastructure as code (LAW-9.1), reversible deploys (LAW-9.2), cost review (LAW-9.3), license compliance (LAW-9.4), SLOs (LAW-9.5), error budgets (LAW-9.6), failure testing (LAW-9.7)
-10. **Agentic Development** — spec-driven agent work (LAW-10.1), verifiable completion (LAW-10.2), sandboxing + permissions (LAW-10.3), governed steering files (LAW-10.4), fresh-context review (LAW-10.5)
+10. **Agentic Development** — spec-driven agent work (LAW-10.1), verifiable completion (LAW-10.2), sandboxing + permissions (LAW-10.3), governed steering files (LAW-10.4), fresh-context review (LAW-10.5), defined workflows (LAW-10.6)
 
 ## Hard Rules (non-negotiable)
 
@@ -40,6 +40,15 @@ domain rules → Industry SME; implementation (default) → Software Engineer.
 - **On uncertainty, stop and ask** per LAW-7.5 — ambiguous requirements, lasting
   architectural choices, and security questions are escalated, never guessed.
 - Cross-cutting changes or persona conflicts → persona-council skill.
+
+## Workflows (LAW-10.6)
+
+Nontrivial work follows a declared workflow from `docs/constitution/workflows/`
+(WF-FEATURE, WF-RESEARCH, WF-BUG, WF-SECBUG, WF-REFACTOR, WF-AMENDMENT) — use the
+workflow-orchestrator skill. Deviations on non-hard stages are allowed when asked,
+but every deviation is recorded on the work item; hard stages (marked `*`) and
+WF-AMENDMENT's sequence are never overridable. Project-local `workflows/` files
+override the catalog by ID but cannot soften org hard stages.
 
 ## Before Declaring Any Work Done
 

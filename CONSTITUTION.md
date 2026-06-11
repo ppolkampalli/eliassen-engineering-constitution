@@ -1,6 +1,6 @@
 # The Engineering Constitution
 
-**Eliassen Group** · Version 1.1.0 · Ratified 2026-06-01 via [AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md) · Amended 2026-06-11 via [AMD-2026-002…009](amendments/records/)
+**Eliassen Group** · Version 1.2.0 · Ratified 2026-06-01 via [AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md) · Amended 2026-06-11 via [AMD-2026-002…010](amendments/records/)
 
 ---
 
@@ -71,7 +71,7 @@ specification lives in
 | [7 — AI Governance](laws/article-7-ai-governance/) | AI | 7.1–7.6 | Human accountability, IP/data protection, `[Claude-assisted]` audit trail, identical standards, escalation on uncertainty, code-health metrics |
 | [8 — Requirements & Domain](laws/article-8-requirements-domain/) | Domain | 8.1–8.4 | Acceptance criteria before code, cited business rules, regulatory mapping, scope discipline |
 | [9 — Operations & Cost](laws/article-9-operations-cost/) | Ops | 9.1–9.7 | IaC, reversible deployments, cost review + tagging, license compliance, SLOs, error budgets, failure-injection testing |
-| [10 — Agentic Development](laws/article-10-agentic-development/) | Agents | 10.1–10.5 | Spec-driven agent work, verifiable completion, sandboxing + permissions, governed steering files, fresh-context review |
+| [10 — Agentic Development](laws/article-10-agentic-development/) | Agents | 10.1–10.6 | Spec-driven agent work, verifiable completion, sandboxing + permissions, governed steering files, fresh-context review, defined workflows |
 
 ---
 
@@ -84,8 +84,8 @@ Eight personas — defined as skills in [.claude/skills/personas/](.claude/skill
 | Persona | Domain | Owned Laws |
 |---|---|---|
 | Industry SME | Domain rules, regulation | 8.2, 8.3 |
-| Product Owner | Requirements, scope | 8.1, 8.4, co-owns 9.5, 9.6, 10.1 |
-| Quality | Testing, review standards | 3.1–3.6, 6.1, 6.2, 10.2, 10.5, co-owns 2.3, 7.6 |
+| Product Owner | Requirements, scope, process | 8.1, 8.4, 10.6, co-owns 9.5, 9.6, 10.1 |
+| Quality | Testing, review standards, process | 3.1–3.6, 6.1, 6.2, 10.2, 10.5, 10.6, co-owns 2.3, 7.6 |
 | Architect | Design, patterns, ADRs | 4.1–4.6, 1.4, co-owns 7.6 |
 | Software Engineer | Implementation (default) | 2.1–2.6, 10.1, 10.4 |
 | DevOps | CI/CD, infra, deploys, reliability | 9.1, 9.2, 9.5–9.7, co-owns 4.6, 10.3; enforces 6.2 |
@@ -105,6 +105,12 @@ Security VETO (CRITICAL findings; overridable only by a named human security lea
 Cross-cutting work and unresolved conflicts go to the
 [persona-council](.claude/skills/persona-council/SKILL.md), which surfaces
 disagreements verbatim and escalates to humans per LAW-7.5.
+
+**How work flows between personas** is defined by the
+[workflow catalog](workflows/README.md) (LAW-10.6): staged persona chains —
+WF-FEATURE, WF-RESEARCH, WF-BUG, WF-SECBUG, WF-REFACTOR, WF-AMENDMENT — driven
+by the workflow-orchestrator skill, with conversational-but-recorded deviations
+and inviolable hard stages.
 
 ---
 

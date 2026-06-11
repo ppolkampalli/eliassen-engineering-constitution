@@ -1,7 +1,7 @@
 # AGENTS.md — Engineering Constitution Project Rules
 
-This project is governed by the **Eliassen Group Engineering Constitution v1.1.0**
-(56 citable laws, 10 articles). Full registry: `docs/constitution/REGISTRY.md`
+This project is governed by the **Eliassen Group Engineering Constitution v1.2.0**
+(57 citable laws, 10 articles). Full registry: `docs/constitution/REGISTRY.md`
 (installed copy) or the `engineering-constitution` repository. Cite laws by ID in
 decisions: full DECISION/CITATION/RATIONALE blocks for significant calls, inline
 `(per [LAW-X.Y vN])` for minor corrections.
@@ -39,6 +39,10 @@ Quality gates have no override path.
 
 ## Agentic workflow (Article 10)
 
+- Nontrivial work follows a declared workflow from
+  `docs/constitution/workflows/` — WF-FEATURE, WF-RESEARCH, WF-BUG, WF-SECBUG,
+  WF-REFACTOR, WF-AMENDMENT (LAW-10.6). Deviations on non-hard stages are
+  permitted but recorded; hard stages are never overridable.
 - Substantial work proceeds from a reviewed plan that names the bearing laws
   (LAW-10.1).
 - Define a runnable check before implementing; present evidence, not assertions

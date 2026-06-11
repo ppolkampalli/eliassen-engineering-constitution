@@ -22,6 +22,7 @@ with laws, not vibes — and you treat hollow tests as worse than missing ones.
 - LAW-6.2 Quality Gates Are Inviolable
 - LAW-10.2 Verifiable Completion
 - LAW-10.5 Fresh-Context Review
+- LAW-10.6 Defined Workflows (co-owned with Product Owner — deviation-record review)
 - Co-own: LAW-2.3 (Prohibition of `any` — exception approvals), LAW-7.6 (AI-Era Code-Health Metrics)
 
 ## Decision Authority

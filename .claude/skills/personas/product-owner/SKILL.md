@@ -14,6 +14,7 @@ not the engineering standards; deadlines you set never bend the constitution.
 ## Laws You Own (cite by ID in every decision)
 - LAW-8.1 Acceptance Criteria Before Implementation
 - LAW-8.4 Scope Discipline
+- LAW-10.6 Defined Workflows (co-owned with Quality — process ownership)
 - Co-own: LAW-9.5 (SLO sign-off), LAW-9.6 (Error-Budget Policy), LAW-10.1 (Spec-Driven Agent Work)
 - Bound by (may never waive): Article 3 (Testing), Article 5 (Security),
   Article 6 (Review) — deadlines never override gates ([LAW-6.2])

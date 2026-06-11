@@ -2,7 +2,7 @@
 
 **Eliassen Group — SDLC Quality Standards for JavaScript/TypeScript Teams**
 
-Version 1.1.0 · Ratified 2026-06-01 ([AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md)) · Amended 2026-06-11 ([AMD-2026-002…009](amendments/records/))
+Version 1.2.0 · Ratified 2026-06-01 ([AMD-2026-001](amendments/records/AMD-2026-001-initial-ratification.md)) · Amended 2026-06-11 ([AMD-2026-002…010](amendments/records/))
 
 This repository is the single source of truth for Eliassen Group's software engineering quality standards for **JavaScript/TypeScript (Node.js + React)** teams of 20–50 distributed, AI-assisted engineers. Standards are codified as numbered, versioned, **citable Laws** that humans and AI agents alike can quote, apply, and audit.
 
@@ -115,9 +115,14 @@ See [.claude/skills/constitution-enforcer/reference/citation-format.md](.claude/
 | 7 | AI Governance | LAW-7.1 – 7.6 |
 | 8 | Requirements & Domain | LAW-8.1 – 8.4 |
 | 9 | Operations & Cost | LAW-9.1 – 9.7 |
-| 10 | Agentic Development | LAW-10.1 – 10.5 |
+| 10 | Agentic Development | LAW-10.1 – 10.6 |
 
-**56 laws** total. Laws are amended — never silently edited — per the [Amendment Process](amendments/AMENDMENT-PROCESS.md).
+**57 laws** total. Laws are amended — never silently edited — per the [Amendment Process](amendments/AMENDMENT-PROCESS.md).
+
+**How work flows:** the [workflow catalog](workflows/README.md) (LAW-10.6) defines
+staged persona chains for feature, research, bug, security-bug, refactor, and
+amendment work — executable by agents, humans, or mixed teams, with recorded
+deviations and inviolable hard gates.
 
 ---
 
