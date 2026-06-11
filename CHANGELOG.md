@@ -7,6 +7,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions follow the constitution versioning rules in
 [AMENDMENT-PROCESS.md](amendments/AMENDMENT-PROCESS.md).
 
+## [1.2.0] — 2026-06-11
+
+### Added
+
+- **LAW-10.6 Defined Workflows** via
+  [AMD-2026-010](amendments/records/AMD-2026-010-defined-workflows-law.md):
+  nontrivial work follows a declared workflow; deviations on non-hard stages
+  are conversational but recorded; hard stages and WF-AMENDMENT are never
+  overridable; workflow definitions stay PR-governed (process, not law).
+- **Workflow catalog** (`workflows/`): WF-FEATURE, WF-RESEARCH, WF-BUG,
+  WF-SECBUG, WF-REFACTOR, WF-AMENDMENT — staged persona chains with law gates,
+  hard stages, and human checkpoints; machine-readable registry; project
+  override precedence; workflow-orchestrator skill; installer integration.
+
 ## [1.1.0] — 2026-06-11
 
 ### Added

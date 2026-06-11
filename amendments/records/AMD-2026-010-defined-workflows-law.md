@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-010
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-10.6]
 reviewers_required: [product-owner, quality, security, architect, software-engineer, devops]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-010: Ratify LAW-10.6 — Defined Workflows
@@ -71,13 +71,15 @@ themselves agile (PR-reviewed process, not amendment-governed law).
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Product Owner | | | | Process ownership |
-| Quality | | | | Deviation-record review duty |
-| Security | | | | Hard-gate inviolability, WF-SECBUG |
-| Architect | | | | Catalog structure |
-| Software Engineer | | | | Default-persona stage execution |
-| DevOps | | | | Installer/propagation mechanics |
+| Product Owner | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Process ownership |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Deviation-record review duty |
+| Security | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Hard-gate inviolability, WF-SECBUG |
+| Architect | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Catalog structure |
+| Software Engineer | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Default-persona stage execution |
+| DevOps | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Installer/propagation mechanics |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved following the design dialogue of 2026-06-11. LAW-10.6 enters
+force at v1.0; Article 10 grows to 6 laws; constitution → v1.2.0. Workflow
+definitions remain PR-governed per the law's own terms.

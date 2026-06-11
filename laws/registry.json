@@ -1,5 +1,5 @@
 {
-  "constitution_version": "1.1.0",
+  "constitution_version": "1.2.0",
   "ratified": "2026-06-01",
   "laws": [
     {
@@ -986,6 +986,24 @@
       "file": "laws/article-10-agentic-development/LAW-10.5.md",
       "amendments": [
         "AMD-2026-002"
+      ]
+    },
+    {
+      "id": "LAW-10.6",
+      "title": "Defined Workflows",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "product-owner",
+        "quality"
+      ],
+      "enforcement": "persona",
+      "statement": "Nontrivial work proceeds under a declared workflow whose stages, personas, and gates govern agents and humans alike; deviations on non-hard stages are permitted but recorded, and hard stages are never overridable.",
+      "rationale_summary": "Process that lives in memory fails exactly like undocumented architecture (LAW-1.4) and unrecorded amendments: invisibly, then expensively — security review happens when someone remembers, and \"did QA see this?\" is answered by recollection.",
+      "file": "laws/article-10-agentic-development/LAW-10.6.md",
+      "amendments": [
+        "AMD-2026-010"
       ]
     }
   ]
