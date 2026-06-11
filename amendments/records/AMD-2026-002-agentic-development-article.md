@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-002
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-10.1, LAW-10.2, LAW-10.3, LAW-10.4, LAW-10.5]
 reviewers_required: [security, quality, devops, software-engineer, product-owner, architect]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-002: Ratify Article 10 — Agentic Development
@@ -132,13 +132,15 @@ texts below; files enter `laws/article-10-agentic-development/` only at enactmen
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Security | | | | LAW-10.3 primary |
-| Quality | | | | LAW-10.2, 10.5 |
-| DevOps | | | | Sandboxing mechanics, CI agents |
-| Software Engineer | | | | LAW-10.1, 10.4 |
-| Product Owner | | | | LAW-10.1 spec gate |
-| Architect | | | | Article structure |
+| Security | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | LAW-10.3 primary |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | LAW-10.2, 10.5 |
+| DevOps | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Sandboxing mechanics, CI agents |
+| Software Engineer | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | LAW-10.1, 10.4 |
+| Product Owner | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | LAW-10.1 spec gate |
+| Architect | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Article structure |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the full v1.1 amendment wave, on the evidence of
+docs/research/2026-06-11-agentic-constitution-research.md. Article 10 enters force
+at v1.0, effective 2026-06-11.

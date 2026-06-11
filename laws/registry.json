@@ -787,6 +787,95 @@
       "amendments": [
         "AMD-2026-001"
       ]
+    },
+    {
+      "id": "LAW-10.1",
+      "title": "Spec-Driven Agent Work",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "product-owner"
+      ],
+      "enforcement": "persona",
+      "statement": "Substantial agent work proceeds from a reviewed written spec or plan that names the laws bearing on the work; agents do not begin substantial implementation without one.",
+      "rationale_summary": "Agents that jump straight to code solve the wrong problem confidently — at generation speed.",
+      "file": "laws/article-10-agentic-development/LAW-10.1.md",
+      "amendments": [
+        "AMD-2026-002"
+      ]
+    },
+    {
+      "id": "LAW-10.2",
+      "title": "Verifiable Completion",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality",
+        "software-engineer"
+      ],
+      "enforcement": "persona",
+      "statement": "Every agent task defines a runnable check before implementation; the agent iterates until it passes and presents the evidence — completion claims without evidence are presumed unverified.",
+      "rationale_summary": "An agent without a runnable check stops when the work *looks* done — and plausible-looking is exactly what generated output is optimized for (LAW-7.4).",
+      "file": "laws/article-10-agentic-development/LAW-10.2.md",
+      "amendments": [
+        "AMD-2026-002"
+      ]
+    },
+    {
+      "id": "LAW-10.3",
+      "title": "Agent Sandboxing and Permissions",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "security",
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "Autonomous agent runs require BOTH filesystem and network isolation plus an explicit tool allowlist; agents never carry credentials beyond the task's needs, with prompt injection as the default threat model.",
+      "rationale_summary": "A coding agent is a code-execution surface whose instructions can arrive from anything it reads — issues, web pages, dependency READMEs.",
+      "file": "laws/article-10-agentic-development/LAW-10.3.md",
+      "amendments": [
+        "AMD-2026-002"
+      ]
+    },
+    {
+      "id": "LAW-10.4",
+      "title": "Steering Files Are Governed Artifacts",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "software-engineer",
+        "quality"
+      ],
+      "enforcement": "review",
+      "statement": "Steering files are code — version-controlled, PR-reviewed, concise, and pruned; always-rules become hooks or gates, not prose; projects ship both CLAUDE.md and AGENTS.md.",
+      "rationale_summary": "Steering files are the constitution's delivery mechanism into every agent session — and they fail by accretion: Anthropic's verified guidance warns \"bloated CLAUDE.md files cause Claude to ignore your actual instructions,\" and prescribes treating the file \"like code: review it when things go wrong, prune it regularly, and test changes by observing whether the agent's behavior actually shifts.\" The hooks-over-prose rule exists because steering text is advisory by nature — a rule that must never be violated belongs in a mechanism that cannot be ignored (LAW-6.2's logic applied to agents).",
+      "file": "laws/article-10-agentic-development/LAW-10.4.md",
+      "amendments": [
+        "AMD-2026-002"
+      ]
+    },
+    {
+      "id": "LAW-10.5",
+      "title": "Fresh-Context Review",
+      "article": 10,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "quality"
+      ],
+      "enforcement": "persona",
+      "statement": "Agent work is reviewed by a context that did not produce it; the implementing context never grades its own work and never deletes or weakens a failing check to reach green.",
+      "rationale_summary": "A context that produced a change carries the reasoning that produced its bugs: Anthropic's verified guidance — \"a fresh context improves code review since Claude won't be biased toward code it just wrote\" — is the agent-era restatement of why authors don't approve their own PRs (LAW-6.1).",
+      "file": "laws/article-10-agentic-development/LAW-10.5.md",
+      "amendments": [
+        "AMD-2026-002"
+      ]
     }
   ]
 }

@@ -7,6 +7,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versions follow the constitution versioning rules in
 [AMENDMENT-PROCESS.md](amendments/AMENDMENT-PROCESS.md).
 
+## [1.1.0] — 2026-06-11
+
+### Added
+
+- **Article 10 — Agentic Development** ratified via
+  [AMD-2026-002](amendments/records/AMD-2026-002-agentic-development-article.md):
+  LAW-10.1 Spec-Driven Agent Work, LAW-10.2 Verifiable Completion, LAW-10.3
+  Agent Sandboxing and Permissions, LAW-10.4 Steering Files Are Governed
+  Artifacts, LAW-10.5 Fresh-Context Review.
+
 ## [1.0.0] — 2026-06-01
 
 ### Added

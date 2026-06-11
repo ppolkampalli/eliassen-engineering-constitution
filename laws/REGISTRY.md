@@ -1,6 +1,6 @@
 # Law Registry
 
-**Constitution v1.0.0** · Ratified 2026-06-01 · 45 laws
+**Constitution v1.0.0** · Ratified 2026-06-01 · 50 laws
 
 Human-readable index of every law. Machine-readable mirror: [registry.json](registry.json).
 Look up any law from the command line: `./scripts/law-lookup.sh LAW-2.3`.
@@ -55,6 +55,11 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | [LAW-9.2](article-9-operations-cost/LAW-9.2.md) | Deployment Safety | 9 — Operations & Cost | ACTIVE | 1.0 | devops | review |
 | [LAW-9.3](article-9-operations-cost/LAW-9.3.md) | Cost Impact Assessment | 9 — Operations & Cost | ACTIVE | 1.0 | finops | persona |
 | [LAW-9.4](article-9-operations-cost/LAW-9.4.md) | License Compliance | 9 — Operations & Cost | ACTIVE | 1.0 | finops | persona |
+| [LAW-10.1](article-10-agentic-development/LAW-10.1.md) | Spec-Driven Agent Work | 10 — Agentic Development | ACTIVE | 1.0 | software-engineer, product-owner | persona |
+| [LAW-10.2](article-10-agentic-development/LAW-10.2.md) | Verifiable Completion | 10 — Agentic Development | ACTIVE | 1.0 | quality, software-engineer | persona |
+| [LAW-10.3](article-10-agentic-development/LAW-10.3.md) | Agent Sandboxing and Permissions | 10 — Agentic Development | ACTIVE | 1.0 | security, devops | review |
+| [LAW-10.4](article-10-agentic-development/LAW-10.4.md) | Steering Files Are Governed Artifacts | 10 — Agentic Development | ACTIVE | 1.0 | software-engineer, quality | review |
+| [LAW-10.5](article-10-agentic-development/LAW-10.5.md) | Fresh-Context Review | 10 — Agentic Development | ACTIVE | 1.0 | quality | persona |
 
 ## Counts by Article
 
@@ -69,4 +74,5 @@ this registry and the law files are kept in lockstep by the `law-integrity` CI w
 | 7 | AI Governance | 5 |
 | 8 | Requirements & Domain | 4 |
 | 9 | Operations & Cost | 4 |
-| | **Total** | **45** |
+| 10 | Agentic Development | 5 |
+| | **Total** | **50** |
