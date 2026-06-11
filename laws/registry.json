@@ -847,6 +847,59 @@
       ]
     },
     {
+      "id": "LAW-9.5",
+      "title": "Service-Level Objectives",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "devops",
+        "product-owner"
+      ],
+      "enforcement": "review",
+      "statement": "Every production service has documented SLOs with measured SLIs, signed off by product, development, and operations, with named authors, approvers, and review dates.",
+      "rationale_summary": "Reliability undefined is reliability unfalsifiable: without a target, every incident debate is opinion versus opinion.",
+      "file": "laws/article-9-operations-cost/LAW-9.5.md",
+      "amendments": [
+        "AMD-2026-009"
+      ]
+    },
+    {
+      "id": "LAW-9.6",
+      "title": "Error-Budget Policy",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "devops",
+        "product-owner"
+      ],
+      "enforcement": "review",
+      "statement": "Exhausting the four-week error budget halts feature releases — only P0 and security fixes ship — and any incident consuming over 20% of the budget mandates a postmortem with a P0 root-cause action item.",
+      "rationale_summary": "The error budget converts the reliability-versus-velocity argument from a per-incident negotiation into a pre-agreed contract — exactly the move this constitution makes for quality gates (LAW-6.2).",
+      "file": "laws/article-9-operations-cost/LAW-9.6.md",
+      "amendments": [
+        "AMD-2026-009"
+      ]
+    },
+    {
+      "id": "LAW-9.7",
+      "title": "Failure-Injection and Recovery Testing",
+      "article": 9,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "Rollback, failover, restore, and degraded modes are exercised through quarterly failure-injection or game days; an untested recovery procedure is assumed broken.",
+      "rationale_summary": "A rollback document that has never run is documentation of hope: backups that were never restored, failovers that were never failed, degraded modes that were never degraded — each is discovered broken at the only moment it matters.",
+      "file": "laws/article-9-operations-cost/LAW-9.7.md",
+      "amendments": [
+        "AMD-2026-009"
+      ]
+    },
+    {
       "id": "LAW-10.1",
       "title": "Spec-Driven Agent Work",
       "article": 10,

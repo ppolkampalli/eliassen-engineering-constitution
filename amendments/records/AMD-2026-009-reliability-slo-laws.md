@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-009
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-9.5, LAW-9.6, LAW-9.7]
 reviewers_required: [devops, finops, product-owner, quality]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-009: Ratify the Reliability Law Family — SLOs, Error Budgets, Failure Testing (LAW-9.5–9.7)
@@ -93,11 +93,12 @@ mandates. (Research report, section b.)
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| DevOps | | | | All three laws |
-| Product Owner | | | | SLO/budget sign-off duty |
-| FinOps | | | | Freeze economics |
-| Quality | | | | Postmortem action-item discipline |
+| DevOps | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | All three laws |
+| Product Owner | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | SLO/budget sign-off duty |
+| FinOps | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Freeze economics |
+| Quality | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Postmortem action-item discipline |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-9.5, 9.6, and 9.7
+enter force at v1.0; Article 9 grows to 7 laws.

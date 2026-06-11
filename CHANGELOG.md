@@ -28,6 +28,11 @@ versions follow the constitution versioning rules in
   [AMD-2026-008](amendments/records/AMD-2026-008-domain-architecture-resilience.md):
   explicit timeouts, bounded backoff-with-jitter retries, idempotency keys,
   circuit breakers with defined degraded modes on every network boundary.
+- **LAW-9.5 Service-Level Objectives, LAW-9.6 Error-Budget Policy, LAW-9.7
+  Failure-Injection and Recovery Testing** via
+  [AMD-2026-009](amendments/records/AMD-2026-009-reliability-slo-laws.md):
+  three-constituency SLO sign-off; budget-exhaustion release freeze with >20%
+  postmortem trigger; quarterly game days — untested recovery is assumed broken.
 
 ### Changed
 
