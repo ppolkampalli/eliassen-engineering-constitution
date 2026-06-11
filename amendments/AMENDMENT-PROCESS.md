@@ -77,7 +77,7 @@ update: a project always sees *why* a law changed before accepting it.
 |---|---|---|
 | Text clarification — wording only, meaning unchanged | **Patch** | 1.0 → 1.0.1 |
 | Meaning change — scope, threshold, or obligation changes | **Minor** | 1.0 → 1.1 |
-| Repeal-and-replace | **New law ID**; old law marked `REPEALED` | LAW-2.3 → REPEALED, LAW-2.7 created |
+| Repeal-and-replace | **New law ID**; old law marked `REPEALED` | hypothetical: LAW-X.Y → REPEALED, replacement ratified under the article's next free ID |
 
 **Repealed laws are never deleted.** They remain in the repository, marked
 `REPEALED`, so historical decisions that cited them remain auditable. A repealed
