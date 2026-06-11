@@ -1,12 +1,12 @@
 ---
 id: AMD-2026-008
-status: PROPOSED
+status: ENACTED
 proposed_by: "PPolkampalli@eliassen.com (AI-assisted research initiative — Claude, per LAW-7.3)"
 proposed_date: "2026-06-11"
 laws_affected: [LAW-4.1, LAW-4.6]
 reviewers_required: [architect, devops]
-decision_by: ""
-decision_date: ""
+decision_by: "P. Polkampalli (PPolkampalli@eliassen.com)"
+decision_date: "2026-06-11"
 ---
 
 # AMD-2026-008: Domain-First Architecture (LAW-4.1 v1.1) and Resilience Patterns (LAW-4.6)
@@ -82,9 +82,10 @@ category. (Research report, sections b/c; refuted "Wedge" claim excluded.)
 ## Review Record
 | Persona/Role | Reviewer | Verdict | Date | Notes |
 |---|---|---|---|---|
-| Architect | | | | Both laws |
-| DevOps | | | | LAW-4.6 operational fit |
+| Architect | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | Both laws |
+| DevOps | P. Polkampalli (en bloc) | APPROVE | 2026-06-11 | LAW-4.6 operational fit |
 
 ## Decision
-Approved/Rejected by: ____ Date: ____
-Rationale: ____
+Approved/Rejected by: **P. Polkampalli (PPolkampalli@eliassen.com)** Date: **2026-06-11**
+Rationale: Approved en bloc with the v1.1 amendment wave. LAW-4.1 → v1.1; LAW-4.6
+enters force at v1.0.

@@ -24,6 +24,10 @@ versions follow the constitution versioning rules in
   [AMD-2026-005](amendments/records/AMD-2026-005-ai-code-health-metrics.md):
   duplication/churn/moved-vs-copied tracked per release; sustained regression is
   ticketed refactoring work; never an individual performance measure.
+- **LAW-4.6 Resilience Patterns** via
+  [AMD-2026-008](amendments/records/AMD-2026-008-domain-architecture-resilience.md):
+  explicit timeouts, bounded backoff-with-jitter retries, idempotency keys,
+  circuit breakers with defined degraded modes on every network boundary.
 
 ### Changed
 
@@ -39,6 +43,10 @@ versions follow the constitution versioning rules in
   [AMD-2026-007](amendments/records/AMD-2026-007-comment-philosophy.md):
   interface comments recognized as part of the abstraction; missing comments
   treated as costlier than imperfect ones; WHAT-restatement still prohibited.
+- **LAW-4.1 → v1.1** via
+  [AMD-2026-008](amendments/records/AMD-2026-008-domain-architecture-resilience.md):
+  domain-first organization with layers inside each domain; modular-monolith
+  default; service extraction gated by ADR with documented criteria.
 
 ## [1.0.0] — 2026-06-01
 

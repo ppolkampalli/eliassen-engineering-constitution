@@ -312,16 +312,17 @@
       "title": "Layered Architecture",
       "article": 4,
       "status": "ACTIVE",
-      "version": "1.0",
+      "version": "1.1",
       "owner_personas": [
         "architect"
       ],
       "enforcement": "review",
-      "statement": "Applications use Presentation → Application → Domain → Persistence layering with dependencies pointing downward only; the domain layer imports no framework.",
+      "statement": "Applications are organized by business domain first with the four layers inside each domain, dependencies pointing downward, cross-domain access through public interfaces only, and a modular-monolith default — service extraction requires an ADR meeting a documented criterion.",
       "rationale_summary": "Layering is what keeps change local.",
       "file": "laws/article-4-architecture/LAW-4.1.md",
       "amendments": [
-        "AMD-2026-001"
+        "AMD-2026-001",
+        "AMD-2026-008"
       ]
     },
     {
@@ -390,6 +391,24 @@
       "file": "laws/article-4-architecture/LAW-4.5.md",
       "amendments": [
         "AMD-2026-001"
+      ]
+    },
+    {
+      "id": "LAW-4.6",
+      "title": "Resilience Patterns",
+      "article": 4,
+      "status": "ACTIVE",
+      "version": "1.0",
+      "owner_personas": [
+        "architect",
+        "devops"
+      ],
+      "enforcement": "review",
+      "statement": "Every network-boundary call has explicit timeouts, bounded exponential-backoff-with-jitter retries, idempotency keys on retryable mutations, and circuit breakers with a defined degraded mode.",
+      "rationale_summary": "Distributed failure is a certainty, not an edge case — AWS's Well-Architected reliability pillar codifies designing for recovery as first-class practice.",
+      "file": "laws/article-4-architecture/LAW-4.6.md",
+      "amendments": [
+        "AMD-2026-008"
       ]
     },
     {
