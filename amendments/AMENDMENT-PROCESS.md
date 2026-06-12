@@ -69,6 +69,12 @@ applying — prints a human-readable diff of every changed law **with the amendm
 and motivation** read from the amendment records. Auditability travels with the
 update: a project always sees *why* a law changed before accepting it.
 
+Propagation also covers the **training app** (`user-training-onboarding/`): law text
+and versions auto-propagate (it renders the registries live), but narrative lesson
+content affected by the amendment is reviewed and updated in the same pass — its
+content-integrity test (`npm test`) fails on references to repealed or renumbered
+laws.
+
 ---
 
 ## Versioning Rules

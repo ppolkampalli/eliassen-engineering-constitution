@@ -1,0 +1,146 @@
+:root {
+  --ink: #1a2233;
+  --ink-soft: #5a6478;
+  --paper: #f7f8fa;
+  --card: #ffffff;
+  --brand: #15467b;
+  --brand-soft: #e8f0f9;
+  --accent: #0e7c5b;
+  --warn: #b4231f;
+  --line: #dde2ea;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); }
+a { color: var(--brand); }
+
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+.app-header {
+  background: var(--brand); color: #fff; padding: 0.9rem 2rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+}
+.app-title { display: flex; align-items: baseline; gap: 0.75rem; }
+.brand { color: #fff; font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+.version-badge {
+  background: rgba(255, 255, 255, 0.18); border-radius: 999px;
+  padding: 0.15rem 0.7rem; font-size: 0.78rem;
+}
+.app-nav { display: flex; gap: 1.2rem; }
+.app-nav a { color: #d7e4f5; text-decoration: none; padding-bottom: 2px; }
+.app-nav a.active { color: #fff; border-bottom: 2px solid #fff; }
+
+.app-main { flex: 1; width: min(960px, 94vw); margin: 0 auto; padding: 2rem 0 4rem; }
+.app-footer {
+  border-top: 1px solid var(--line); color: var(--ink-soft);
+  font-size: 0.8rem; padding: 1rem 2rem; text-align: center;
+}
+
+.hero h1 { margin: 0 0 0.5rem; }
+.hero p { color: var(--ink-soft); max-width: 60ch; }
+
+.module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.module-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1.1rem 1.2rem; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column; gap: 0.5rem;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.module-card:hover { box-shadow: 0 4px 14px rgba(21, 70, 123, 0.14); transform: translateY(-2px); }
+.module-card h2 { margin: 0; font-size: 1.05rem; color: var(--brand); }
+.module-card p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+.module-meta { font-size: 0.78rem !important; }
+
+.progress-badge { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
+.progress-track { flex: 1; height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width 0.3s ease; }
+.progress-pct { font-size: 0.8rem; color: var(--ink-soft); min-width: 2.6rem; text-align: right; }
+
+.path-header p { color: var(--ink-soft); }
+.learning-path details {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  margin: 0.7rem 0; padding: 0.2rem 1rem;
+}
+.learning-path summary { cursor: pointer; font-weight: 600; padding: 0.7rem 0; }
+
+.lesson h3 { margin-top: 0.4rem; }
+.lesson p, .lesson li { line-height: 1.55; }
+.lesson-laws { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.8rem 0; }
+.laws-label { font-size: 0.82rem; color: var(--ink-soft); }
+
+.law-chip {
+  display: inline-block; background: var(--brand-soft); color: var(--brand);
+  border-radius: 999px; padding: 0.18rem 0.65rem; font-size: 0.78rem;
+  text-decoration: none; border: 1px solid #c7d9ee;
+}
+.law-chip-unknown { background: #fbeaea; color: var(--warn); border-color: #efc4c2; }
+
+.btn {
+  border: 1px solid var(--line); background: var(--card); border-radius: 8px;
+  padding: 0.5rem 1rem; cursor: pointer; font-size: 0.9rem; margin: 0.6rem 0;
+}
+.btn-primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+.btn-done { background: var(--accent); border-color: var(--accent); color: #fff; cursor: default; }
+
+.quiz {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.2rem; margin-top: 1.4rem;
+}
+.quiz-hint { color: var(--ink-soft); font-size: 0.85rem; }
+.quiz-question { border: none; border-top: 1px solid var(--line); padding: 0.8rem 0; margin: 0; }
+.quiz-question legend { font-weight: 600; padding: 0.4rem 0; }
+.quiz-option { display: block; padding: 0.25rem 0; cursor: pointer; }
+.quiz-option input { margin-right: 0.5rem; }
+.quiz-right { color: var(--accent); }
+.quiz-wrong { color: var(--warn); }
+.quiz-result { display: flex; align-items: center; gap: 1rem; padding-top: 0.6rem; }
+.quiz-passed-badge { color: var(--accent); font-size: 0.85rem; margin-left: 0.5rem; }
+
+.law-controls { display: flex; gap: 0.7rem; margin: 1rem 0; flex-wrap: wrap; }
+.law-controls input[type='search'] {
+  flex: 1; min-width: 240px; padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line); border-radius: 8px; font-size: 0.95rem;
+}
+.law-controls select { padding: 0.55rem 0.6rem; border: 1px solid var(--line); border-radius: 8px; }
+.law-count { color: var(--ink-soft); font-size: 0.85rem; }
+
+.law-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.2rem; margin: 0.7rem 0;
+}
+.law-card header { display: flex; justify-content: space-between; align-items: center; }
+.law-card h3 { margin: 0; color: var(--brand); }
+.law-card h4 { margin: 0.3rem 0 0.6rem; }
+.law-version { color: var(--ink-soft); font-size: 0.8rem; font-weight: 400; }
+.law-status { font-size: 0.72rem; border-radius: 999px; padding: 0.12rem 0.6rem; }
+.law-status-active { background: #e4f4ee; color: var(--accent); }
+.law-status-repealed { background: #fbeaea; color: var(--warn); }
+.law-card blockquote {
+  margin: 0.5rem 0; padding: 0.6rem 0.9rem; border-left: 3px solid var(--brand);
+  background: var(--brand-soft); border-radius: 0 8px 8px 0; font-size: 0.92rem; line-height: 1.5;
+}
+.law-rationale { color: var(--ink-soft); font-size: 0.88rem; }
+.law-card footer { font-size: 0.78rem; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 0.5rem; }
+
+.explorer-legend { color: var(--ink-soft); font-size: 0.85rem; }
+.workflow-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.2rem; margin: 0.8rem 0;
+}
+.workflow-card h3 { margin: 0; color: var(--brand); }
+.workflow-card h4 { margin: 0.25rem 0 0.4rem; }
+.workflow-trigger { color: var(--ink-soft); font-size: 0.88rem; }
+.workflow-stages { padding-left: 1.4rem; }
+.stage { padding: 0.3rem 0; }
+.stage-persona { font-weight: 600; margin-right: 0.5rem; }
+.stage-action { color: var(--ink-soft); margin-right: 0.5rem; }
+.stage-flag {
+  font-size: 0.7rem; background: #fdeeee; color: var(--warn);
+  border-radius: 999px; padding: 0.1rem 0.5rem; margin-right: 0.3rem;
+}
+.stage-flag-cond { background: #fdf6e7; color: #946200; }
+.stage-flag-human { background: var(--brand-soft); color: var(--brand); }
+
+.not-found { text-align: center; padding: 3rem 0; }

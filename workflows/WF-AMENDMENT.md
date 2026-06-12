@@ -83,7 +83,10 @@ before pushing.
 
 ### 5. propagation — DevOps
 `update.sh` shows consuming projects each changed law WITH its amendment
-motivation before applying — auditability travels with the update.
+motivation before applying — auditability travels with the update. The
+training app (`user-training-onboarding/`) is part of propagation: registries
+render live (no action), but affected narrative lessons are updated in the
+same pass, and its content-integrity test catches stale law references.
 
 ## Deviation Notes
 
