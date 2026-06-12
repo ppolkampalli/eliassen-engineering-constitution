@@ -14,8 +14,9 @@ export function AppRoutes(): JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<HomePage />} />
+        <Route index element={<WhyPage />} />
         <Route path="why" element={<WhyPage />} />
+        <Route path="learn" element={<HomePage />} />
         <Route path="personas" element={<PersonasPage />} />
         <Route path="start" element={<GetStartedPage />} />
         <Route path="path/:moduleId" element={<LearningPathPage />} />

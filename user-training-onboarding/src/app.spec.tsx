@@ -12,10 +12,10 @@ function renderAt(path: string): void {
 }
 
 describe('App', () => {
-  it('should render the catalog when mounted with its own browser router', () => {
+  it('should render the Why manifesto as the landing page when mounted', () => {
     window.localStorage.clear();
     render(<App />);
-    expect(screen.getByText('Learn the Engineering Constitution')).toBeTruthy();
+    expect(screen.getByText(/protects engineers/)).toBeTruthy();
   });
 
   it('should render the Eliassen Agentic SDLC brand in the header', () => {
@@ -32,8 +32,14 @@ describe('AppRoutes', () => {
     window.localStorage.clear();
   });
 
-  it('should render the catalog with all training modules when visiting home', () => {
+  it('should render the Why manifesto when visiting the root', () => {
     renderAt('/');
+    expect(screen.getByText(/protects engineers/)).toBeTruthy();
+    expect(screen.getByText('Born from six pains you already know')).toBeTruthy();
+  });
+
+  it('should render the catalog with all training modules when visiting /learn', () => {
+    renderAt('/learn');
     expect(screen.getByText('Learn the Engineering Constitution')).toBeTruthy();
     expect(screen.getByText(/Orientation: How the Constitution Works/)).toBeTruthy();
     expect(screen.getByText(/Greenfield: Starting a New Application/)).toBeTruthy();

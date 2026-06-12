@@ -16,7 +16,7 @@ export function HomePage(): JSX.Element {
         <p>
           The deep-dive learning paths: pick the one that matches your situation — brand-new
           application, legacy rewrite, or enhancing a governed system. New here? Read{' '}
-          <Link to="/why">why this exists</Link> first, or jump straight to the{' '}
+          <Link to="/">why this exists</Link> first, or jump straight to the{' '}
           <Link to="/start">10-minute setup</Link>.
         </p>
         <ProgressBadge pct={overallPct} label="Overall progress" />

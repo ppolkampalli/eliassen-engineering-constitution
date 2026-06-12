@@ -70,7 +70,7 @@ export function GetStartedPage(): JSX.Element {
           detail — with knowledge checks that cite the law behind every answer.
         </p>
         <div className="hero-actions">
-          <Link className="btn btn-hero" to="/">
+          <Link className="btn btn-hero" to="/learn">
             Browse the learning paths →
           </Link>
           <Link className="btn btn-ghost" to="/workflows">
