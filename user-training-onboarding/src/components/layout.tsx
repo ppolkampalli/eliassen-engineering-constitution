@@ -14,6 +14,9 @@ export function Layout(): JSX.Element {
           <span className="version-badge">Constitution v{CONSTITUTION_VERSION}</span>
         </div>
         <nav className="app-nav">
+          <NavLink to="/why">Why</NavLink>
+          <NavLink to="/start">Start Here</NavLink>
+          <NavLink to="/personas">Personas</NavLink>
           <NavLink to="/">Learn</NavLink>
           <NavLink to="/laws">Law Browser</NavLink>
           <NavLink to="/workflows">Workflows</NavLink>

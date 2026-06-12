@@ -14,9 +14,10 @@ export function HomePage(): JSX.Element {
       <section className="hero">
         <h1>Learn the Engineering Constitution</h1>
         <p>
-          A self-study guide to working under Eliassen Group&apos;s engineering laws — whether you
-          are starting a brand-new application, rewriting a legacy one, or enhancing an existing
-          system. Start with Orientation, then pick the path that matches your situation.
+          The deep-dive learning paths: pick the one that matches your situation — brand-new
+          application, legacy rewrite, or enhancing a governed system. New here? Read{' '}
+          <Link to="/why">why this exists</Link> first, or jump straight to the{' '}
+          <Link to="/start">10-minute setup</Link>.
         </p>
         <ProgressBadge pct={overallPct} label="Overall progress" />
       </section>
