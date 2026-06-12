@@ -58,7 +58,7 @@ describe('PersonasPage', () => {
 });
 
 describe('JourneysPage', () => {
-  it('should render all three journey archetypes with their headlines', () => {
+  it('should render every journey archetype with its headline', () => {
     renderPage(<JourneysPage />);
     for (const journey of clientJourneys) {
       expect(screen.getByText(journey.archetype)).toBeTruthy();
@@ -68,13 +68,15 @@ describe('JourneysPage', () => {
 
   it('should render a journey-map timeline graphic per journey', () => {
     renderPage(<JourneysPage />);
-    expect(screen.getAllByRole('img', { name: 'Client journey timeline' }).length).toBe(3);
+    expect(screen.getAllByRole('img', { name: 'Client journey timeline' }).length).toBe(
+      clientJourneys.length
+    );
   });
 
   it('should render before/after columns for each journey', () => {
     renderPage(<JourneysPage />);
-    expect(screen.getAllByText('Where they start').length).toBe(3);
-    expect(screen.getAllByText('Where they land').length).toBe(3);
+    expect(screen.getAllByText('Where they start').length).toBe(clientJourneys.length);
+    expect(screen.getAllByText('Where they land').length).toBe(clientJourneys.length);
   });
 });
 

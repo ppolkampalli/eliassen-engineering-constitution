@@ -62,10 +62,12 @@ export function JourneysPage(): JSX.Element {
         <p className="kicker">Client Journeys</p>
         <h1>Wherever a client starts, there’s a mapped road to governed AI delivery.</h1>
         <p className="manifesto-sub">
-          Three journeys we see again and again: teams with no real SDLC who need one before agents
-          amplify the chaos; mature shops with great process who need the agentic layer on top; and
-          federated organizations where every team runs its own dialect and governance must arrive
-          with flexibility built in. Each map shows the road — phase by phase, pain to win.
+          Seven journeys we see again and again: teams with no real SDLC who need one before agents
+          amplify the chaos; mature shops adding the agentic layer to great process; federated
+          organizations needing governance with flexibility; rescues from ungoverned AI debt;
+          regulated clients turning audits into report runs; consultants landing day-one productive;
+          and acquisitions becoming one engineering organization. Each map shows the road — phase by
+          phase, pain to win.
         </p>
       </section>
 

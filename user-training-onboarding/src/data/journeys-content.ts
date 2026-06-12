@@ -203,4 +203,236 @@ export const clientJourneys: ClientJourney[] = [
     lawRefs: ['LAW-10.6', 'LAW-1.3', 'LAW-1.5'],
     workflowRefs: ['WF-AMENDMENT', 'WF-FEATURE'],
   },
+  {
+    id: 'agentic-rescue',
+    archetype: 'The Rescue',
+    headline: 'Agents ran wild — recovering from vibe-coded debt',
+    profile:
+      'They adopted AI coding tools enthusiastically and ungoverned. Eighteen months later: duplication everywhere, tests that are green but detect nothing, and modules nobody — human or agent — can explain. Velocity is collapsing under code that was cheap to write and is now expensive to touch.',
+    before: [
+      'Duplication and churn climbing release over release',
+      'Coverage high, mutation score near zero — green means nothing',
+      '"The AI wrote it" is the answer to every incident question',
+      'Engineers afraid to touch generated modules',
+    ],
+    after: [
+      'Debt measured, mapped, and burning down on a schedule',
+      'Generated tests must kill mutants — hollow green rejected at the gate',
+      'A human owner can explain every merged line',
+      'Agents still ship fast — inside guardrails this time',
+    ],
+    stages: [
+      {
+        phase: 'Day 0',
+        title: 'Measure the damage',
+        description:
+          'Baseline the code health: duplication percentage, churn, mutation scores, module-by-module. The fear becomes a number — and numbers can be burned down.',
+        mood: 'pain',
+      },
+      {
+        phase: 'Weeks 1–2',
+        title: 'Stop the bleeding',
+        description:
+          'Article 10 guardrails land: agents now plan first, show evidence, work sandboxed, and never grade their own output. New debt stops accumulating immediately.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Weeks 3–6',
+        title: 'Honest tests first',
+        description:
+          'Characterization tests pin the behavior that matters; mutation gates reject hollow suites. The safety net becomes real before any restructuring begins.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Months 2–3',
+        title: 'Refactor in governed waves',
+        description:
+          'WF-REFACTOR runs module by module: ADR defines the target, baselines prove behavior preserved, metrics prove structure improved. Agents do the heavy lifting — verified.',
+        mood: 'win',
+      },
+      {
+        phase: 'Quarter 2',
+        title: 'Velocity restored, instruments on',
+        description:
+          'Duplication trending down, every release graphed, every agent commit owned and tagged. The same tools that dug the hole — now governed — fill it.',
+        mood: 'win',
+      },
+    ],
+    lawRefs: ['LAW-7.6', 'LAW-3.6', 'LAW-7.1', 'LAW-10.5'],
+    workflowRefs: ['WF-REFACTOR', 'WF-BUG'],
+  },
+  {
+    id: 'regulated-client',
+    archetype: 'The Regulated Client',
+    headline: 'From audit panic to evidence on demand',
+    profile:
+      'Healthcare, fintech, or anyone under PCI, HIPAA, or SOC 2: every audit is a fire drill of screenshots and recollection, and "are you using AI to write code?" is the question they dread most. Compliance lives in people’s heads — exactly where auditors can’t see it.',
+    before: [
+      'Audit prep measured in weeks of archaeology',
+      'No map from regulation to the code that satisfies it',
+      'AI usage policy is "please be careful"',
+      'Every control demonstrated by interview, not evidence',
+    ],
+    after: [
+      'Compliance map links each requirement to code and tests',
+      '"Did AI touch this?" answered from commit tags in seconds',
+      'Change history IS the audit trail — laws, amendments, deviations',
+      'Audit prep becomes a report run, not a fire drill',
+    ],
+    stages: [
+      {
+        phase: 'Day 0',
+        title: 'Map the obligations',
+        description:
+          'Each regulatory requirement gets a row: the control, the code path that satisfies it, the test that proves it. The Industry SME persona owns keeping it current.',
+        mood: 'pain',
+      },
+      {
+        phase: 'Weeks 1–2',
+        title: 'Provenance switches on',
+        description:
+          'AI-assisted commits tagged, PR disclosures mandatory, agent data-protection rules enforced. From here forward, AI involvement is a record, not a rumor.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Weeks 3–6',
+        title: 'Mapped paths get teeth',
+        description:
+          'Changes touching compliance-mapped code require the map updated in the same PR and SME review. Drift between "documented" and "deployed" becomes structurally impossible.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Month 2',
+        title: 'Recovery rehearsed',
+        description:
+          'Quarterly game days exercise restore, failover, and degraded modes — the resilience evidence regulators increasingly ask for, generated before they ask.',
+        mood: 'win',
+      },
+      {
+        phase: 'Audit day',
+        title: 'Evidence on demand',
+        description:
+          '"Show me your AI governance" → the registry, the tags, the deviation records. "Show me control 3.4" → the map, the code, the test. The dreaded questions become the easy ones.',
+        mood: 'win',
+      },
+    ],
+    lawRefs: ['LAW-8.3', 'LAW-7.3', 'LAW-7.2', 'LAW-9.7'],
+    workflowRefs: ['WF-SECBUG'],
+  },
+  {
+    id: 'consultant-drop-in',
+    archetype: 'The Consultant Drop-In',
+    headline: 'Day-one productive in any client repo — the Eliassen way',
+    profile:
+      'An Eliassen consultant — increasingly a consultant-plus-agent pair — lands in a client engagement. Traditionally, the first two weeks vanish into "how does this team work?" The constitution makes the standards travel with the consultant, so the ramp is measured in hours.',
+    before: [
+      'Weeks 1–2 of every engagement lost to convention archaeology',
+      'Each consultant re-derives review and quality norms per client',
+      'Agent tooling reconfigured from scratch per engagement',
+      'Engagement quality depends on which consultant you got',
+    ],
+    after: [
+      'Same laws, personas, and workflows on every engagement',
+      'Consultant’s agent reads the steering files and is briefed instantly',
+      'Deliverables carry citations clients can audit after we leave',
+      'Eliassen quality is a system, not a staffing lottery',
+    ],
+    stages: [
+      {
+        phase: 'Hour 1',
+        title: 'Land and install',
+        description:
+          'The constitution installs into the engagement repo — or maps onto what the client already runs. Either way, the consultant’s working rules are explicit by lunch.',
+        mood: 'pain',
+      },
+      {
+        phase: 'Day 1',
+        title: 'Agent briefed automatically',
+        description:
+          'CLAUDE.md and AGENTS.md brief the consultant’s coding agent: conventions, gates, workflows, escalation rules. No tribal knowledge required — it’s all written down.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Week 1',
+        title: 'First governed delivery',
+        description:
+          'The first feature ships through WF-FEATURE with cited decisions and disclosed AI assistance. The client sees the process, not just the output.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Ongoing',
+        title: 'Compounding trust',
+        description:
+          'Every deliverable carries its citations and deviation records. Client reviews get faster because the evidence arrives with the work.',
+        mood: 'win',
+      },
+      {
+        phase: 'Handoff',
+        title: 'Leave the system behind',
+        description:
+          'When the engagement ends, the governance stays: registry, workflows, training app. The client keeps the operating system — and knows who installed it.',
+        mood: 'win',
+      },
+    ],
+    lawRefs: ['LAW-1.3', 'LAW-10.4', 'LAW-7.3'],
+    workflowRefs: ['WF-FEATURE'],
+  },
+  {
+    id: 'ma-integration',
+    archetype: 'The M&A Integration',
+    headline: 'Three acquired engineering orgs, one operating system',
+    profile:
+      'An acquisition just closed — or three did. Each inherited org has its own stack, standards, review culture, and AI policy. Leadership needs one answer to "how do we build software?" before the integration window closes and the dialects calcify permanently.',
+    before: [
+      'Per-org standards, mutually unintelligible',
+      'Integration teams blocked on process disputes, not code',
+      'Diligence flagged unknown AI usage in two of three orgs',
+      'Talent retention at risk from heavy-handed harmonization',
+    ],
+    after: [
+      'One ratified floor; org-specific flexibility preserved as recorded overrides',
+      'Cross-org staffing works — same laws everywhere',
+      'AI usage inventoried, tagged, and governed in the first quarter',
+      'Harmonization by amendment process, not by decree',
+    ],
+    stages: [
+      {
+        phase: 'Day 0',
+        title: 'Ratify the floor, time-box the rest',
+        description:
+          'Leadership ratifies the non-negotiables — security veto, quality gates, AI provenance — as the integration baseline. Everything else is explicitly open for the amendment process.',
+        mood: 'pain',
+      },
+      {
+        phase: 'Month 1',
+        title: 'Inventory and install',
+        description:
+          'Each org installs against the baseline; existing practices map to laws or become recorded local overrides. The diligence unknowns — especially AI usage — become a registry.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Months 2–3',
+        title: 'Dialects become amendments',
+        description:
+          'Where orgs genuinely disagree, the best practice wins through proposals with evidence — not by whoever acquired whom. Losing positions stay on record, which keeps the peace.',
+        mood: 'shift',
+      },
+      {
+        phase: 'Quarter 2',
+        title: 'One talent pool',
+        description:
+          'Engineers and agents move across former org boundaries and find the same constitution. Integration staffing stops being a special project.',
+        mood: 'win',
+      },
+      {
+        phase: 'Year 1',
+        title: 'The integration that stuck',
+        description:
+          'One operating system, an audit trail of how it was harmonized, and no resentment archaeology — because every decision has its rationale on record.',
+        mood: 'win',
+      },
+    ],
+    lawRefs: ['LAW-1.3', 'LAW-10.6', 'LAW-1.5'],
+    workflowRefs: ['WF-AMENDMENT', 'WF-REFACTOR'],
+  },
 ];

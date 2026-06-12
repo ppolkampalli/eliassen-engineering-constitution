@@ -49,7 +49,7 @@ describe('marketing content — the stay-consistent guarantee (LAW-10.6)', () =>
   });
 
   it('should give every journey five stages that travel from pain to win', () => {
-    expect(clientJourneys.length).toBe(3);
+    expect(clientJourneys.length).toBe(7);
     for (const journey of clientJourneys) {
       expect(journey.stages.length).toBe(5);
       expect(journey.stages[0]?.mood).toBe('pain');
