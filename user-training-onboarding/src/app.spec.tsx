@@ -17,6 +17,14 @@ describe('App', () => {
     render(<App />);
     expect(screen.getByText('Learn the Engineering Constitution')).toBeTruthy();
   });
+
+  it('should render the Eliassen Agentic SDLC brand in the header', () => {
+    window.localStorage.clear();
+    render(<App />);
+    expect(screen.getAllByText(/Eliassen Group/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Agentic SDLC/).length).toBeGreaterThan(0);
+    expect(screen.getByText('Training & Onboarding for the Engineering Constitution')).toBeTruthy();
+  });
 });
 
 describe('AppRoutes', () => {

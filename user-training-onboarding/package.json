@@ -2,7 +2,7 @@
   "name": "user-training-onboarding",
   "private": true,
   "version": "1.0.0",
-  "description": "User Training & Onboarding — self-study guide for the Eliassen Group Engineering Constitution",
+  "description": "Eliassen Group · Agentic SDLC — Training & Onboarding for the Engineering Constitution",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

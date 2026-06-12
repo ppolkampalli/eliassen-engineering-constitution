@@ -9,9 +9,14 @@ export function Layout(): JSX.Element {
       <header className="app-header">
         <div className="app-title">
           <NavLink to="/" className="brand">
-            User Training &amp; Onboarding
+            <span className="brand-name">
+              Eliassen Group <span className="brand-dot">·</span> Agentic SDLC
+            </span>
+            <span className="brand-tagline">
+              Training &amp; Onboarding for the Engineering Constitution
+            </span>
           </NavLink>
-          <span className="version-badge">Constitution v{CONSTITUTION_VERSION}</span>
+          <span className="version-badge">v{CONSTITUTION_VERSION}</span>
         </div>
         <nav className="app-nav">
           <NavLink to="/why">Why</NavLink>
