@@ -2,9 +2,11 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { GetStartedPage } from './get-started';
+import { JourneysPage } from './journeys';
 import { PersonasPage } from './personas';
 import { WhyPage } from './why';
 import { startSteps } from '../data/get-started-content';
+import { clientJourneys } from '../data/journeys-content';
 import { personaProfiles } from '../data/personas-content';
 
 function renderPage(page: JSX.Element): void {
@@ -52,6 +54,27 @@ describe('PersonasPage', () => {
     renderPage(<PersonasPage />);
     // Security owns LAW-5.1 — the chip renders id + live version + title.
     expect(screen.getByText(/\[LAW-5\.1 v[\d.]+\]/)).toBeTruthy();
+  });
+});
+
+describe('JourneysPage', () => {
+  it('should render all three journey archetypes with their headlines', () => {
+    renderPage(<JourneysPage />);
+    for (const journey of clientJourneys) {
+      expect(screen.getByText(journey.archetype)).toBeTruthy();
+      expect(screen.getByText(journey.headline)).toBeTruthy();
+    }
+  });
+
+  it('should render a journey-map timeline graphic per journey', () => {
+    renderPage(<JourneysPage />);
+    expect(screen.getAllByRole('img', { name: 'Client journey timeline' }).length).toBe(3);
+  });
+
+  it('should render before/after columns for each journey', () => {
+    renderPage(<JourneysPage />);
+    expect(screen.getAllByText('Where they start').length).toBe(3);
+    expect(screen.getAllByText('Where they land').length).toBe(3);
   });
 });
 

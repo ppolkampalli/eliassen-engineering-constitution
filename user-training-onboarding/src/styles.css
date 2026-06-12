@@ -352,8 +352,73 @@ h1, h2, h3 {
 .step-checkpoint { font-size: 0.88rem; color: var(--accent); }
 .step-laws { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
+/* Client journeys */
+.journey {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  border-top: 4px solid var(--royal);
+  padding: 2rem 2.2rem 1.6rem; margin: 2rem 0;
+}
+.journey-archetype {
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 700; color: var(--coral-dark); margin: 0 0 0.4rem;
+}
+.journey h2 { margin: 0 0 0.6rem; font-size: clamp(1.3rem, 2.4vw, 1.8rem); font-weight: 600; }
+.journey-profile { color: var(--ink-soft); line-height: 1.7; max-width: 75ch; font-size: 0.93rem; }
+
+.journey-map { position: relative; margin: 1.8rem 0 1rem; }
+.journey-rail {
+  position: absolute; top: 0.55rem; left: 2%; right: 2%; height: 4px;
+  background: linear-gradient(90deg, var(--coral) 0%, var(--royal) 55%, var(--accent) 100%);
+  border-radius: 999px;
+}
+.journey-stages {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;
+}
+.journey-stage { position: relative; padding-top: 1.6rem; }
+.journey-node {
+  position: absolute; top: 0; left: 0;
+  width: 1.25rem; height: 1.25rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; border: 2.5px solid currentColor;
+}
+.mood-pain { color: var(--coral-dark); }
+.mood-shift { color: var(--royal); }
+.mood-win { color: var(--accent); }
+.journey-phase {
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 600; color: currentColor;
+}
+.journey-stage h4 { margin: 0.25rem 0 0.3rem; font-size: 0.95rem; color: var(--ink); font-weight: 600; }
+.journey-stage p { margin: 0; font-size: 0.8rem; line-height: 1.55; color: var(--ink-soft); }
+
+.before-after {
+  display: grid; grid-template-columns: 1fr 2.5rem 1fr; gap: 0.8rem; align-items: center;
+  background: var(--cream); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.4rem 0 1rem;
+}
+.ba-col h4 {
+  font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; margin: 0 0 0.4rem; font-family: inherit;
+}
+.ba-before h4 { color: var(--coral-dark); }
+.ba-after h4 { color: var(--accent); }
+.ba-col ul { margin: 0; padding-left: 1.1rem; }
+.ba-col li { font-size: 0.85rem; line-height: 1.55; }
+.ba-arrow { font-size: 1.6rem; color: var(--royal); text-align: center; font-weight: 700; }
+.journey-laws { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+
+@media (max-width: 760px) {
+  .journey-stages { grid-template-columns: 1fr; gap: 0.9rem; }
+  .journey-rail { left: 0.5rem; right: auto; top: 2%; bottom: 2%; width: 4px; height: auto;
+    background: linear-gradient(180deg, var(--coral) 0%, var(--royal) 55%, var(--accent) 100%); }
+  .journey-stage { padding-top: 0; padding-left: 2.2rem; }
+  .before-after { grid-template-columns: 1fr; }
+  .ba-arrow { transform: rotate(90deg); }
+}
+
 @media (max-width: 640px) {
   .manifesto-hero, .personas-hero, .start-hero { padding: 2.2rem 1.4rem; }
   .pain-grid-section, .ladder-section { padding: 1.4rem 1.2rem; }
   .claim { grid-template-columns: 1fr; gap: 0.3rem; }
+  .journey { padding: 1.4rem 1.2rem; }
 }
