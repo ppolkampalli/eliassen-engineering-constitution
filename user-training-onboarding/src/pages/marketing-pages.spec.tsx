@@ -58,10 +58,12 @@ describe('PersonasPage', () => {
 });
 
 describe('JourneysPage', () => {
-  it('should render every journey archetype with its headline', () => {
+  it('should render every journey archetype as a filter chip and a section, with its headline', () => {
     renderPage(<JourneysPage />);
     for (const journey of clientJourneys) {
-      expect(screen.getByText(journey.archetype)).toBeTruthy();
+      // Archetype appears twice by design: once as a filter chip, once in the section.
+      expect(screen.getByRole('button', { name: journey.archetype })).toBeTruthy();
+      expect(screen.getAllByText(journey.archetype).length).toBe(2);
       expect(screen.getByText(journey.headline)).toBeTruthy();
     }
   });
