@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { Layout } from './components/layout';
+import { ArticleReaderPage, ArticlesPage } from './pages/articles';
 import { GetStartedPage } from './pages/get-started';
 import { HomePage } from './pages/home';
 import { JourneysPage } from './pages/journeys';
@@ -18,6 +19,8 @@ export function AppRoutes(): JSX.Element {
         <Route index element={<WhyPage />} />
         <Route path="why" element={<WhyPage />} />
         <Route path="journeys" element={<JourneysPage />} />
+        <Route path="articles" element={<ArticlesPage />} />
+        <Route path="articles/:articleId" element={<ArticleReaderPage />} />
         <Route path="learn" element={<HomePage />} />
         <Route path="personas" element={<PersonasPage />} />
         <Route path="start" element={<GetStartedPage />} />
