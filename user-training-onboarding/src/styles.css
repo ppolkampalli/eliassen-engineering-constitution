@@ -353,6 +353,25 @@ h1, h2, h3 {
 .step-laws { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
 /* Client journeys */
+.journey-filter {
+  position: sticky; top: 72px; z-index: 9;
+  display: flex; flex-wrap: wrap; gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.55rem 0.8rem; margin: 0 0 1.4rem;
+}
+.filter-chip {
+  border: 1px solid var(--line); background: #fff; color: var(--ink);
+  border-radius: 999px; padding: 0.32rem 0.85rem;
+  font-family: inherit; font-size: 0.76rem; font-weight: 600;
+  letter-spacing: 0.02em; cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.filter-chip:hover { border-color: var(--royal); color: var(--royal); }
+.filter-chip-active { background: var(--royal); border-color: var(--royal); color: #fff; }
+.filter-chip-active:hover { background: var(--royal-deep); color: #fff; }
+
 .journey {
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
   border-top: 4px solid var(--royal);

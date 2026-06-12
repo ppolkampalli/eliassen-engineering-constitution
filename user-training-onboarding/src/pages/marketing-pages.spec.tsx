@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { GetStartedPage } from './get-started';
@@ -77,6 +77,22 @@ describe('JourneysPage', () => {
     renderPage(<JourneysPage />);
     expect(screen.getAllByText('Where they start').length).toBe(clientJourneys.length);
     expect(screen.getAllByText('Where they land').length).toBe(clientJourneys.length);
+  });
+
+  it('should filter to one journey when its archetype chip is clicked', () => {
+    renderPage(<JourneysPage />);
+    fireEvent.click(screen.getByRole('button', { name: 'The Rescue' }));
+    expect(screen.getAllByRole('img', { name: 'Client journey timeline' }).length).toBe(1);
+    expect(screen.getByText(/recovering from vibe-coded debt/)).toBeTruthy();
+  });
+
+  it('should restore all journeys when the All chip is clicked after filtering', () => {
+    renderPage(<JourneysPage />);
+    fireEvent.click(screen.getByRole('button', { name: 'The Mature Shop' }));
+    fireEvent.click(screen.getByRole('button', { name: 'All journeys' }));
+    expect(screen.getAllByRole('img', { name: 'Client journey timeline' }).length).toBe(
+      clientJourneys.length
+    );
   });
 });
 

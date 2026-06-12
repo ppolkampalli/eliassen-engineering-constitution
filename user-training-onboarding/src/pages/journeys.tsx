@@ -1,9 +1,40 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { JourneyMap } from '../components/journey-map';
 import { LawLink } from '../components/law-link';
 import { clientJourneys } from '../data/journeys-content';
 import type { ClientJourney } from '../data/journeys-content';
+
+const ALL_JOURNEYS = 'all';
+
+interface JourneyFilterProps {
+  selected: string;
+  onSelect: (id: string) => void;
+}
+
+/** Sticky mini-nav: archetype chips that filter the journey list. */
+function JourneyFilter({ selected, onSelect }: JourneyFilterProps): JSX.Element {
+  const chips = [
+    { id: ALL_JOURNEYS, label: 'All journeys' },
+    ...clientJourneys.map((journey) => ({ id: journey.id, label: journey.archetype })),
+  ];
+  return (
+    <nav className="journey-filter" aria-label="Filter journeys by client archetype">
+      {chips.map((chip) => (
+        <button
+          key={chip.id}
+          type="button"
+          className={selected === chip.id ? 'filter-chip filter-chip-active' : 'filter-chip'}
+          aria-pressed={selected === chip.id}
+          onClick={(): void => onSelect(chip.id)}
+        >
+          {chip.label}
+        </button>
+      ))}
+    </nav>
+  );
+}
 
 function BeforeAfter({ journey }: { journey: ClientJourney }): JSX.Element {
   return (
@@ -54,8 +85,14 @@ function JourneySection({ journey }: { journey: ClientJourney }): JSX.Element {
   );
 }
 
-/** Client Journeys: three client archetypes mapped from pain to governed agentic delivery. */
+/** Client Journeys: client archetypes mapped from pain to governed agentic delivery. */
 export function JourneysPage(): JSX.Element {
+  const [selected, setSelected] = useState<string>(ALL_JOURNEYS);
+  const visibleJourneys =
+    selected === ALL_JOURNEYS
+      ? clientJourneys
+      : clientJourneys.filter((journey) => journey.id === selected);
+
   return (
     <div className="journeys-page">
       <section className="personas-hero">
@@ -71,7 +108,9 @@ export function JourneysPage(): JSX.Element {
         </p>
       </section>
 
-      {clientJourneys.map((journey) => (
+      <JourneyFilter selected={selected} onSelect={setSelected} />
+
+      {visibleJourneys.map((journey) => (
         <JourneySection key={journey.id} journey={journey} />
       ))}
 
