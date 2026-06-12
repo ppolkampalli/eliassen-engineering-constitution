@@ -23,12 +23,12 @@ export function Layout(): JSX.Element {
             Why
           </NavLink>
           <NavLink to="/journeys">Client Journeys</NavLink>
-          <NavLink to="/articles">Articles</NavLink>
           <NavLink to="/start">Start Here</NavLink>
           <NavLink to="/personas">Personas</NavLink>
           <NavLink to="/learn">Learn</NavLink>
           <NavLink to="/laws">Law Browser</NavLink>
           <NavLink to="/workflows">Workflows</NavLink>
+          <NavLink to="/articles">Articles</NavLink>
         </nav>
       </header>
       <main className="app-main">
