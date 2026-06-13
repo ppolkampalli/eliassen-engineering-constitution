@@ -15,8 +15,8 @@ function renderReaderAt(path: string): void {
 }
 
 describe('articles content', () => {
-  it('should publish both commissioned articles with substantial bodies', () => {
-    expect(articles.length).toBe(2);
+  it('should publish the commissioned articles with substantial bodies', () => {
+    expect(articles.length).toBe(3);
     for (const article of articles) {
       expect(article.body.length).toBeGreaterThan(4000);
       expect(article.deck.length).toBeGreaterThan(40);

@@ -7,6 +7,57 @@ import type { Article } from './articles-types';
  */
 export const articles: Article[] = [
   {
+    id: 'the-token-is-not-the-bill',
+    title: 'The Token Is Not the Bill',
+    deck: 'Per-token costs are collapsing, total AI spend is climbing, and most of the value is unproven — which means the unit you measure decides whether you can see what you’re buying at all.',
+    author: 'Eliassen Group · AI-SDLC Practice',
+    published: '2026-06-13',
+    readingMinutes: 6,
+    body: `There is a number that finance teams have learned to watch, and it is the wrong number. It is the price of a token — the fraction of a cent an AI model charges to read or write a word. It is wrong not because it is inaccurate, but because it is the cost of an ingredient being used to reason about the price of a meal. The token is not the bill. And the gap between the two is where most enterprise AI budgets are quietly being decided by no one.
+
+Start with the genuinely good news, because it is real. The cost of inference — running a model to get an answer — is falling at a pace that has few precedents in computing. Epoch AI, which tracks this carefully, puts it at "very roughly a 5 to 10 times cost reduction per year for reaching a given capability level." Eight months separated two models reaching the same score on a hard math benchmark; the later one used roughly a third of the tokens. If you are pricing a use case on today's per-token rate, the rate will likely embarrass you within a year — in your favor.
+
+## The cheaper it gets, the more you spend
+
+Here is the trap. Falling unit prices have not produced falling bills. They have produced larger ones.
+
+The mechanism is an old one, named for the economist who noticed in 1865 that more efficient steam engines increased coal consumption rather than reducing it. Cheaper coal made more uses of coal worth it. Cheaper tokens do the same. When a model call cost real money, you sent the model one carefully framed question. When it costs almost nothing, you build an agent that calls the model in a loop — planning, criticizing itself, calling tools, retrying — and a single agentic coding task can consume on the order of a thousand times the tokens of the equivalent chat message. Deloitte's early-2026 reading captures the scissor exactly: cost-per-token down roughly tenfold in two years, token consumption up roughly a hundredfold.
+
+> The price of the ingredient fell. The size of the meal grew faster.
+
+So the per-token line on your dashboard slopes reassuringly down while the total at the bottom of the invoice climbs. Watching the unit cost is not just unhelpful here; it is actively misleading. It tells a story of efficiency over a reality of escalation.
+
+## The value side is thin — and harder to see than the cost side
+
+If spend were the only question, this would be a procurement problem. It is not, because the value side of the ledger is both weaker and far harder to read than the vendors' case studies suggest.
+
+The most sober numbers come from McKinsey's State of AI survey: only 39 percent of organizations attribute any EBIT impact at all to their AI use, and most of those put it below five percent. Gartner, surveying thousands of organizations, expects more than 40 percent of agentic AI projects to be canceled by the end of 2027 — citing escalating costs and unclear business value. These are not the numbers of a technology failing to work. They are the numbers of a technology working in demos and evaporating somewhere between the pilot and the income statement.
+
+And then there is the finding that should unsettle anyone who measures AI value by asking people whether it helped. In a controlled trial, the research group METR had experienced open-source developers complete real tasks on codebases they knew well, with and without early-2025 AI tools. The developers predicted AI would speed them up by 24 percent. Afterward, they reported it had sped them up by about 20 percent. Measured against the clock, the AI had slowed them down by 19 percent.
+
+> They were slower, and they were certain they were faster. Both were true at once.
+
+Hold that study at the right distance — it is sixteen expert developers, on mature code, with year-old tooling, and it should not be stretched into a verdict on all AI everywhere. But its core lesson is not about a tool. It is about measurement. Self-reported productivity, the instrument most organizations actually use to justify their AI spend, pointed almost forty percentage points away from reality. If your ROI case rests on a satisfaction survey, you may be measuring enthusiasm and calling it value.
+
+## Measure the meal
+
+The fix is not a better token-tracking dashboard. It is a change in the unit of measurement.
+
+The discipline forming around this — the FinOps Foundation calls it FinOps for AI — makes the point bluntly: "the only real way to understand the total cost of ownership of leveraging AI for a business outcome is to measure the entire use case." Tokens are, in their words, "only a small piece of the puzzle." The unit that matters is cost per useful business outcome — a resolved support ticket, a merged and verified pull request, a closed claim — with everything that outcome actually required folded in: the model calls, yes, but also the infrastructure, the integration work, the governance, and the increasingly large line item of human oversight. Generation got cheap. Verification did not. The person who has to confirm the agent's output is correct is often the most expensive token in the loop, and they do not appear on the API invoice at all.
+
+This reframing also explains why the cost levers that work are unglamorous and specific. Inference is 80 to 90 percent of production spend, so that is where optimization compounds — not training. Routing simple requests to smaller, non-reasoning models instead of sending everything to the most capable one saves between 40 and 70 percent of inference cost in reported deployments, because most requests never needed the expensive model. Caching repeated context can cut its cost by 90 percent. None of this shows up if you are measuring the average price of a token. All of it shows up if you are measuring the cost of an outcome.
+
+## What the winners are actually doing
+
+The organizations capturing value are not the ones who found a cheaper token. They are the ones who changed what they were measuring and, more importantly, what they were doing.
+
+The single strongest pattern in McKinsey's data is not a tool choice or a model choice. Of twenty-five attributes they tested, fundamental redesign of workflows had the highest correlation with bottom-line impact; the high performers were nearly three times as likely to have done it. This is the same lesson the steam engine taught, inverted: efficiency in one component does not help if the system around it is unchanged. Bolting an AI agent onto a process designed for human throughput mostly produces faster generation of work that humans must still review at human speed — which is precisely how you end up 19 percent slower while feeling 20 percent faster.
+
+So the questions worth bringing to the AI budget review are not about the price of tokens. They are: What outcome are we buying, and what does a unit of it actually cost us all-in, including the humans? Are we measuring that, or are we measuring adoption and sentiment? And have we redesigned the work to fit a world of cheap generation and expensive verification — or have we just made the old work generate faster?
+
+The token is not the bill. It never was. The bill is the total cost of an outcome you can actually attribute value to — and the first enterprises to measure that, rather than the price of the ingredient, will be the ones who can still tell, a year from now, whether any of this was worth it.`,
+  },
+  {
     id: 'what-is-your-sprint-protecting-now',
     title: 'What Is Your Sprint Protecting Now?',
     deck: 'Scrum’s ceremonies were precision-fitted to human limitations in a world that no longer exists — the limits remain, the world doesn’t, and that gap deserves harder questions than most teams are asking.',

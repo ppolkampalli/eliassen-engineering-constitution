@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Token Economics &amp; Enterprise AI ROI — Research Appendix</title>
+    <style>
+      /* Print-to-PDF appendix. Open in a browser, then File → Print → Save as PDF
+         (A4/Letter, default margins, "Background graphics" ON for the cover band). */
+      :root {
+        --royal: #2e3f95;
+        --ink: #1c2240;
+        --ink-soft: #555c78;
+        --coral: #d96b6a;
+        --cream: #f2ece4;
+        --line: #d9d3c8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        color: var(--ink); line-height: 1.6; margin: 0;
+        font-size: 11pt;
+      }
+      .wrap { max-width: 7.2in; margin: 0 auto; padding: 0 0.4in; }
+      h1, h2, h3 { font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--ink); line-height: 1.25; }
+      h2 { font-size: 15pt; border-bottom: 2px solid var(--coral); padding-bottom: 4px; margin-top: 1.6em; }
+      h3 { font-size: 12pt; color: var(--royal); margin-top: 1.3em; }
+      p { margin: 0.6em 0; }
+      ul { margin: 0.5em 0; }
+      li { margin: 0.3em 0; }
+      a { color: var(--royal); word-break: break-all; }
+      code { font-family: 'Consolas', monospace; font-size: 9.5pt; background: var(--cream); padding: 0 3px; border-radius: 3px; }
+      blockquote {
+        border-left: 3px solid var(--coral); margin: 1em 0; padding: 0.3em 0 0.3em 1em;
+        font-style: italic; color: var(--royal); font-size: 12pt;
+      }
+      table { border-collapse: collapse; width: 100%; font-size: 9.5pt; margin: 1em 0; }
+      th, td { border: 1px solid var(--line); padding: 5px 8px; text-align: left; vertical-align: top; }
+      th { background: var(--cream); font-family: 'Helvetica Neue', Arial, sans-serif; }
+      .vote { font-family: 'Consolas', monospace; font-size: 8.5pt; color: var(--ink-soft); }
+
+      /* Cover */
+      .cover {
+        background: var(--royal); color: #fff; padding: 1.4in 0.6in 1.1in;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .cover .kicker { font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: 0.18em; text-transform: uppercase; font-size: 9pt; color: #f3b6b2; }
+      .cover h1 { color: #fff; font-size: 26pt; margin: 0.3em 0; }
+      .cover .deck { color: #ccd3ee; font-size: 12pt; font-style: italic; max-width: 6in; }
+      .cover .meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 9pt; color: #aab4d6; margin-top: 1.2em; }
+      .brandline { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10pt; }
+      .brandline .dot { color: var(--coral); }
+
+      .flag { background: var(--cream); border-left: 3px solid var(--coral); padding: 0.6em 1em; font-size: 10pt; margin: 1em 0; }
+      footer { margin-top: 2em; border-top: 1px solid var(--line); padding-top: 0.6em; font-size: 8.5pt; color: var(--ink-soft); font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+      @media print {
+        h2 { page-break-after: avoid; }
+        h3 { page-break-after: avoid; }
+        table, blockquote, .flag { page-break-inside: avoid; }
+        .cover { page-break-after: always; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cover">
+      <div class="wrap">
+        <p class="brandline">Eliassen Group <span class="dot">·</span> Agentic SDLC</p>
+        <p class="kicker">Research Appendix</p>
+        <h1>Token Economics &amp; How to Measure Value</h1>
+        <p class="deck">
+          The enterprise view: what AI actually costs, how value is measured, and why
+          the unit of measurement decides whether you can see what you are buying.
+        </p>
+        <p class="meta">
+          Companion to the article <em>"The Token Is Not the Bill."</em><br />
+          Multi-agent deep research · 24 sources · 23 of 25 claims adversarially verified ·
+          June 13, 2026
+        </p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <p class="flag">
+        <strong>How to read this appendix.</strong> Every claim carries its
+        verification vote (e.g., 3-0 = unanimous across three independent skeptics)
+        and a confidence rating. Source-strength caveats and the two refuted claims
+        are recorded at the end. Pricing figures are verified as of June 2026 and will
+        date quickly.
+      </p>
+
+      <h2>1. Headline thesis</h2>
+      <p>
+        Enterprises are caught between two opposing curves. <strong>Per-unit inference
+        cost is collapsing</strong> — roughly 5–10× per year to reach a given
+        capability (Epoch AI) — while <strong>total AI spend is rising</strong>,
+        because cheap tokens induce far more token-hungry agentic workflows (a
+        Jevons-paradox dynamic). Meanwhile the <strong>value side remains weak and hard
+        to prove</strong>: only 39% of organizations attribute any EBIT impact to AI,
+        most under 5% (McKinsey); Gartner forecasts 40%+ of agentic AI projects
+        canceled by end of 2027; and a controlled trial found experienced developers
+        19% <em>slower</em> with early-2025 AI tools while believing they were 20%
+        faster (METR). The through-line: <strong>cost-per-token is the wrong unit.</strong>
+        Value is measured per business outcome, and the organizations capturing it
+        redesign workflows rather than bolt AI onto existing ones.
+      </p>
+
+      <h2>2. Token-economics primer</h2>
+      <h3>Unit cost is falling fast — 5–10× per year <span class="vote">(3-0, high)</span></h3>
+      <p>
+        Epoch AI: "very roughly a 5–10× cost reduction per year for reaching a given
+        capability level." Reaching ~27% on the FrontierMath benchmark took ~43M output
+        tokens in April 2025 (o4-mini) vs ~5M in December 2025 (GPT-5.2) — a ~3× drop in
+        eight months. a16z's "LLMflation" analysis estimates ~10×/year. Epoch cautions
+        the trend "might slow."
+      </p>
+      <h3>Output costs 3–5× input — output volume is the driver <span class="vote">(3-0 / 2-1, high)</span></h3>
+      <p>
+        Output tokens are priced at a premium over input (a 3–5× lower bound).
+        Anthropic is exactly 5× per tier — Opus 4.8 <code>$5 / $25</code>, Sonnet 4.6
+        <code>$3 / $15</code>, Haiku 4.5 <code>$1 / $5</code> per million in/out;
+        OpenAI GPT-4o ~4×; Google Gemini ~8×. What the model <em>writes</em>, not what
+        you feed it, dominates most budgets.
+      </p>
+      <h3>Caching is the primary lever — 90% off reads <span class="vote">(3-0, high)</span></h3>
+      <p>
+        On Anthropic, cache reads cost 0.1× base input (a 90% discount); cache writes
+        carry a premium (1.25× for a 5-minute TTL, 2× for 1-hour). Break-even arrives
+        on the first re-read. <em>Caching economics are provider-specific — OpenAI and
+        Google differ.</em>
+      </p>
+      <h3>Inference is 80–90% of production spend <span class="vote">(3-0, high)</span></h3>
+      <p>
+        FinOps Foundation: inference "can account for 80–90% of the total spend in many
+        cases," corroborated by NVIDIA's ~80/20 inference/training framing. Optimization
+        effort belongs on inference, not training.
+      </p>
+      <h3>Falling unit cost ≠ falling total spend (Jevons) <span class="vote">(2-1, medium)</span></h3>
+      <p>
+        Cheaper inference pushes firms toward more compute-intensive agentic
+        architectures, making aggregate demand "super-elastic" — total spend rises as
+        cost-per-token falls (arXiv 2601.12339). Corroborated: Deloitte (Jan 2026)
+        reports cost-per-token down ~10× in two years while consumption rose ~100×;
+        agentic coding can use ~1,000× the tokens of equivalent chat.
+        <em>The "super-elastic / structural Jevons paradox" framing is from a single
+        non-peer-reviewed preprint; the empirical core is multiply corroborated.</em>
+      </p>
+
+      <h2>3. The ROI evidence — bullish and skeptical</h2>
+      <h3>Skeptical (well-sourced)</h3>
+      <ul>
+        <li>
+          <strong>McKinsey State of AI</strong> <span class="vote">(3-0, high)</span> —
+          only <strong>39%</strong> attribute any EBIT impact to AI; most of those say
+          <strong>under 5%</strong>; only ~6% are "AI high performers."
+        </li>
+        <li>
+          <strong>Gartner, 2025-06-25</strong> <span class="vote">(3-0, high; analyst forecast)</span> —
+          <strong>40%+ of agentic AI projects canceled by end of 2027</strong> (escalating
+          cost, unclear value, inadequate risk controls); "most agentic AI propositions
+          lack significant value or ROI." Survey of 3,400+ organizations.
+        </li>
+        <li>
+          <strong>METR randomized controlled trial, 2025</strong> <span class="vote">(3-0, high)</span> —
+          early-2025 AI tools made experienced developers <strong>19% slower</strong> on
+          real issues; they forecast a 24% speedup and still believed in a 20% speedup
+          afterward. <em>n=16 expert devs on mature codebases with early-2025 tooling —
+          do not generalize to juniors, greenfield, or 2026 tools.</em>
+        </li>
+      </ul>
+      <h3>Bullish (weaker sourcing)</h3>
+      <p>
+        A Microsoft-sponsored IDC report claims large GenAI ROI multiples; treat
+        vendor-sponsored multiples with caution (sponsorship incentive, self-reported).
+        The widely repeated <strong>MIT/NANDA "95% of GenAI pilots fail"</strong>
+        statistic did <strong>not</strong> survive into the verified set — see open
+        questions.
+      </p>
+
+      <h2>4. How enterprises measure value</h2>
+      <h3>FinOps for AI — the emerging standard <span class="vote">(3-0, high)</span></h3>
+      <p>
+        Defines AI-specific KPIs — <em>Cost Per Inference</em> = total inference cost /
+        requests; <em>Cost Per Token</em> = total cost / tokens — treats cost-per-token
+        as a new core usage metric (volatile pricing, GPU scarcity), and frames ROI
+        around six business-value priorities: cost efficiency, resilience, user
+        experience, productivity, sustainability, business growth.
+      </p>
+      <h3>Measure the use case, not the token <span class="vote">(3-0, high)</span></h3>
+      <p>
+        FinOps Foundation: "the only real way to understand the TCO of leveraging AI for
+        a business outcome is to measure the entire use case" — across models, infra,
+        integration, human oversight, and governance. Tokens are "only a small piece of
+        the puzzle." The unit that matters is <strong>cost per useful business
+        outcome</strong>, and human verification — absent from the API invoice — is
+        often the most expensive component.
+      </p>
+
+      <h2>5. Why most fail — and what the winners do</h2>
+      <h3>The winners redesign workflows <span class="vote">(3-0, high)</span></h3>
+      <p>
+        McKinsey: 80% set efficiency as the AI objective, but value-capturers "often set
+        growth or innovation as additional objectives... most are redesigning workflows."
+        Of 25 attributes tested, workflow redesign has the <strong>single highest
+        correlation with EBIT impact</strong>; high performers are 2.8× more likely to
+        report fundamental redesign. <em>Correlational survey evidence, not causal proof.</em>
+      </p>
+      <h3>Cost-control levers that work</h3>
+      <ul>
+        <li>
+          <strong>Model routing / right-sizing</strong> <span class="vote">(3-0, high)</span> —
+          routing to a non-reasoning model when reasoning isn't needed saves 4–20×
+          tokens; organizations report <strong>40–70% inference savings</strong>
+          (RouteLLM: 35–85% while retaining ~95% of GPT-4 performance). Workload-dependent.
+        </li>
+        <li><strong>Prompt caching</strong> — the 90% read discount, for any re-read context.</li>
+        <li><strong>Inference focus</strong> — since inference is 80–90% of spend, that's where optimization compounds.</li>
+      </ul>
+
+      <h2>6. Watch-list — open questions &amp; weak-evidence flags</h2>
+      <ol>
+        <li>The MIT/NANDA <strong>"95% of pilots fail"</strong> statistic did not appear among verified claims — a candidate thin-source figure. Trace the primary methodology before citing it as fact.</li>
+        <li>Does the METR slowdown hold for 2026 agentic tooling, juniors, or greenfield work? The result is narrow.</li>
+        <li>Durability of the 5–10×/year cost decline — Epoch itself cautions it "might slow"; GPU scarcity and benchmark contamination complicate the curve.</li>
+        <li>Audited, third-party use-case-level ROI case studies (cost per business outcome) beyond vendor and survey self-reporting remain scarce.</li>
+      </ol>
+      <p class="flag">
+        <strong>Refuted in verification (do not use):</strong> "Context Window Creep is
+        the largest hidden cost" (1-2); "Three-way cost/performance/impact balancing
+        yields 30–50% better outcomes" (0-3).
+      </p>
+
+      <h2>Source register</h2>
+      <table>
+        <thead>
+          <tr><th>Source</th><th>Quality</th><th>Used for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>epoch.ai — inference cost burden</td><td>Primary</td><td>5–10×/yr cost decline</td></tr>
+          <tr><td>platform.claude.com — pricing &amp; prompt-caching</td><td>Primary</td><td>output premium, caching economics</td></tr>
+          <tr><td>arxiv.org/2601.12339 — agentic Jevons paradox</td><td>Primary (preprint, caveated)</td><td>super-elastic demand</td></tr>
+          <tr><td>finops.org — FinOps for AI; token pricing; optimizing GenAI</td><td>Primary</td><td>KPIs, use-case TCO, routing</td></tr>
+          <tr><td>mckinsey.com — State of AI</td><td>Primary</td><td>39% EBIT, workflow redesign</td></tr>
+          <tr><td>gartner.com — agentic AI cancellation forecast</td><td>Primary</td><td>40% canceled by 2027</td></tr>
+          <tr><td>metr.org + arxiv.org/2507.09089 — developer RCT</td><td>Primary</td><td>19% slowdown, perception gap</td></tr>
+          <tr><td>news.microsoft.com — IDC ROI report</td><td>Secondary (vendor-sponsored)</td><td>bullish ROI multiples (caveated)</td></tr>
+          <tr><td>finout.io, intuitionlabs.ai — pricing comparisons</td><td>Secondary</td><td>cross-vendor pricing</td></tr>
+        </tbody>
+      </table>
+
+      <footer>
+        Eliassen Group · Agentic SDLC Practice — Research Appendix. Method: multi-agent
+        deep-research harness, 106 agents, 5 search angles, 24 sources, 25 claims
+        adversarially verified (23 confirmed, 2 refuted). Pricing verified June 2026.
+        Companion article: "The Token Is Not the Bill."
+      </footer>
+    </div>
+  </body>
+</html>
