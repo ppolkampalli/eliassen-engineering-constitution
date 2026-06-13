@@ -10,7 +10,7 @@ export const articles: Article[] = [
     id: 'the-token-is-not-the-bill',
     title: 'The Token Is Not the Bill',
     deck: 'Per-token costs are collapsing, total AI spend is climbing, and most of the value is unproven — which means the unit you measure decides whether you can see what you’re buying at all.',
-    author: 'Eliassen Group · AI-SDLC Practice',
+    author: 'Pramod Polkampalli',
     published: '2026-06-13',
     readingMinutes: 6,
     body: `There is a number that finance teams have learned to watch, and it is the wrong number. It is the price of a token — the fraction of a cent an AI model charges to read or write a word. It is wrong not because it is inaccurate, but because it is the cost of an ingredient being used to reason about the price of a meal. The token is not the bill. And the gap between the two is where most enterprise AI budgets are quietly being decided by no one.
@@ -61,7 +61,7 @@ The token is not the bill. It never was. The bill is the total cost of an outcom
     id: 'what-is-your-sprint-protecting-now',
     title: 'What Is Your Sprint Protecting Now?',
     deck: 'Scrum’s ceremonies were precision-fitted to human limitations in a world that no longer exists — the limits remain, the world doesn’t, and that gap deserves harder questions than most teams are asking.',
-    author: 'Eliassen Group · AI-SDLC Practice',
+    author: 'Pramod Polkampalli',
     published: '2026-06-12',
     readingMinutes: 7,
     body: `Every process is a scar. Somewhere behind each ceremony, gate, and artifact in your delivery pipeline is a wound — a project that shipped eighteen months late, a team that built the wrong thing in confident silence, an organization that made the same mistake every year because nobody wrote down what went wrong the last time. Process is how organizations remember pain. That is not a criticism. It is the most generous and most accurate way to understand why Scrum looks the way it does — and the only honest starting point for asking whether it should still look that way.
@@ -127,7 +127,7 @@ Here is the conclusion this all builds toward: the SDLC must now evolve for the 
     id: 'the-engineer-of-intent',
     title: 'The Engineer of Intent',
     deck: 'AI agents didn’t diminish the Product Owner — they exposed how hard the job always was, and then handed over the first real tools to do it.',
-    author: 'Eliassen Group · AI-SDLC Practice',
+    author: 'Pramod Polkampalli',
     published: '2026-06-12',
     readingMinutes: 7,
     body: `For most of the history of software, everyone knew where the line formed. Business wanted things; engineering built things; the wanting always outran the building. Roadmap meetings were essentially auctions for scarce engineering capacity. The backlog was a waiting room. Entire professions — including, let's be honest, much of the Product Owner role as practiced — grew up around managing that waiting room: prioritizing it, grooming it, apologizing for it.
