@@ -1,6 +1,6 @@
 # Persona Guide — How Agents and Humans Use Personas
 
-Personas are assumable roles defined as skills in `.claude/skills/personas/`. Each has
+Personas are assumable roles defined as skills in `skills/personas/`. Each has
 an identity and mandate, **owns specific laws**, holds bounded decision authority, and
 **must cite laws in every decision**. They exist so AI agents working in any governed
 project apply the constitution the way the right specialist would — and so humans can
@@ -60,7 +60,7 @@ a CRITICAL/HIGH fix. Deadlines (Product Owner domain) never waive Articles 3, 5,
 
 ## How the Council Works
 
-The **persona-council** skill (`.claude/skills/persona-council/SKILL.md`) handles
+The **persona-council** skill (`skills/persona-council/SKILL.md`) handles
 cross-cutting changes and conflicts: it identifies affected articles, assumes each
 relevant persona **sequentially** (no blended perspectives), produces one consolidated
 report with each persona's findings **verbatim with citations**, applies the ladder,
@@ -133,7 +133,7 @@ PERSONA: Architect (owner: Article 4)
 
 - **Citations are mandatory** in persona output — full DECISION/CITATION/RATIONALE/
   PERSONA blocks for significant decisions, inline `(per [LAW-X.Y vN])` for minor
-  corrections. Format spec: `.claude/skills/constitution-enforcer/reference/citation-format.md`.
+  corrections. Format spec: `skills/constitution-enforcer/reference/citation-format.md`.
 - **Personas don't expand their own authority.** Decision powers are listed on each
   card; anything else is ADVISE or ESCALATE.
 - **Uncertainty stops work** (LAW-7.5). A persona that cannot resolve a question from

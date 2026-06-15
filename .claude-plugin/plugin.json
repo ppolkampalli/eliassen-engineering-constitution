@@ -1,0 +1,24 @@
+{
+  "name": "engineering-constitution",
+  "displayName": "Eliassen Group · Engineering Constitution",
+  "description": "Develop under the Eliassen Group Engineering Constitution: assume 8 governance personas (security, architect, quality, software-engineer, product-owner, industry-sme, devops, finops), run citation-aware enforcement skills, orchestrate the defined workflows, and look up the 57 citable laws — all from inside Claude Code.",
+  "version": "1.2.0",
+  "author": {
+    "name": "Pramod Polkampalli",
+    "email": "PPolkampalli@eliassen.com"
+  },
+  "homepage": "https://github.com/ppolkampalli/eliassen-engineering-constitution",
+  "repository": "https://github.com/ppolkampalli/eliassen-engineering-constitution",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "governance",
+    "personas",
+    "sdlc",
+    "agentic",
+    "engineering-constitution",
+    "code-review",
+    "tdd",
+    "security"
+  ],
+  "defaultEnabled": false
+}

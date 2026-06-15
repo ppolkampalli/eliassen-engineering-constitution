@@ -47,7 +47,7 @@ All strict-family flags on: `strict`, `noImplicitAny` (LAW-2.3's compiler half),
 `esModuleInterop`, `skipLibCheck`.
 
 Weakening any strict flag is a LAW-2.3/LAW-6.2 violation (CRITICAL per the
-[violation severity matrix](../.claude/skills/constitution-enforcer/reference/violation-severity.md)).
+[violation severity matrix](../skills/constitution-enforcer/reference/violation-severity.md)).
 
 ## `jest.config.js`
 **Enforces: LAW-3.2, LAW-3.4**

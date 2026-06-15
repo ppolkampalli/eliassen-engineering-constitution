@@ -20,7 +20,34 @@ This repository is the single source of truth for Eliassen Group's software engi
 
 ## Quickstart
 
-### Install into a project
+There are two ways to adopt the constitution, and they answer different needs.
+
+### Option A — Install the Claude Code plugin (develop with the personas)
+
+Use this when you want to **develop using the constitution** — assume its personas,
+run its enforcement skills, drive its workflows, and look up laws — from inside
+Claude Code, with version management.
+
+```text
+# In Claude Code, point at this repo as a plugin marketplace, then install:
+/plugin marketplace add ppolkampalli/eliassen-engineering-constitution
+/plugin install engineering-constitution
+
+# Or test locally without a marketplace:
+claude --plugin-dir /path/to/eliassen-engineering-constitution
+```
+
+Once installed, invoke a persona explicitly — `/engineering-constitution:persona-security`
+— or just say *"act as the Security persona and review this"* and the matching skill
+auto-activates by description. The full catalog: 8 personas, `persona-council`,
+`law-clerk`, `workflow-orchestrator`, and the citation-aware enforcement skills.
+See the [plugin install guide](docs/plugin-install.md).
+
+### Option B — Install the full governance stack into a project (`install.sh`)
+
+Use this when you want a **whole repo governed end-to-end** — the personas *plus*
+the tooling configs, pre-commit hook, CI workflows, PR template, checklists, and the
+offline law registry copied into the target project.
 
 ```bash
 git clone <this-repo> engineering-constitution
@@ -28,7 +55,7 @@ cd engineering-constitution
 ./scripts/install.sh /path/to/your-project
 ```
 
-The installer copies CLAUDE.md, tooling configs, the pre-commit hook, CI workflows, the PR template, all Claude skills (including personas), checklists, and the law registry (`docs/constitution/`) into your project, then prints the devDependencies and package.json scripts to add.
+The installer copies CLAUDE.md and AGENTS.md, tooling configs, the pre-commit hook, CI workflows, the PR template, all Claude skills (including personas), checklists, and the law registry (`docs/constitution/`) into your project, then prints the devDependencies and package.json scripts to add.
 
 ### Validate an installation
 
@@ -76,7 +103,7 @@ production.
 PERSONA: Software Engineer (owner: Quality)
 ```
 
-See [.claude/skills/constitution-enforcer/reference/citation-format.md](.claude/skills/constitution-enforcer/reference/citation-format.md) for the full and inline citation forms.
+See [skills/constitution-enforcer/reference/citation-format.md](skills/constitution-enforcer/reference/citation-format.md) for the full and inline citation forms.
 
 ---
 
@@ -89,9 +116,9 @@ See [.claude/skills/constitution-enforcer/reference/citation-format.md](.claude/
 | All laws, machine-readable | [laws/registry.json](laws/registry.json) |
 | Law files by article | [laws/](laws/) |
 | Amendment process & audit records | [amendments/](amendments/) |
-| Persona skills (8 + council + clerk) | [.claude/skills/personas/](.claude/skills/personas/) |
+| Persona skills (8 + council + clerk) | [skills/personas/](skills/personas/) |
 | Persona usage guide | [docs/persona-guide.md](docs/persona-guide.md) |
-| Enforcement skills | [.claude/skills/](.claude/skills/) |
+| Enforcement skills | [skills/](skills/) |
 | Tooling configs (law-mapped) | [configs/](configs/) · [configs/CONFIG-LAW-MAP.md](configs/CONFIG-LAW-MAP.md) |
 | CI workflows | [ci/github/](ci/github/) |
 | Templates (PR, ADR, law, commits) | [templates/](templates/) |

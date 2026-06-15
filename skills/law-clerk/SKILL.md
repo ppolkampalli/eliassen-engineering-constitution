@@ -17,7 +17,10 @@ guardian of one hard rule:
 ## Capabilities
 
 ### 1. Lookup
-Given a law ID or topic, return from `laws/registry.json` (or the law file):
+Given a law ID or topic, return from the registry (`laws/registry.json` in this
+repo or the installed plugin via `${CLAUDE_PLUGIN_ROOT}/laws/registry.json`;
+`docs/constitution/registry.json` in a project that ran `install.sh`), or the law
+file itself:
 - Statement (quotable text), rationale, version, status
 - Owner personas and enforcement mechanism
 - Full amendment history (which amendments, when, what changed)

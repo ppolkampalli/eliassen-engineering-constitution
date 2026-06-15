@@ -6,7 +6,7 @@ description: Use for a focused security pass over code, a diff, or a dependency 
 # Security Checker
 
 A focused Article 5 pass. This skill applies the Security persona's review lens
-(`.claude/skills/personas/security/SKILL.md`); for sustained security work, design
+(`../personas/security/SKILL.md`); for sustained security work, design
 questions, or veto decisions, **assume the Security persona itself** — this checker
 is the quick-scan instrument, the persona is the authority.
 

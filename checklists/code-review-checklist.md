@@ -1,9 +1,9 @@
 # Code Review Checklist
 
 Every item annotated with its law. Findings cite laws per
-[citation-format.md](../.claude/skills/constitution-enforcer/reference/citation-format.md);
+[citation-format.md](../skills/constitution-enforcer/reference/citation-format.md);
 severities per
-[violation-severity.md](../.claude/skills/constitution-enforcer/reference/violation-severity.md).
+[violation-severity.md](../skills/constitution-enforcer/reference/violation-severity.md).
 Two approvals required, one domain expert, no self-approval (LAW-6.1).
 
 ## Before Reading Code

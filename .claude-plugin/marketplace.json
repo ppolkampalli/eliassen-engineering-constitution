@@ -1,0 +1,18 @@
+{
+  "name": "eliassen-engineering",
+  "owner": {
+    "name": "Pramod Polkampalli",
+    "email": "PPolkampalli@eliassen.com"
+  },
+  "metadata": {
+    "description": "Eliassen Group engineering governance plugins.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "engineering-constitution",
+      "source": "./",
+      "description": "Personas, enforcement skills, workflows, and the citable law registry of the Eliassen Group Engineering Constitution."
+    }
+  ]
+}

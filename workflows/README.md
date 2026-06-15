@@ -7,7 +7,7 @@ the constitution's triad:
 | Layer | Artifact | Answers |
 |---|---|---|
 | Laws | `laws/` | **What** must hold (citable, amendment-governed) |
-| Personas | `.claude/skills/personas/` | **Who** decides what (mandates, authority ladder) |
+| Personas | `skills/personas/` | **Who** decides what (mandates, authority ladder) |
 | **Workflows** | `workflows/` | **How** work moves (stages, sequence, gates) |
 
 Workflows are **process, not law**: they are governed artifacts (versioned,
@@ -32,7 +32,7 @@ Machine-readable index: [registry.json](registry.json). New workflows start from
 ## How Execution Works
 
 The **workflow-orchestrator** skill
-(`.claude/skills/workflow-orchestrator/SKILL.md`) drives execution:
+(`skills/workflow-orchestrator/SKILL.md`) drives execution:
 
 1. **Select** — match the work item to a workflow by trigger (or be told:
    "run WF-BUG on JIRA-3411").

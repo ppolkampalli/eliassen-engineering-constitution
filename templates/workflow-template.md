@@ -8,7 +8,7 @@ applies_to: [agent, human, mixed]
 governed_by: [LAW-10.6]
 stages:
   - id: <stage-id>
-    persona: <persona-name>          # from .claude/skills/personas/
+    persona: <persona-name>          # from skills/personas/
     action: "<What this stage produces>"
     entry: "<What must exist before this stage starts>"
     exit: "<What must be true to advance — the stage's definition of done>"

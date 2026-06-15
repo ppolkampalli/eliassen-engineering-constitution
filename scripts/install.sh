@@ -3,7 +3,7 @@
 #
 # Installs the Engineering Constitution building blocks into a target project:
 #   CLAUDE.md → root            configs → root           hook → .husky/
-#   CI yml → .github/workflows/ PR template → .github/   skills → .claude/skills/
+#   CI yml → .github/workflows/ PR template → .github/   skills/ → .claude/skills/
 #   checklists + standards/testing/persona guides → docs/
 #   laws/REGISTRY.md + registry.json → docs/constitution/   (offline citability)
 #
@@ -75,7 +75,7 @@ echo "PR template → .github/"
 copy "$SRC/templates/pull_request_template.md" "$TARGET/.github/pull_request_template.md"
 
 echo "Skills (personas + enforcement) → .claude/skills/"
-copy_tree "$SRC/.claude/skills" "$TARGET/.claude/skills"
+copy_tree "$SRC/skills" "$TARGET/.claude/skills"
 
 echo "Checklists + guides → docs/"
 copy "$SRC/checklists/code-review-checklist.md" "$TARGET/docs/code-review-checklist.md"

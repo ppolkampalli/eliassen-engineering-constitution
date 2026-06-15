@@ -54,7 +54,7 @@ PERSONA: Software Engineer (owner: Quality)
 
 Short corrections may use the inline form: `(per [LAW-2.1 v1.0])`. The complete
 specification lives in
-[citation-format.md](.claude/skills/constitution-enforcer/reference/citation-format.md).
+[citation-format.md](skills/constitution-enforcer/reference/citation-format.md).
 
 ---
 
@@ -77,7 +77,7 @@ specification lives in
 
 ## The Persona System
 
-Eight personas — defined as skills in [.claude/skills/personas/](.claude/skills/personas/)
+Eight personas — defined as skills in [skills/personas/](skills/personas/)
 — let AI agents assume a role with a mandate, owned laws, and bounded authority.
 **Every persona decision cites laws.** Full guide: [docs/persona-guide.md](docs/persona-guide.md).
 
@@ -103,7 +103,7 @@ Security VETO (CRITICAL findings; overridable only by a named human security lea
 ```
 
 Cross-cutting work and unresolved conflicts go to the
-[persona-council](.claude/skills/persona-council/SKILL.md), which surfaces
+[persona-council](skills/persona-council/SKILL.md), which surfaces
 disagreements verbatim and escalates to humans per LAW-7.5.
 
 **How work flows between personas** is defined by the

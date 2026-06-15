@@ -116,7 +116,7 @@ sync_file "$SRC/ci/github/security.yml"          "$TARGET/.github/workflows/secu
 # Skills tree (full refresh)
 rm -rf "$TARGET/.claude/skills"
 mkdir -p "$TARGET/.claude/skills"
-cp -R "$SRC/.claude/skills/." "$TARGET/.claude/skills/"
+cp -R "$SRC/skills/." "$TARGET/.claude/skills/"
 echo "  updated: .claude/skills/ (full refresh)"
 
 sync_file "$SRC/docs/standards.md"               "$TARGET/docs/standards.md"
