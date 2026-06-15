@@ -116,7 +116,7 @@ See [skills/constitution-enforcer/reference/citation-format.md](skills/constitut
 | All laws, machine-readable | [laws/registry.json](laws/registry.json) |
 | Law files by article | [laws/](laws/) |
 | Amendment process & audit records | [amendments/](amendments/) |
-| Persona skills (8 + council + clerk) | [skills/personas/](skills/personas/) |
+| Persona skills (8 + council + clerk) | [skills/](skills/) (the `persona-*` directories) |
 | Persona usage guide | [docs/persona-guide.md](docs/persona-guide.md) |
 | Enforcement skills | [skills/](skills/) |
 | Tooling configs (law-mapped) | [configs/](configs/) · [configs/CONFIG-LAW-MAP.md](configs/CONFIG-LAW-MAP.md) |

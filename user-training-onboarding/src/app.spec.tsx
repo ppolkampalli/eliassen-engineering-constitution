@@ -47,6 +47,14 @@ describe('AppRoutes', () => {
     expect(screen.getByText(/Enhancing an Existing Application/)).toBeTruthy();
   });
 
+  it('should render the skill command catalog with namespaced commands when visiting /learn', () => {
+    renderAt('/learn');
+    expect(screen.getByText('Skill Command Catalog')).toBeTruthy();
+    // Appears in both the how-to intro and its catalog card — assert at least one.
+    expect(screen.getAllByText('/engineering-constitution:persona-security').length).toBeGreaterThan(0);
+    expect(screen.getByText('/engineering-constitution:workflow-orchestrator')).toBeTruthy();
+  });
+
   it('should render a learning path with its lessons and quiz when visiting a module', () => {
     renderAt('/path/orientation');
     expect(screen.getByText(/Lesson 1:/)).toBeTruthy();

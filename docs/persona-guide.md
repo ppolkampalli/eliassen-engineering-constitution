@@ -1,6 +1,6 @@
 # Persona Guide — How Agents and Humans Use Personas
 
-Personas are assumable roles defined as skills in `skills/personas/`. Each has
+Personas are assumable roles defined as skills in `skills/` (the `persona-*` directories). Each has
 an identity and mandate, **owns specific laws**, holds bounded decision authority, and
 **must cite laws in every decision**. They exist so AI agents working in any governed
 project apply the constitution the way the right specialist would — and so humans can

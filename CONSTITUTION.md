@@ -77,7 +77,7 @@ specification lives in
 
 ## The Persona System
 
-Eight personas — defined as skills in [skills/personas/](skills/personas/)
+Eight personas — defined as skills in [skills/](skills/) (the `persona-*` directories)
 — let AI agents assume a role with a mandate, owned laws, and bounded authority.
 **Every persona decision cites laws.** Full guide: [docs/persona-guide.md](docs/persona-guide.md).
 

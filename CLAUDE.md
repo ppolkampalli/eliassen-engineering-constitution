@@ -30,7 +30,7 @@ or the `engineering-constitution` repository. Look up any law: `./scripts/law-lo
 
 ## Personas
 
-Assume the matching persona for the work at hand (see `.claude/skills/personas/`):
+Assume the matching persona for the work at hand (the `persona-*` skills):
 security work → Security persona; design/refactors → Architect; tests/review → Quality;
 requirements/scope → Product Owner; infra/deploys → DevOps; cost/licenses → FinOps;
 domain rules → Industry SME; implementation (default) → Software Engineer.

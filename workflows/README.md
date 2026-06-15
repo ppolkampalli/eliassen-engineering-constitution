@@ -7,7 +7,7 @@ the constitution's triad:
 | Layer | Artifact | Answers |
 |---|---|---|
 | Laws | `laws/` | **What** must hold (citable, amendment-governed) |
-| Personas | `skills/personas/` | **Who** decides what (mandates, authority ladder) |
+| Personas | `skills/persona-*` | **Who** decides what (mandates, authority ladder) |
 | **Workflows** | `workflows/` | **How** work moves (stages, sequence, gates) |
 
 Workflows are **process, not law**: they are governed artifacts (versioned,

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { ProgressBadge } from '../components/progress-badge';
+import { SkillCatalog } from '../components/skill-catalog';
 import { trainingModules } from '../data/modules';
+import { skillCatalog } from '../data/skills-catalog';
 import { loadProgress, moduleProgressPct, overallProgressPct } from '../domain/progress';
 
 /** Home: the self-study catalog with per-path and overall progress. */
@@ -32,6 +34,28 @@ export function HomePage(): JSX.Element {
             <ProgressBadge pct={moduleProgressPct(progress, module)} />
           </Link>
         ))}
+      </section>
+
+      <section className="catalog-section" id="skill-catalog">
+        <h2>Skill Command Catalog</h2>
+        <p className="catalog-intro">
+          The constitution installs as a Claude Code plugin that exposes{' '}
+          {skillCatalog.length} skills — 8 personas, 3 orchestration skills, and 6 enforcement
+          skills. Install it with <code>/plugin install engineering-constitution</code> (see the{' '}
+          <Link to="/start">setup steps</Link>), then invoke any skill two ways:
+        </p>
+        <ul className="catalog-howto">
+          <li>
+            <strong>Explicitly</strong> — type the namespaced command, e.g.{' '}
+            <code>/engineering-constitution:persona-security</code>.
+          </li>
+          <li>
+            <strong>By describing the work</strong> — say “act as the Security persona and review
+            this,” and the matching skill auto-activates from its description. The example phrases
+            below all work as-is.
+          </li>
+        </ul>
+        <SkillCatalog />
       </section>
     </div>
   );

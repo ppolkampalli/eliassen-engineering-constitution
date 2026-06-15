@@ -352,6 +352,50 @@ h1, h2, h3 {
 .step-checkpoint { font-size: 0.88rem; color: var(--accent); }
 .step-laws { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
+/* Skill Command Catalog (Learn page) */
+.catalog-section { margin-top: 3rem; }
+.catalog-section > h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 600; margin: 0 0 0.6rem; }
+.catalog-intro { color: var(--ink-soft); line-height: 1.7; max-width: 74ch; }
+.catalog-intro code, .catalog-howto code {
+  font-family: var(--mono); font-size: 0.82rem; background: var(--cream);
+  border: 1px solid var(--line); border-radius: 4px; padding: 0.05rem 0.35rem; color: var(--royal);
+}
+.catalog-howto { color: var(--ink); line-height: 1.7; max-width: 74ch; margin: 0.4rem 0 1.6rem; }
+.catalog-howto li { margin: 0.3rem 0; }
+
+.catalog-group { margin: 2rem 0; }
+.catalog-group-head h3 {
+  font-size: 1.2rem; font-weight: 600; margin: 0 0 0.2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.catalog-count {
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 600; color: #fff;
+  background: var(--royal); border-radius: 999px; padding: 0.05rem 0.5rem;
+}
+.catalog-group-head p { color: var(--ink-soft); font-size: 0.9rem; margin: 0 0 1rem; }
+
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 0.9rem; }
+.catalog-skill {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  border-left: 3px solid var(--coral); padding: 1rem 1.2rem;
+  display: flex; flex-direction: column; gap: 0.45rem;
+}
+.catalog-skill-head { display: flex; flex-direction: column; gap: 0.25rem; }
+.catalog-skill-head h4 { margin: 0; font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+.catalog-cmd {
+  font-family: var(--mono); font-size: 0.74rem; color: var(--royal);
+  background: var(--royal-soft); border-radius: 5px; padding: 0.15rem 0.45rem; align-self: flex-start;
+  word-break: break-all;
+}
+.catalog-summary { margin: 0; font-size: 0.87rem; line-height: 1.55; }
+.catalog-when { margin: 0; font-size: 0.83rem; color: var(--ink-soft); line-height: 1.55; }
+.catalog-label {
+  font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+  color: var(--coral-dark); margin-right: 0.3rem;
+}
+.catalog-examples { margin: 0.2rem 0 0; padding-left: 1rem; }
+.catalog-examples li { font-size: 0.82rem; color: var(--ink); line-height: 1.5; margin: 0.15rem 0; }
+
 /* Articles */
 .article-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.1rem; }
 .article-card {
