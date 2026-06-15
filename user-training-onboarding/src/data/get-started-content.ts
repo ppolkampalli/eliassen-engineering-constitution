@@ -28,9 +28,10 @@ export const startSteps: StartStep[] = [
       'git clone <engineering-constitution-repo>',
       './engineering-constitution/scripts/install.sh /path/to/your-project',
       '# — or, for the agentic layer only, inside Claude Code —',
+      '/plugin marketplace add ppolkampalli/eliassen-engineering-constitution',
       '/plugin install engineering-constitution',
     ],
-    checkpoint: 'The installer reports ~36 files installed and prints the devDependencies block.',
+    checkpoint: 'install.sh reports ~36 files installed; or the plugin shows 17 skills available.',
     lawRefs: ['LAW-1.3'],
   },
   {
@@ -71,7 +72,12 @@ export const startSteps: StartStep[] = [
     title: 'Pick up your first ticket — and declare the workflow',
     narrative:
       'Say it out loud: "run WF-FEATURE on TICKET-123." The orchestrator announces the chain — PO writes acceptance criteria, Architect places the work, Quality writes the test list, you (or your agent) implement, fresh-context review, security pass, release check. No stage gets forgotten, because the sequence is declared, not remembered.',
-    commands: ['# In your agent session:', '“Run WF-FEATURE on TICKET-123”'],
+    commands: [
+      '# In your agent session — natural language:',
+      '“Run WF-FEATURE on TICKET-123”',
+      '# — or the explicit skill command —',
+      '/engineering-constitution:workflow-orchestrator',
+    ],
     checkpoint:
       'The orchestrator prints the stage chain with hard markers before any code is written.',
     lawRefs: ['LAW-10.6', 'LAW-8.1'],
@@ -105,7 +111,8 @@ export const startSteps: StartStep[] = [
       'Every rule has an ID, a rationale, and a lookup tool; every judgment call has a persona; every conflict has an escalation path. You are never arguing against a vibe — you are reading a law, or summoning the persona that owns it.',
     commands: [
       './engineering-constitution/scripts/law-lookup.sh LAW-2.3',
-      '# or: “as the Quality persona, is this tested enough?”',
+      '# or, with the plugin: “as the Quality persona, is this tested enough?”',
+      '# or explicitly: /engineering-constitution:persona-quality',
     ],
     checkpoint: 'You cited a law in a review comment and nobody argued. Welcome aboard.',
     lawRefs: ['LAW-7.5'],

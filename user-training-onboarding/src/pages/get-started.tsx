@@ -66,15 +66,17 @@ export function GetStartedPage(): JSX.Element {
       <section className="closing-cta">
         <h2>Then go deeper, at your own pace.</h2>
         <p>
-          The self-study paths cover greenfield, rewrites, and day-to-day enhancement work in
-          detail — with knowledge checks that cite the law behind every answer.
+          Keep the <Link to="/learn#skill-catalog">Skill Command Catalog</Link> handy — every
+          persona, orchestration, and enforcement skill with its exact command and example
+          invocations. The self-study paths cover greenfield, rewrites, and day-to-day enhancement
+          work in detail, with knowledge checks that cite the law behind every answer.
         </p>
         <div className="hero-actions">
           <Link className="btn btn-hero" to="/learn">
             Browse the learning paths →
           </Link>
-          <Link className="btn btn-ghost" to="/workflows">
-            Explore the workflows
+          <Link className="btn btn-ghost" to="/learn#skill-catalog">
+            See the skill catalog
           </Link>
         </div>
       </section>
