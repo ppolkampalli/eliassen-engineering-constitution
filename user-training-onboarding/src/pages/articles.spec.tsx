@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { ArticleReaderPage, ArticlesPage } from './articles';
+import { articleFigures } from '../components/article-figures';
 import { articles } from '../data/articles-content';
 
 function renderReaderAt(path: string): void {
@@ -16,13 +17,28 @@ function renderReaderAt(path: string): void {
 
 describe('articles content', () => {
   it('should publish the commissioned articles with substantial bodies', () => {
-    expect(articles.length).toBe(3);
+    expect(articles.length).toBe(4);
     for (const article of articles) {
       expect(article.body.length).toBeGreaterThan(4000);
       expect(article.deck.length).toBeGreaterThan(40);
       expect(article.readingMinutes).toBeGreaterThan(0);
       // Body format contract: headings exist for the renderer.
       expect(article.body).toContain('## ');
+    }
+  });
+
+  it('should reference only registered figures (every @@figure:id@@ resolves)', () => {
+    const tokenPattern = /@@figure:([\w-]+)@@/g;
+    for (const article of articles) {
+      for (const match of article.body.matchAll(tokenPattern)) {
+        expect(articleFigures[match[1] ?? '']).toBeDefined();
+      }
+    }
+  });
+
+  it('should author every article as Pramod Polkampalli', () => {
+    for (const article of articles) {
+      expect(article.author).toBe('Pramod Polkampalli');
     }
   });
 });
@@ -58,6 +74,18 @@ describe('ArticleReaderPage', () => {
     expect(screen.getByRole('heading', { name: 'The Engineer of Intent' })).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'The Job Nobody Tooled' })).toBeTruthy();
     expect(screen.getByText(/tolerance for ambiguity collapsed/)).toBeTruthy();
+  });
+
+  it('should render the multi-agent article with its embedded diagrams', () => {
+    renderReaderAt('/articles/many-agents-one-source-of-truth');
+    expect(screen.getByRole('heading', { name: 'Many Agents, One Source of Truth' })).toBeTruthy();
+    // Figures rendered, not shown as raw @@figure@@ tokens.
+    expect(screen.getByText(/Figure 1 ·/)).toBeTruthy();
+    expect(screen.getByText(/Figure 2 ·/)).toBeTruthy();
+    expect(screen.getByText(/Figure 3 ·/)).toBeTruthy();
+    expect(screen.getByText('Orchestrator Agent')).toBeTruthy();
+    expect(screen.getByText('Central Memory Service')).toBeTruthy();
+    expect(screen.queryByText(/@@figure:/)).toBeNull();
   });
 
   it('should render not-found for an unknown article slug', () => {

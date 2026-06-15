@@ -7,6 +7,82 @@ import type { Article } from './articles-types';
  */
 export const articles: Article[] = [
   {
+    id: 'many-agents-one-source-of-truth',
+    title: 'Many Agents, One Source of Truth',
+    deck: 'A how-to for running governed multi-agent development — every agent wearing the right persona, an orchestrator running the workflow, and a central memory service the agents ask before they act.',
+    author: 'Pramod Polkampalli',
+    published: '2026-06-15',
+    readingMinutes: 9,
+    body: `Put one capable coding agent on a task and you get speed. Put ten on a project and, without structure, you get a crowd: agents that re-decide settled questions, contradict each other's assumptions, re-derive the same business rule three different ways, and leave behind code no one can explain. Adding agents multiplies output — and, by default, multiplies divergence at the same rate.
+
+Multi-agent orchestration platforms — Multica.ai and its peers — solve the mechanical half of this. They spin up agents, route tasks between them, run them in parallel, and collect results. What they deliberately leave open is the governance half: which agent should do what, by what rules, and against what shared understanding of "true." That gap is exactly the shape of the Engineering Constitution, and closing it takes two things most multi-agent setups are missing.
+
+## The two things every multi-agent system needs
+
+The first is a definition of **who** — not "agent 3," but a *role* with a mandate, owned responsibilities, and bounded authority. A security review and a cost estimate are different jobs requiring different judgment; an agent with no role is an agent with no point of view, and ten of those produce mush. The constitution already defines eight such roles — its personas — each a skill an agent can assume.
+
+The second is a shared definition of **what is true** — a single place every agent reads before acting and writes to after deciding. Without it, each agent carries its own private context, and private context is how two agents "both finish" a feature having made incompatible assumptions about it.
+
+> A multi-agent system without shared memory isn't a team. It's a crowd that happens to share a repository.
+
+The constitution supplies the first directly (personas) and, less obviously, the second: it was always a *memory* — a place where decisions and the reasons behind them are written down so they are never silently re-litigated. Turning that into a service the agents can query is what makes multi-agent governance real rather than aspirational.
+
+## Step one: give every agent a persona
+
+On a platform like Multica.ai, an "agent" is essentially a model plus a system identity plus a set of tools. The constitution maps onto that cleanly: **each agent's identity is a persona skill.** The agent assigned to security work boots with the Security persona — it owns Article 5, it cites laws in every finding, and it holds veto authority on CRITICAL issues. The agent doing implementation wears the Software Engineer persona; the one writing acceptance criteria wears Product Owner; and so on across the eight.
+
+Above them sits one more agent with a different job: the **orchestrator**, whose identity is the workflow itself. It does not write code — it runs the declared workflow (WF-FEATURE, WF-BUG, WF-SECBUG…), dispatching each stage to the agent wearing the persona that owns it, and refusing to let a hard-gated stage be skipped.
+
+@@figure:persona-mesh@@
+
+This is the difference between "ten agents working" and "a team working." The orchestrator knows that design comes before implementation, that security review is not optional on an Article-5 surface, and that a stage's owner is fixed — so the Security agent reviews, the Architect agent designs, and neither is asked to do the other's job. The authority ladder (Security veto over Architect veto over Quality block over the rest) gives the orchestrator a deterministic rule for resolving conflicts between agents instead of averaging their opinions into nonsense.
+
+## Step two: the part everyone underestimates — shared memory
+
+Here is where most multi-agent experiments quietly fail. Each agent reasons from its own window of context, and those windows drift apart the moment work fans out in parallel. The Engineer agent assumes the dormancy threshold is 90 days; the Industry SME agent knows the regulation says 60; nobody reconciles it because nobody shares a memory. The fix is a **Central Memory Service** — a single knowledge graph the agents query before they act and append to after they decide.
+
+@@figure:memory-service@@
+
+The constitution is almost entirely composed of things that belong in that memory:
+
+- **The 57 laws**, as a registry — so any agent can answer "what does LAW-5.2 actually require?" with the same quoted text, not a paraphrase from memory.
+- **The six workflow definitions** — so the orchestrator and every agent agree on the stages and gates.
+- **ADRs and design decisions** — so the Architect agent doesn't re-decide the database choice that was settled (with reasons) last sprint.
+- **A decision-and-citation log** — every persona decision, with its law citation and rationale, appended as it happens.
+- **The amendment history** — so "why is the rule like this?" has an answer, and a rejected idea isn't proposed again.
+
+Two access rules make this safe rather than chaotic. **Laws are read-only to working agents** — only the Law Clerk writes to them, and only through the amendment process, so no agent can quietly "improve" a rule mid-task. And **everything else is append-only** — decisions and ADRs accumulate, they don't overwrite, so the provenance trail is complete and no agent erases another's reasoning.
+
+> The question that makes multi-agent work safe isn't "what can this agent do?" It's "what does this agent have to ask before it acts?"
+
+Concretely, you can implement the memory service as an MCP server (or your platform's equivalent tool/service interface) that exposes a few operations over the constitution's registry and a decision graph: look up a law by ID or topic, fetch the workflow definition, query prior decisions on a file or feature, and append a new cited decision. Every persona agent gets that service as a tool. The "MemoryGraph as a service" pattern is just this: the shared brain the agents consult, sitting outside any one agent's context window so it survives across all of them.
+
+## A feature, end to end
+
+Put the two pieces together and a single feature flows through the system like this: the orchestrator selects WF-FEATURE; the Product Owner agent reads the relevant laws and prior decisions from memory, writes acceptance criteria, and appends them; the Architect agent reads those, designs, and records an ADR; Quality derives the test list; the Engineer implements test-first; a fresh-context reviewer and the Security agent gate the result — each one reading the laws its stage is gated by and writing back a cited decision.
+
+@@figure:feature-flow@@
+
+Notice what the memory service buys you across that chain. No stage starts from a blank slate — each agent inherits the cited decisions of the ones before it. No decision is unaccountable — every step names the law it stands on. And when something conflicts, the conflict surfaces against shared facts ("the SME decision in memory says 60 days, your code says 90") instead of disappearing into a private assumption. The merged feature carries an audit trail that no single agent authored and any human can read.
+
+## Wiring it up
+
+A practical checklist for standing this up on a multi-agent platform:
+
+- **One persona per working agent.** The persona skill is the agent's system identity, not a suggestion in its prompt. Ship it the skill, not a paraphrase.
+- **One orchestrator agent = the workflow.** It owns sequencing and gates; it does not implement. Give it the workflow-orchestrator skill and the authority ladder.
+- **Memory as a service, not a shared file.** Expose the law registry, workflow definitions, decision log, and amendment history through a queryable interface (MCP server or platform tool) every agent can call. Reads cheap, laws read-only, decisions append-only.
+- **A citation contract.** Every agent's output must include the DECISION / CITATION / RATIONALE / PERSONA block. An uncited decision is rejected by the next stage — that's what keeps the memory trustworthy.
+- **Hard gates as orchestration checkpoints.** The orchestrator enforces "no implementation without acceptance criteria," "no merge without security review on Article-5 surfaces," and the rest — structurally, not by hoping an agent remembers.
+- **Human checkpoints where the law requires them.** Two human approvals still stand (LAW-6.1); a CRITICAL security veto is overridden only by a named human. The agents prepare the decision; humans make the ones reserved for humans.
+
+## What still needs a human — and an honest caveat
+
+This pattern moves the bottleneck, it doesn't remove the human. The expensive, irreplaceable work becomes *verification* — confirming the agents' cited decisions are actually sound — and the memory service makes that tractable by giving a reviewer the trail to check rather than a pile of unexplained output. Budget for it; generation is cheap, judgment is not.
+
+And the honest caveat: the exact wiring depends on your platform's primitives. Multica.ai and its peers differ in how they model agent identity, tool access, and shared state, so treat the three pieces here — persona-as-identity, orchestrator-as-workflow, constitution-as-memory — as the architecture, not as API calls. The constitution ships the personas and skills as an installable plugin and the registry as queryable data; how you expose them as a service to your specific platform is the integration work. The principle underneath is platform-independent and older than any of these tools: a team is not a number of workers, it's a shared set of rules and a shared memory of what's already been decided. Give your agents both, and ten of them become a team instead of a crowd.`,
+  },
+  {
     id: 'the-token-is-not-the-bill',
     title: 'The Token Is Not the Bill',
     deck: 'Per-token costs are collapsing, total AI spend is climbing, and most of the value is unproven — which means the unit you measure decides whether you can see what you’re buying at all.',

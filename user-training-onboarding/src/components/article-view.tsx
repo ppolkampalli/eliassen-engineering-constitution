@@ -1,7 +1,27 @@
+import { articleFigures } from './article-figures';
 import type { Article } from '../data/articles-types';
 
-/** Renders one block of article body: heading, pull quote, bullets, or paragraph. */
+
+const FIGURE_PATTERN = /^@@figure:([\w-]+)@@$/;
+
+/** Renders an embedded diagram figure, or nothing if the id is unknown. */
+function ArticleFigure({ id }: { id: string }): JSX.Element | null {
+  const figure = articleFigures[id];
+  if (figure === undefined) return null;
+  return (
+    <figure className="article-figure">
+      {figure.render()}
+      <figcaption>{figure.caption}</figcaption>
+    </figure>
+  );
+}
+
+/** Renders one block of article body: figure, heading, pull quote, bullets, or paragraph. */
 function ArticleBlock({ block }: { block: string }): JSX.Element {
+  const figureMatch = block.match(FIGURE_PATTERN);
+  if (figureMatch !== null) {
+    return <ArticleFigure id={figureMatch[1] ?? ''} />;
+  }
   if (block.startsWith('## ')) {
     return <h2>{block.slice(3)}</h2>;
   }

@@ -428,6 +428,85 @@ h1, h2, h3 {
   margin: 1.8rem 0; padding: 0.4rem 0 0.4rem 1.4rem;
 }
 
+/* Article figures (diagrams) */
+.article-figure { margin: 2rem 0; }
+.article-figure figcaption {
+  font-size: 0.8rem; color: var(--ink-soft); text-align: center; margin-top: 0.6rem;
+  font-family: 'Poppins', sans-serif; letter-spacing: 0.01em;
+}
+.fig {
+  background: var(--cream); border: 1px solid var(--line); border-radius: 12px;
+  padding: 1.4rem 1.3rem;
+}
+.fig strong { font-family: 'Poppins', sans-serif; }
+
+/* Figure 1 — persona mesh */
+.fig-orchestrator {
+  background: var(--royal); color: #fff; border-radius: 10px; padding: 0.8rem 1rem;
+  text-align: center; max-width: 24rem; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 0.15rem;
+}
+.fig-orchestrator span { font-size: 0.8rem; color: #cfd6ee; }
+.fig-dispatch { text-align: center; color: var(--ink-soft); font-size: 0.78rem; margin: 0.5rem 0; font-family: 'Poppins', sans-serif; }
+.fig-persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.fig-persona {
+  background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--coral);
+  border-radius: 8px; padding: 0.6rem 0.7rem; display: flex; flex-direction: column; gap: 0.3rem;
+}
+.fig-persona-name { font-size: 0.84rem; font-weight: 600; color: var(--ink); }
+.fig-badge {
+  align-self: flex-start; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+  border-radius: 4px; padding: 0.1rem 0.4rem;
+}
+.fig-badge-veto { background: var(--coral-soft); color: var(--warn); }
+.fig-badge-block { background: #fdf3df; color: #8a6210; }
+.fig-badge-decide { background: var(--royal-soft); color: var(--royal); }
+
+/* Figure 2 — memory service */
+.fig-mem-row { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 0.8rem; align-items: center; }
+.fig-agents-col { display: flex; flex-direction: column; gap: 0.5rem; }
+.fig-agent-chip {
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.3rem 0.7rem; font-size: 0.78rem; font-weight: 600; text-align: center; color: var(--ink);
+}
+.fig-agent-write { border-color: var(--accent); color: var(--accent); }
+.fig-arrow-label { font-size: 0.74rem; color: var(--ink-soft); font-family: 'Poppins', sans-serif; }
+.fig-mem-core {
+  background: var(--royal); color: #fff; border-radius: 12px; padding: 1rem;
+  display: flex; flex-direction: column; gap: 0.1rem; text-align: center;
+}
+.fig-mem-core > span { font-size: 0.78rem; color: #cfd6ee; margin-bottom: 0.4rem; }
+.fig-mem-core ul { list-style: none; margin: 0; padding: 0; text-align: left; }
+.fig-mem-core li {
+  font-size: 0.76rem; padding: 0.22rem 0.5rem; margin: 0.2rem 0;
+  background: rgba(255, 255, 255, 0.12); border-radius: 5px;
+}
+.fig-note { font-size: 0.8rem; color: var(--ink-soft); line-height: 1.55; margin: 1rem 0 0; }
+
+/* Figure 3 — feature flow */
+.fig-mem-bar {
+  background: var(--royal); color: #fff; border-radius: 8px; padding: 0.5rem 0.8rem;
+  font-size: 0.78rem; text-align: center; margin-bottom: 1rem; font-weight: 500;
+}
+.fig-flow-row { display: flex; align-items: stretch; gap: 0.2rem; flex-wrap: wrap; }
+.fig-flow-stage { display: flex; align-items: center; gap: 0.2rem; flex: 1; min-width: 8.5rem; }
+.fig-flow-card {
+  background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--coral);
+  border-radius: 8px; padding: 0.55rem 0.6rem; flex: 1;
+  display: flex; flex-direction: column; gap: 0.2rem;
+}
+.fig-flow-persona { font-size: 0.8rem; font-weight: 600; color: var(--royal); }
+.fig-flow-action { font-size: 0.74rem; color: var(--ink-soft); }
+.fig-flow-mem { font-size: 0.66rem; color: var(--coral-dark); font-family: 'Poppins', sans-serif; }
+.fig-flow-arrow { color: var(--royal); font-weight: 700; }
+
+@media (max-width: 640px) {
+  .fig-persona-grid { grid-template-columns: 1fr 1fr; }
+  .fig-mem-row { grid-template-columns: 1fr; }
+  .fig-flow-stage { min-width: 100%; }
+  .fig-flow-arrow { transform: rotate(90deg); align-self: center; }
+}
+
 /* Client journeys */
 .journey-filter {
   position: sticky; top: 72px; z-index: 9;
