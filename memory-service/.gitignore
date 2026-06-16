@@ -1,0 +1,5 @@
+node_modules/
+dist/
+coverage/
+# Runtime decision log (per-project memory); the sample is committed instead.
+decisions.local.jsonl

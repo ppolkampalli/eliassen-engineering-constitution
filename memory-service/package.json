@@ -1,0 +1,30 @@
+{
+  "name": "constitution-memory-service",
+  "private": true,
+  "version": "1.2.0",
+  "description": "Reference Central Memory Service (MemoryGraph) — an MCP server exposing the Engineering Constitution's law registry, workflows, and an append-only decision log to AI agents.",
+  "type": "module",
+  "bin": {
+    "constitution-memory": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "smoke": "node dist/server.js --self-test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.20.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.13",
+    "@types/node": "20.16.10",
+    "jest": "29.7.0",
+    "ts-jest": "29.2.5",
+    "tsx": "4.19.1",
+    "typescript": "5.1.6"
+  }
+}

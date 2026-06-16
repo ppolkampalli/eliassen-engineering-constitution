@@ -125,6 +125,7 @@ See [skills/constitution-enforcer/reference/citation-format.md](skills/constitut
 | Checklists | [checklists/](checklists/) |
 | Standards / testing / rollout guides | [docs/](docs/) |
 | Install / validate / update / lookup scripts | [scripts/](scripts/) |
+| Central Memory Service (reference MCP server) | [memory-service/](memory-service/) |
 | Project-level Claude instructions | [CLAUDE.md](CLAUDE.md) |
 
 ---
