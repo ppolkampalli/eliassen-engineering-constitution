@@ -4,3 +4,9 @@
 node_modules/
 coverage/
 user-training-onboarding/dist/
+
+# Generated knowledge-graph output (regenerable via /graphify)
+graphify-out/
+
+# Office temp/lock files
+~$*
