@@ -1,9 +1,8 @@
 # Engineering Constitution — Project Rules
 
 This project is governed by the **Eliassen Group Engineering Constitution v1.2.0**.
-Laws are citable by ID. Full registry: `docs/constitution/REGISTRY.md` (installed copy)
-or the `engineering-constitution` repository. Look up any law: `./scripts/law-lookup.sh LAW-X.Y`
-(in the constitution repo) or read `docs/constitution/registry.json`.
+Laws are citable by ID. Full registry: `laws/REGISTRY.md` or read `laws/registry.json`.
+Look up any law: `./scripts/law-lookup.sh LAW-X.Y`.
 
 ## The Ten Articles (most-invoked laws)
 
@@ -43,7 +42,7 @@ domain rules → Industry SME; implementation (default) → Software Engineer.
 
 ## Workflows (LAW-10.6)
 
-Nontrivial work follows a declared workflow from `docs/constitution/workflows/`
+Nontrivial work follows a declared workflow from `workflows/`
 (WF-FEATURE, WF-RESEARCH, WF-BUG, WF-SECBUG, WF-REFACTOR, WF-AMENDMENT) — use the
 workflow-orchestrator skill. Deviations on non-hard stages are allowed when asked,
 but every deviation is recorded on the work item; hard stages (marked `*`) and
