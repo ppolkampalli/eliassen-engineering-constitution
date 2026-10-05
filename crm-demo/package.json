@@ -1,0 +1,23 @@
+{
+  "name": "crm-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Reference CRM implementation demonstrating the Engineering Constitution's Requirement -> Architect -> Design -> Develop -> Review flow (WF-FEATURE).",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "demo": "tsx src/demo.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "29.5.13",
+    "@types/node": "20.16.10",
+    "jest": "29.7.0",
+    "ts-jest": "29.2.5",
+    "tsx": "4.19.1",
+    "typescript": "5.1.6"
+  }
+}
