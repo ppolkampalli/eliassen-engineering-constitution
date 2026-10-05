@@ -500,11 +500,26 @@ h1, h2, h3 {
 .fig-flow-mem { font-size: 0.66rem; color: var(--coral-dark); font-family: 'Poppins', sans-serif; }
 .fig-flow-arrow { color: var(--royal); font-weight: 700; }
 
+/* Figure 4 — two-team domain split */
+.fig-teams-row { display: flex; gap: 1rem; }
+.fig-team-card {
+  flex: 1; background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--royal);
+  border-radius: 8px; padding: 0.7rem 0.8rem; display: flex; flex-direction: column; gap: 0.3rem;
+}
+.fig-team-domain { font-size: 0.74rem; color: var(--ink-soft); font-family: 'Poppins', sans-serif; }
+.fig-team-card ul { list-style: none; margin: 0.3rem 0 0; padding: 0; }
+.fig-team-card li { font-size: 0.74rem; padding: 0.15rem 0; color: var(--ink); }
+.fig-shared-link {
+  display: flex; align-items: center; gap: 0.6rem; justify-content: center;
+  margin: 1rem 0; flex-wrap: wrap; text-align: center;
+}
+
 @media (max-width: 640px) {
   .fig-persona-grid { grid-template-columns: 1fr 1fr; }
   .fig-mem-row { grid-template-columns: 1fr; }
   .fig-flow-stage { min-width: 100%; }
   .fig-flow-arrow { transform: rotate(90deg); align-self: center; }
+  .fig-teams-row { flex-direction: column; }
 }
 
 /* Client journeys */

@@ -268,4 +268,75 @@ That is a promotion. From administrator of the backlog to engineer of intent: th
 
 But they're here. And the teams that win the next five years will be the ones whose POs picked them up first.`,
   },
+  {
+    id: 'two-teams-one-constitution',
+    title: 'Two Teams, One Constitution: Shipping a Shared CRM Without Forking the Rules',
+    deck: 'A step-by-step walkthrough of two scrum teams installing the Engineering Constitution and building a shared CRM together — same install, same workflow, different domains, zero drift.',
+    author: 'Pramod Polkampalli',
+    published: '2026-10-05',
+    readingMinutes: 11,
+    body: `Leadership's question is always some version of the same thing: "This works beautifully for one team. What happens to it at five?" It's a fair worry — most standards survive exactly one team before someone ships under deadline pressure, cuts a corner, and the exception becomes the precedent. This is a walkthrough of two teams, not one, installing the same constitution and building one shared application — a small CRM — and what actually happened when their work met in the middle.
+
+## The setup: one CRM, two domains, two teams
+
+The application is deliberately small: a CRM with self-service user registration and admin-only customer-relationship-management operations. Two teams own it. **Team Falcon** owns the users domain — registration, identity, roles. **Team Atlas** owns customers — the CRM records an admin creates, lists, and updates. Neither team's code imports the other's internals. If this sounds like an arbitrary toy example, it isn't — it's the actual reference implementation now sitting in this repository's crm-demo/ directory, built exactly the way this article describes, with real tests and real coverage numbers, not illustrative pseudocode.
+
+## Step one: install, once, the same way
+
+Both teams ran the identical command against their own checkout — scripts/install.sh — and got the identical kit: lint/type/test configs, the pre-commit hook, CI workflows, the PR template, every persona skill, both steering files, and the full law registry for offline citation (LAW-1.3). Nobody in either team debated tabs versus spaces, or whether any is acceptable "just this once." That conversation was already over before either team wrote a line, which is the entire point of installing a constitution instead of writing a wiki page: a wiki page is read once and drifts; a linter config is enforced every commit, forever.
+
+## Step two: declare the workflow before writing a line
+
+Before either team touched a keyboard, the work was declared: WF-FEATURE on the CRM reference implementation. The orchestrator announced the chain — Product Owner writes acceptance criteria, Architect designs and places the work, Quality writes the test list, Engineer implements test-first, a fresh context reviews it, Security passes over it, DevOps checks release-readiness. That announcement is not ceremony. It's the difference between "we'll figure out the sequence as we go" (how security review quietly gets skipped under deadline pressure) and a sequence that was declared out loud before anyone could conveniently forget a stage.
+
+The Product Owner persona's acceptance criteria named five observable behaviors — AC1 through AC5 — covering registration, role-gated admin actions, record creation, listing with filters, and partial updates. Each one stated not just what should happen, but how to verify it. "Done" was written down before "how" was discussed, which is LAW-8.1 in one sentence: coding against an undefined "done" is the root failure this constitution exists to prevent.
+
+## Step three: split the work by domain, not by file
+
+@@figure:two-team-split@@
+
+This is where most multi-team efforts quietly go wrong: splitting work by layer ("you take the frontend, I'll take the backend") instead of by domain. Layer-first splits mean every feature touches both teams' code, every PR waits on both teams' review, and "whose bug is this" becomes a standing argument. The constitution's architecture law (LAW-4.1) mandates the opposite: domains first, with the full stack — application, domain logic, persistence — inside each domain, and cross-domain access only through a public interface.
+
+So Team Falcon's users domain and Team Atlas's customers domain each contain their own full stack, and the only thing that crosses the line between them is a single shared value type — Caller { id, role } — representing an already-authenticated caller's identity, the same way a real auth middleware would hand it to application code. Neither domain imports the other's persistence, entities, or use-cases. This wasn't a design aspiration left to good behavior; it was verified by grep in the fresh-context code review described below, and it's the architectural reason Team Falcon can refactor its password-hashing strategy next sprint without asking Team Atlas's permission.
+
+## Step four: build test-first, with evidence
+
+Both teams worked from the same test list — Quality's output from Canon TDD's first step: a written list of behaviors to prove, one at a time, before any implementation exists. "Should throw DuplicateEmailError when registering with an email differing only in case," "should throw NotAuthorizedError when caller role is customer, creating nothing," "should leave name and email unchanged regardless of update payload" — twenty-nine items, each traced back to one of the five acceptance criteria, none of them speculative coverage for behavior nobody asked for.
+
+The result, run for real rather than asserted: 34 tests, 8 suites, 100% line/branch/function/statement coverage, a clean strict-TypeScript type-check with zero any. Not "should be green" — an actual terminal showing green, because LAW-10.2 doesn't accept a confident claim as evidence. It accepts a runnable check and its output.
+
+## Step five: a context that didn't write it, reviews it
+
+Here is the part most governance frameworks only gesture at. LAW-10.5 says agent-produced work is reviewed by a context that didn't produce it — not as a formality, but because the agent that just wrote the code is the worst-positioned reviewer of it: it's confident in exactly the places it should be suspicious. So the implementation was handed to a fresh agent with zero memory of having written it, and told to independently re-run the tests, grep for violations, and find real problems.
+
+It found one. The partial-update logic for a customer record — input.status ?? existing.status — had never been exercised in the direction where status is omitted and only phone/company are given. The code was correct; the test coverage claiming to prove it wasn't actually proving that branch. Branch coverage was 96% overall, comfortably above the 90% floor, which is exactly how a real gap hides behind a healthy-looking aggregate number. The fix was one new test, five minutes of work — but it only happened because review was structurally independent, not because anyone remembered to be careful.
+
+> The question a governance framework should answer isn't "did someone review this?" It's "could the reviewer have missed what the author missed, for the same reason?"
+
+## Step six: see it work
+
+@@figure:memory-service@@
+
+Tests proving behavior is one kind of evidence; watching the thing actually run is another, and leadership reads the second kind far more easily than a coverage report. The reference implementation ships a small runnable demo — not a web server (that's explicitly out of scope for this reference slice, recorded as an ADR rather than left as an unexplained gap) but an in-process script exercising every acceptance criterion end to end: register a visitor, watch a non-admin get rejected from an admin action, create two customer records, filter them by status, update one, and print every result as it happens. One command, real output, nothing staged.
+
+## The part that actually scales: staying one constitution at five teams
+
+Two teams splitting one small CRM by domain is the easy case. The harder, leadership-grade question is what happens at five teams, ten subsystems, a platform nobody holds in their head at once — and whether "stay consistent" quietly becomes "stay identical in ways that no longer fit," which is how good standards curdle into bureaucracy teams route around.
+
+The constitution's own research had already flagged this as unresolved — a watch-listed, deliberately deferred question about whether every convention should really be zero-exception, or whether a tiered model (hard constitutional gates everywhere, a paved path elsewhere teams may deviate from with recorded rationale) fits the federated reality better. Building this CRM across two teams was the concrete trigger to stop deferring it: a formal amendment proposal — still in PROPOSED status, awaiting real persona and human review, not self-ratified — now names the inviolable set explicitly (every Security veto, the quality gates, the two human approvals, acceptance-criteria-first, the TDD guardrail, tooling consistency) and names everything outside it as a recorded, auditable choice rather than either silent drift or rigid uniformity. Teams don't fork the constitution to get flexibility; they deviate within it, on the record, and a deviation repeated by more than one team becomes a candidate amendment instead of a permanent fork.
+
+The same build also sketched — again as a reviewed, not-yet-ratified proposal — what a leadership-visible dashboard across teams would need underneath it: the Central Memory Service shown above, already append-only and cited for a single project, extended with stage-transition and blocker events and hosted once instead of once-per-project, so a manager can see which workflow stage every team's work is actually in without reading every PR by hand. The design deliberately keeps that governed, tested, append-only log as the one source of truth and treats whatever dashboard renders it — Multica.ai or anything else — as a swappable consumer, never the record itself. Tools come and go; the two invariants (laws read-only, decisions append-only) are what the constitution actually protects.
+
+## What leadership actually gets
+
+- The same install, every team. No team debates lint rules or coverage floors; that conversation ran once, centrally, and is enforced mechanically forever after.
+- Independent delivery, zero merge archaeology. Domain-first splitting means Team Falcon and Team Atlas shipped on their own schedules, reviewed their own PRs, and never once waited on each other's code.
+- A declared, auditable sequence. Every stage of WF-FEATURE left a citation trail — which persona decided what, against which law — instead of a Slack thread nobody can find in six months.
+- Review that actually catches things. The one real gap this build produced was caught by a structurally independent reviewer, not by hoping the author was careful twice.
+- Flexibility that doesn't mean drift. The still-pending Golden Paths proposal gives teams room to diverge on the things that should flex, while keeping the five or six things that should never flex — security, the quality gates, human approval — identical no matter how many teams exist.
+
+## Build it yourself
+
+The complete artifact trail is real and in the repository, not summarized from memory: crm-demo/docs/requirements.md, design.md, and test-list.md for the three planning stages; docs/adr/0003-crm-reference-implementation-scope.md for the three deliberate scope cuts and why each was made; crm-demo/src/ for the implementation itself, domain by domain; and crm-demo/README.md for the three commands — install, test, demo — that take you from a clone to watching it run. Clone it, run npm test -- --coverage and read the real number, then run npm run demo and watch two domains, owned by two imaginary teams, cooperate through nothing but a shared value type and a shared set of rules neither of them had to invent.`,
+  },
 ];

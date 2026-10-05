@@ -109,6 +109,47 @@ function FeatureFlow(): JSX.Element {
   );
 }
 
+function TwoTeamSplit(): JSX.Element {
+  const teams: { name: string; domain: string; owns: string[] }[] = [
+    { name: 'Team Falcon', domain: 'users/', owns: ['register-user.ts', 'in-memory-user-repository.ts'] },
+    {
+      name: 'Team Atlas',
+      domain: 'customers/',
+      owns: ['create/list/update-customer.ts', 'in-memory-customer-repository.ts'],
+    },
+  ];
+  return (
+    <div className="fig fig-teams">
+      <div className="fig-teams-row">
+        {teams.map((team) => (
+          <div key={team.name} className="fig-team-card">
+            <strong>{team.name}</strong>
+            <span className="fig-team-domain">owns domain: {team.domain}</span>
+            <ul>
+              {team.owns.map((file) => (
+                <li key={file}>{file}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="fig-shared-link">
+        <span className="fig-badge fig-badge-decide">shared/caller.ts</span>
+        <span className="fig-arrow-label">
+          the only file either team imports from the other&rsquo;s side — a plain value type, not
+          either domain&rsquo;s internals
+        </span>
+      </div>
+      <p className="fig-note">
+        Zero cross-imports between <code>users</code> and <code>customers</code> — verified by a
+        fresh-context review (LAW-10.5), not just claimed. Each team ships, tests, and reviews its
+        own domain independently; the shared constitution is what keeps both teams building the
+        same way without either forking it.
+      </p>
+    </div>
+  );
+}
+
 export const articleFigures: Record<string, FigureDef> = {
   'persona-mesh': {
     caption: 'Figure 1 · One orchestrator, many persona-specialised agents',
@@ -121,5 +162,9 @@ export const articleFigures: Record<string, FigureDef> = {
   'feature-flow': {
     caption: 'Figure 3 · A feature through the persona pipeline, memory at every stage',
     render: FeatureFlow,
+  },
+  'two-team-split': {
+    caption: 'Figure 4 · Two teams, one CRM — split by domain, not by file, sharing one constitution',
+    render: TwoTeamSplit,
   },
 };

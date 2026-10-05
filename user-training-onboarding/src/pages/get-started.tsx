@@ -71,6 +71,14 @@ export function GetStartedPage(): JSX.Element {
           invocations. The self-study paths cover greenfield, rewrites, and day-to-day enhancement
           work in detail, with knowledge checks that cite the law behind every answer.
         </p>
+        <p>
+          Wondering how this holds up past one team? Read{' '}
+          <Link to="/articles/two-teams-one-constitution">
+            Two Teams, One Constitution
+          </Link>{' '}
+          — the same eight steps above, run by two scrum teams building a shared CRM, with the
+          real test output and a real fresh-context review finding along the way.
+        </p>
         <div className="hero-actions">
           <Link className="btn btn-hero" to="/learn">
             Browse the learning paths →

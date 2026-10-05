@@ -535,4 +535,154 @@ The defenses you will use day-to-day:
       },
     ],
   },
+  {
+    id: 'crm-walkthrough',
+    title: 'Worked Example: Building the CRM with WF-FEATURE',
+    summary:
+      'A real, runnable feature built stage by stage under WF-FEATURE — read the plan, read the plan, run the tests, and watch a fresh-context review catch a real gap.',
+    lessons: [
+      {
+        id: 'crm-why-this-example',
+        title: 'Why a CRM demo, and what it proves',
+        body: `Every other lesson in this app explains a law. This one walks through a single real feature — a small CRM with self-service registration and admin-only customer records — built end to end under WF-FEATURE, so you can see the laws operating together instead of one at a time. It lives in this repository's crm-demo/ directory; everything described here is real code you can clone and run, not illustrative pseudocode.
+
+Before any code existed, the work was declared: "WF-FEATURE on the CRM reference implementation." That declaration matters more than it looks — LAW-10.1 requires substantial agent-executed work to proceed from a reviewed plan that names the laws bearing on it, not a jump straight to implementation. An agent (or engineer) that starts writing files before the plan exists has already exceeded its mandate, even if the code turns out fine — because "fine" was never defined before work began.
+
+Four artifacts came out of the planning stages, in this order:
+
+- requirements.md — the Product Owner's acceptance criteria (LAW-8.1): five observable behaviors, each with a stated verification method
+- design.md — the Architect's domain placement and pattern choices (LAW-4.1, LAW-4.4)
+- ADR-0003 — the three deliberate scope cuts (no auth stack, no web layer, no real database) and why each was made (LAW-4.5)
+- test-list.md — Quality's Canon TDD test list, written before any implementation (LAW-3.1)
+
+Notice what order that is: acceptance criteria first, design second, tests third, code last. Reversing that order is the single most common way agent-assisted work goes wrong — code that solves a plausible-sounding problem nobody actually defined.`,
+        lawRefs: ['LAW-10.1', 'LAW-8.1'],
+        workflowRefs: ['WF-FEATURE'],
+      },
+      {
+        id: 'crm-domain-first',
+        title: 'Reading the design before the code',
+        body: `The design stage named two domains, not two layers: users (registration, identity, roles) and customers (the CRM records an admin manages). This is LAW-4.1 in practice — applications are organized by business domain first, with the full stack (application, domain logic, persistence) inside each domain, and cross-domain access only through a public interface.
+
+The design went further than "two folders." It named the one thing allowed to cross between them: a plain Caller { id, role } value type, representing what a real auth layer would already have resolved — not either domain's internals. Everything else stays local: users never imports from customers, and customers never imports from users.
+
+Why this is worth noticing: a design document that only says "we'll use good architecture" is not a design — LAW-4.5 requires significant structural decisions to be recorded with context, options considered, and the laws bearing on the decision, specifically so a future reader doesn't have to reverse-engineer intent from file layout. ADR-0003 recorded three such decisions explicitly: why no auth stack yet (LAW-5.4 deferred, not violated), why no web framework (use-cases are the public interface a future adapter would call), and why in-memory persistence (LAW-9.1 — no infrastructure needed for a reference app). Each decision names what it costs and what stays reversible.
+
+- Domain-first, not layer-first: users and customers each own their full stack
+- One shared value type crosses the boundary — never either domain's internals
+- Every deliberate scope cut is in writing, with its reasoning, not left for someone to wonder about later`,
+        lawRefs: ['LAW-4.1', 'LAW-4.5'],
+      },
+      {
+        id: 'crm-test-list-first',
+        title: 'The test list, then the code — not the other way around',
+        body: `Before a line of users/ or customers/ implementation existed, Quality's test-definition stage produced a numbered list: twenty-nine behaviors, each traced back to one of the five acceptance criteria. "Should throw DuplicateEmailError when registering with an email differing only in case." "Should throw NotAuthorizedError when caller role is customer, creating nothing." Nothing speculative — no test exists for behavior nobody asked for, and no acceptance criterion exists without at least one test proving it.
+
+This is Canon TDD's actual sequence (LAW-3.1): write the test list, convert one item into a failing test, make it pass, move to the next — never write a batch of implementation and backfill tests to match what the code happens to do. The guardrail that makes this non-negotiable: a failing test is fixed or its requirement is formally changed through the plan — it is never quietly deleted or weakened to reach green.
+
+The result, run for real: 34 tests across 8 suites, 100% line/branch/function/statement coverage, a clean strict-TypeScript check with zero any. LAW-10.2 is the reason that sentence has numbers in it instead of just saying "tests pass" — verifiable completion means a runnable check and its actual output count as evidence; a confident claim does not. You can reproduce every one of those numbers yourself: clone the repo, cd crm-demo, run npm test -- --coverage, and read your own terminal.`,
+        lawRefs: ['LAW-3.1', 'LAW-10.2'],
+      },
+      {
+        id: 'crm-fresh-context-review',
+        title: 'A context that did not write it, reviews it',
+        body: `Here is the part most teams skip under time pressure, and the part that actually caught something real. LAW-10.5 requires agent-produced work to be reviewed by a context that did not produce it — specifically because the author (human or agent) is the worst-positioned judge of their own blind spots. For the CRM, that meant handing the finished implementation to a reviewer with zero memory of having written it, and asking it to independently re-run the tests rather than trust the claim that they passed.
+
+It found a real gap. The partial-update logic for a customer record — update only phone and company, leave status untouched — had only ever been tested in one direction. The code was correct; the test suite claiming to prove it wasn't actually exercising that branch. Overall branch coverage read 96%, comfortably above the 90% floor, which is exactly how a real gap hides behind a healthy-looking aggregate number — the floor was never the problem; the false confidence in what it measured was.
+
+The fix was one new test and five minutes of work. The point isn't that the bug was dramatic — it wasn't. The point is that it was found at all, and it was found because review was structurally independent rather than because someone remembered to be extra careful. A reviewer with the same blind spot as the author catches nothing a second read of the same assumptions would catch.
+
+- Self-review catches typos; it rarely catches the assumption the author never questioned
+- A healthy aggregate coverage number can still hide an untested branch
+- Independent review is a structural property of the process, not a personality trait of the reviewer`,
+        lawRefs: ['LAW-10.5', 'LAW-3.2'],
+      },
+      {
+        id: 'crm-run-it-yourself',
+        title: 'Run it yourself',
+        body: `Every number in this lesson came from an actual terminal, and you can get the same ones:
+
+- npm install — installs the pinned dependencies (strict TypeScript, Jest, ts-jest)
+- npm run type-check — zero any, strict mode, clean
+- npm test -- --coverage — 34 tests, 100% lines/branches/functions/statements
+- npm run build — compiles to dist/
+- npm run demo — runs the compiled (or, via npm run demo in dev, the source) use-cases end to end: register a visitor, watch a non-admin get rejected from an admin action, create two customer records, filter them by status, update one, and print every result as it happens
+
+That last command is worth running even if you skip everything else — it's the difference between a coverage report and watching the thing actually work. The full artifact trail — requirements.md, design.md, test-list.md, the ADR, and the implementation itself — is in crm-demo/ in this repository, not summarized from memory. Clone it and read the real files; every claim in this lesson should check out against them.`,
+        lawRefs: ['LAW-6.5'],
+      },
+    ],
+    quiz: [
+      {
+        id: 'crm-q1',
+        prompt: 'The CRM feature declared "WF-FEATURE" before any code was written. Why does that declaration matter?',
+        options: [
+          'It is a formality required for the PR template',
+          'LAW-10.1 requires substantial agent-executed work to proceed from a reviewed plan naming the bearing laws — not a jump straight to implementation',
+          'It only matters for human-written code, not agent-assisted work',
+          'It lets the team skip the design stage',
+        ],
+        correctIndex: 1,
+        explanation:
+          'LAW-10.1: multi-file changes and new features proceed from a written specification or plan reviewed before implementation begins — the plan is what defines "done" before anyone starts typing.',
+        lawRef: 'LAW-10.1',
+      },
+      {
+        id: 'crm-q2',
+        prompt: 'Why did the design split the CRM into users and customers domains instead of frontend/backend layers?',
+        options: [
+          'Layers are easier to staff',
+          'LAW-4.1: applications organize by business domain first, with the full stack inside each domain and cross-domain access only through a public interface',
+          'It was an arbitrary choice with no law behind it',
+          'Because the test framework requires it',
+        ],
+        correctIndex: 1,
+        explanation:
+          'Domain-first splitting means each domain can be built, tested, and reviewed independently — a layer-first split would have made every change touch both domains at once.',
+        lawRef: 'LAW-4.1',
+      },
+      {
+        id: 'crm-q3',
+        prompt: 'The fresh-context review found an untested branch even though overall branch coverage was 96%, above the 90% floor. What does this demonstrate?',
+        options: [
+          'The coverage floor is set too low and should be raised',
+          'A healthy aggregate coverage number can still hide a real untested branch — which is exactly why LAW-10.5 requires independent review, not just a passing metric',
+          'Coverage floors are not useful',
+          'The reviewer made a mistake',
+        ],
+        correctIndex: 1,
+        explanation:
+          'LAW-10.5: a context that did not produce the work reviews it. The author of a healthy-looking metric is poorly positioned to notice what that metric is failing to measure.',
+        lawRef: 'LAW-10.5',
+      },
+      {
+        id: 'crm-q4',
+        prompt: 'ADR-0003 records three deliberate scope cuts (no auth stack, no web layer, no real database) for the CRM demo. Why write this down instead of just not building those things?',
+        options: [
+          'So a future maintainer does not mistake a deliberate decision for an unfinished gap — LAW-4.5 requires significant structural decisions to be recorded with context and reasoning',
+          'It is required paperwork with no practical value',
+          'So the team can bill more hours',
+          'ADRs are only for decisions that were implemented, not ones that were skipped',
+        ],
+        correctIndex: 0,
+        explanation:
+          'LAW-4.5: an ADR records context, options considered, the decision, and its consequences — exactly so "why is it like this?" has a written answer instead of requiring archaeology.',
+        lawRef: 'LAW-4.5',
+      },
+      {
+        id: 'crm-q5',
+        prompt: 'The lesson claims "34 tests, 100% coverage" for the CRM demo. What makes that claim trustworthy rather than just a confident assertion?',
+        options: [
+          'It was written by a careful author',
+          'LAW-10.2: verifiable completion means a runnable check and its actual output are the evidence — you can run npm test -- --coverage yourself and get the same numbers',
+          'It does not matter whether it is trustworthy',
+          'The numbers are rounded, so minor inaccuracies are fine',
+        ],
+        correctIndex: 1,
+        explanation:
+          'LAW-10.2 rejects "should work" as a standard of evidence. A number anyone can reproduce by running the same command is evidence; an unverified claim is not.',
+        lawRef: 'LAW-10.2',
+      },
+    ],
+  },
 ];
