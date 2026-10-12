@@ -17,7 +17,7 @@ function renderReaderAt(path: string): void {
 
 describe('articles content', () => {
   it('should publish the commissioned articles with substantial bodies', () => {
-    expect(articles.length).toBe(5);
+    expect(articles.length).toBe(6);
     for (const article of articles) {
       expect(article.body.length).toBeGreaterThan(4000);
       expect(article.deck.length).toBeGreaterThan(40);
@@ -85,6 +85,15 @@ describe('ArticleReaderPage', () => {
     expect(screen.getByText(/Figure 3 ·/)).toBeTruthy();
     expect(screen.getByText('Orchestrator Agent')).toBeTruthy();
     expect(screen.getByText('Central Memory Service')).toBeTruthy();
+    expect(screen.queryByText(/@@figure:/)).toBeNull();
+  });
+
+  it('should render the agent board article with its embedded mockup', () => {
+    renderReaderAt('/articles/watching-agentic-work-the-agent-board');
+    expect(screen.getByRole('heading', { name: 'Watch It Run: A Window Into Agentic Work' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'Reading the lanes' })).toBeTruthy();
+    expect(screen.getByText(/Figure 5 ·/)).toBeTruthy();
+    expect(screen.getByText('JIRA-3411')).toBeTruthy();
     expect(screen.queryByText(/@@figure:/)).toBeNull();
   });
 

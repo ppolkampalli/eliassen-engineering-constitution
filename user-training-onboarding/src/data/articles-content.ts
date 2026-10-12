@@ -339,4 +339,62 @@ The same build also sketched — again as a reviewed, not-yet-ratified proposal 
 
 The complete artifact trail is real and in the repository, not summarized from memory: crm-demo/docs/requirements.md, design.md, and test-list.md for the three planning stages; docs/adr/0003-crm-reference-implementation-scope.md for the three deliberate scope cuts and why each was made; crm-demo/src/ for the implementation itself, domain by domain; and crm-demo/README.md for the three commands — install, test, demo — that take you from a clone to watching it run. Clone it, run npm test -- --coverage and read the real number, then run npm run demo and watch two domains, owned by two imaginary teams, cooperate through nothing but a shared value type and a shared set of rules neither of them had to invent.`,
   },
+  {
+    id: 'watching-agentic-work-the-agent-board',
+    title: 'Watch It Run: A Window Into Agentic Work',
+    deck: 'A manager asked "what is the agent actually doing right now?" and a citation trail in a PR description couldn’t answer it — so we built a one-screen, local Kanban board that can, and shipped it the same governed way as everything else here.',
+    author: 'Pramod Polkampalli',
+    published: '2026-10-12',
+    readingMinutes: 9,
+    body: `A PR description tells you what an agent decided and which law it cited for the decision. It does not tell you anything while the work is still happening — whether it is making progress, stuck waiting on you, or three stages into a chain nobody in the room remembers approving. "Run WF-FEATURE on TICKET-123" announces a plan before any code is written, which solves the silent-process problem. It does not solve the next one: once that chain is running, where do you actually look to see it move?
+
+That gap is what agent-board answers. Not a dashboard for executives, not a second governance system — a small, local, zero-drama Kanban board that turns the workflow-orchestrator's own stage transitions into three lanes: In Progress, Blocked, Done. This is the story of building it, including the two genuinely surprising bugs that only showed up once it was real.
+
+## The problem a citation trail can't solve
+
+Every governed workflow in this constitution already produces an audit trail — a stage-by-stage record of which persona did what, against which law, with what evidence. That trail is excellent at answering "what happened," after the fact, once someone goes looking for it. It was never built to answer "what is happening, right now, without me having to go looking." Those are different questions, and conflating them is how teams end up either over-interrupting an agent to ask for a status update, or under-watching it until a blocked stage sits unnoticed for a day because nobody happened to check the PR.
+
+The constitution already has a planned answer to this at enterprise scale — a centrally-hosted memory and events service feeding a dashboard adapter, described in docs/proposals/agentic-visibility. That design is still PROPOSED, tied to an amendment that hasn't been ratified, and it is solving a genuinely different problem: aggregating many teams' activity for leadership. What one developer needs today, watching one workflow run in one project, is something you can have running in two minutes with nothing to provision. That's agent-board.
+
+## What it actually is
+
+workflow-orchestrator already announces its chain and records stage completions as part of running a workflow (SKILL.md §1 and §2). agent-board adds one more, deliberately minor, side effect: at four points — chain announcement, stage entry and completion, a required-checkpoint stop, and the run summary — it appends one JSON line to a local event log, .claude/board/events.local.jsonl. A small Node server reads that file and serves it over one HTTP endpoint; a React app polls that endpoint every 1.5 seconds and renders the three lanes.
+
+## Three commands, from zero
+
+Copy the folder into your project, install its dependencies, and start the dev server: cp -r engineering-constitution/agent-board ./agent-board, then cd agent-board && npm install && npm run dev. Open the URL Vite prints — usually port 5173, though if that port is already busy it automatically tries the next one and prints whichever it actually used, so read the terminal rather than assuming the default. No file picker, no "choose a log file" step, no Chrome-versus-Firefox distinction to think about: the Node server reads the file, every browser just calls the same API.
+
+@@figure:agent-board-mockup@@
+
+## Reading the lanes
+
+A card's lane is derived from the *latest* non-deviation event for that work item, not from a fixed list of stage names — WF-BUG and WF-FEATURE have completely different stages, but every workflow's progress still lands in one of three buckets. **In Progress** means the workflow has started and isn't stopped on anything. **Blocked** means a stage explicitly reported itself as blocked, or it hit a human checkpoint marked required — and per SKILL.md and LAW-6.1/LAW-7.1, agents never self-approve through a required checkpoint, so "blocked" here always means "waiting on you," not "the agent gave up." **Done** means the workflow emitted its end-of-run summary.
+
+One rule is easy to get backwards and worth stating precisely: a recorded deviation — a soft stage skipped or softened, with its reason on the record — annotates the card's note and citation count, but it never moves the card to a different lane by itself. If a work item's chronologically last event happens to be a deviation sitting on top of an earlier blocked stage event, the card stays blocked. The note changes; the lane doesn't. Getting this backwards would mean a deviation could accidentally make a stuck work item look unstuck, which is exactly the kind of quiet error a visibility tool exists to prevent, not cause — so it has its own dedicated test fixture proving exactly this case, rather than being left to incidental coverage.
+
+Click a card and the full timeline opens: every stage it passed through, the persona and status at each step, any deviation's reason and who approved it, and the free-text note the agent left — the closest thing this tool has to "what is the agent actually thinking right now." A hard-stage badge marks stages that cannot be skipped or softened (LAW-6.2); a running citation count shows how many LAW-X.Y references the work has touched.
+
+## Security, by construction, not by promise
+
+The log path is resolved from an environment variable exactly once, at server start. The request handler never reads a path from the request itself — no query string, no header, no body field can change which file gets served. This isn't a validation rule that could be forgotten later; there is no code path through which a client-supplied path could reach the file system at all. We proved it the boring way, not the confident way: with the dev server running, requesting the events endpoint and then requesting it again with a path parameter appended, trying to point it at /etc/passwd, and diffing the two responses byte for byte. Identical. That diff, not the design intent, is the evidence (LAW-5.1, LAW-10.2).
+
+## What building it for real surfaced
+
+Two bugs showed up only once the thing was real, and both are worth naming because they're the kind that "should work" would have missed. First, a detail-view modal that opened with just a close button and no content — traced to the fact that a card's work-item id was being looked up fresh on every click instead of carried with the click itself, invisible until you actually clicked something in a running browser rather than reading the code. Second, once the server-side logic had real tests: spying on the filesystem module's read function kept throwing a property-redefinition error, and separately, a real file-not-found error from Node's own filesystem module kept failing an instanceof check that is correct in every normal Node process. Both traced to the same root cause — Jest runs each test file in its own sandboxed realm, so a namespace-style import's non-configurable property wrapper and a cross-realm error-identity mismatch both bite only inside the test harness, never in the real server process. The fix for both was the same shape: stop relying on identity checks that assume a single realm, and check structurally instead — a default import where a namespace import had been wrapped, and a duck-typed property check where an identity check had been assumed safe. Neither bug was visible from reading the code in isolation; both were caught because the test suite was real enough to hit them, which is the entire argument for LAW-10.2's "runnable check, not a confident claim" in one small example.
+
+## Built the same governed way as everything else
+
+This tool didn't get a casual pass just because it's a convenience viewer. It went through the same type-check, lint, and test-coverage gates as every other reference implementation in this repository — 100% coverage on the pure parsing and lane-derivation logic and on the server's request handler (the actual security boundary), with five dedicated fixture files proving the edge cases that matter: a fully worked three-lane example, an empty log, a log mixing valid lines with genuinely unparseable text, a log with schema-valid JSON that's still missing required fields, and the deviation-stays-in-lane case described above. A malformed or schema-invalid line is skipped, not fatal — the orchestrator writes its log as prose-following output, not type-checked code in the call path, so the viewer degrades instead of crashing, and the on-screen status line reports exactly how many lines it skipped.
+
+## What a team actually gets
+
+- A live answer to "what's it doing right now," without interrupting the agent to ask or reading a raw log file by hand.
+- "Blocked" that always means "waiting on a human," never "the agent silently gave up" — because that distinction is load-bearing for LAW-6.1 and LAW-7.1, not cosmetic.
+- A security guarantee you can verify yourself with one terminal command, not one you have to take on faith.
+- Nothing new to operate. No database, no auth, no second place for state to drift — one log file, one small Node process, one browser tab.
+
+## Build it yourself
+
+Everything described here is real and in the repository: agent-board/README.md for the full event schema, lane rules, and directory layout; docs/agent-board.md for the team-facing install and run guide, including a troubleshooting section for the port-fallback behavior and the cwd gotcha around where the log path resolves from; and agent-board/fixtures/ for the five sample logs described above, including a fully worked example if you want to see the board populated before any real workflow has written anything. Copy it in, install it, run the dev server, and watch a workflow move — that's the whole pitch, and it holds up because it's three commands and one diffed response, not a slide.`,
+  },
 ];

@@ -79,6 +79,14 @@ export function GetStartedPage(): JSX.Element {
           — the same eight steps above, run by two scrum teams building a shared CRM, with the
           real test output and a real fresh-context review finding along the way.
         </p>
+        <p>
+          Want to watch step six happen live instead of reading about it after the fact? Read{' '}
+          <Link to="/articles/watching-agentic-work-the-agent-board">
+            Watch It Run: A Window Into Agentic Work
+          </Link>{' '}
+          — how the local Kanban board behind that step was built, including the two real bugs
+          only a running instance surfaced.
+        </p>
         <div className="hero-actions">
           <Link className="btn btn-hero" to="/learn">
             Browse the learning paths →

@@ -514,12 +514,32 @@ h1, h2, h3 {
   margin: 1rem 0; flex-wrap: wrap; text-align: center;
 }
 
+/* Figure 5 — agent board mockup */
+.fig-board-lanes { display: flex; gap: 0.8rem; }
+.fig-board-lane {
+  flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 8px;
+  padding: 0.6rem; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.fig-board-lane-title {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-soft); font-family: 'Poppins', sans-serif;
+}
+.fig-board-card {
+  background: var(--cream); border: 1px solid var(--line); border-radius: 6px;
+  padding: 0.5rem 0.6rem; display: flex; flex-direction: column; gap: 0.25rem;
+}
+.fig-board-card-head { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; }
+.fig-board-card-wf { margin-left: auto; font-size: 0.66rem; color: var(--ink-soft); }
+.fig-board-card-stage { font-size: 0.68rem; color: var(--ink-soft); }
+.fig-board-card-note { font-size: 0.72rem; color: var(--ink); }
+
 @media (max-width: 640px) {
   .fig-persona-grid { grid-template-columns: 1fr 1fr; }
   .fig-mem-row { grid-template-columns: 1fr; }
   .fig-flow-stage { min-width: 100%; }
   .fig-flow-arrow { transform: rotate(90deg); align-self: center; }
   .fig-teams-row { flex-direction: column; }
+  .fig-board-lanes { flex-direction: column; }
 }
 
 /* Client journeys */

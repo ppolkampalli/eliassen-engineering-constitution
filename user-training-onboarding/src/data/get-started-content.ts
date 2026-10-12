@@ -84,6 +84,20 @@ export const startSteps: StartStep[] = [
     workflowRefs: ['WF-FEATURE'],
   },
   {
+    id: 'watch-the-board',
+    title: 'Watch it run — open the agent board',
+    narrative:
+      'Copy in agent-board/, a small local Vite + React viewer with its own tiny Node API, and the orchestrator starts appending one JSON line per stage transition to a local log — best-effort, never blocking the workflow it reports on. Open the page and the ticket shows up as a card moving across In Progress, Blocked, and Done, with the agent’s own notes and law citations attached to every move.',
+    commands: [
+      'cp -r engineering-constitution/agent-board ./agent-board',
+      'cd agent-board && npm install && npm run dev',
+      '# open http://localhost:5173 — it reads .claude/board/events.local.jsonl automatically',
+    ],
+    checkpoint: 'The card for your ticket updates live as the workflow advances — no refresh needed in any browser.',
+    lawRefs: ['LAW-7.3', 'LAW-4.6'],
+    workflowRefs: ['WF-FEATURE'],
+  },
+  {
     id: 'build',
     title: 'Build test-first — with evidence',
     narrative:

@@ -150,6 +150,75 @@ function TwoTeamSplit(): JSX.Element {
   );
 }
 
+function AgentBoardMockup(): JSX.Element {
+  const lanes: {
+    title: string;
+    items: { workItem: string; workflowId: string; stage: string; hard?: boolean; note: string }[];
+  }[] = [
+    {
+      title: 'In Progress',
+      items: [
+        {
+          workItem: 'JIRA-3600',
+          workflowId: 'WF-REFACTOR',
+          stage: 'refactor · software-engineer',
+          note: 'Extracting validation logic — 6 of 14 call sites done.',
+        },
+      ],
+    },
+    {
+      title: 'Blocked',
+      items: [
+        {
+          workItem: 'JIRA-3500',
+          workflowId: 'WF-FEATURE',
+          stage: 'code-review · quality',
+          hard: true,
+          note: 'Waiting on two human approvals (LAW-6.1).',
+        },
+      ],
+    },
+    {
+      title: 'Done',
+      items: [
+        {
+          workItem: 'JIRA-3411',
+          workflowId: 'WF-BUG',
+          stage: 'verify · quality',
+          note: 'Fix applied; mutation kill confirmed.',
+        },
+      ],
+    },
+  ];
+  return (
+    <div className="fig fig-board">
+      <div className="fig-board-lanes">
+        {lanes.map((lane) => (
+          <div key={lane.title} className="fig-board-lane">
+            <span className="fig-board-lane-title">{lane.title}</span>
+            {lane.items.map((item) => (
+              <div key={item.workItem} className="fig-board-card">
+                <div className="fig-board-card-head">
+                  <strong>{item.workItem}</strong>
+                  {item.hard && <span className="fig-badge fig-badge-veto">HARD</span>}
+                  <span className="fig-board-card-wf">{item.workflowId}</span>
+                </div>
+                <span className="fig-board-card-stage">{item.stage}</span>
+                <span className="fig-board-card-note">{item.note}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <p className="fig-note">
+        A sketch of the real UI, not a screenshot — agent-board renders this live from
+        .claude/board/events.local.jsonl, polling every ~1.5s as the orchestrator appends
+        stage-transition events (LAW-4.6: best-effort, never blocking the workflow it reports on).
+      </p>
+    </div>
+  );
+}
+
 export const articleFigures: Record<string, FigureDef> = {
   'persona-mesh': {
     caption: 'Figure 1 · One orchestrator, many persona-specialised agents',
@@ -166,5 +235,9 @@ export const articleFigures: Record<string, FigureDef> = {
   'two-team-split': {
     caption: 'Figure 4 · Two teams, one CRM — split by domain, not by file, sharing one constitution',
     render: TwoTeamSplit,
+  },
+  'agent-board-mockup': {
+    caption: 'Figure 5 · The agent board — a sketch of the live Kanban view, not a screenshot',
+    render: AgentBoardMockup,
   },
 };
