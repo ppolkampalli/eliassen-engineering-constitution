@@ -28,6 +28,9 @@ CHAIN: software-engineer(reproduce-and-fix*) → quality(verify*)
 (* = hard stage)
 ```
 
+If `agent-board/` is installed in the project, emit a `workflowSelected`
+board event here (see §6).
+
 ## 2. Execute
 
 Stage by stage, in order:
@@ -47,6 +50,9 @@ Stage by stage, in order:
    means offer, and proceed only on explicit or standing instruction.
 6. **Record stage completion** on the work item (one line per stage: persona,
    outcome, evidence pointer).
+7. **Emit a board event** (best-effort, non-blocking — see §6) for this
+   stage's transition: on entering the stage (step 2), on stopping at a
+   required human checkpoint (step 5), and on completing it (this step).
 
 ## 3. Overrides — conversational, validated, recorded
 
@@ -80,7 +86,8 @@ Approved by: <name>, <date>
 
 The record goes where the work is recorded (PR description / ticket), per
 LAW-7.3's provenance principle: undisclosed deviation is the violation, not
-deviation itself.
+deviation itself. Also emit a `deviation` board event (§6) for every applied
+or refused override.
 
 **Project-override validation:** before executing a project-local workflow
 file that replaces a catalog entry, diff its stages against the installed org
@@ -107,4 +114,27 @@ through an org-catalog PR, per workflows/README.md precedence rules).
 - WF-AMENDMENT's sequence is constitutional procedure: no conversational or
   project override applies to it, ever.
 - Every workflow run ends with a one-block summary: stages executed, personas,
-  deviations (or "none"), evidence pointers.
+  deviations (or "none"), evidence pointers. Also emit a `workflowCompleted`
+  board event here (§6).
+
+## 6. Board Events (best-effort, non-blocking)
+
+If the consuming project has `agent-board/` installed (see
+`agent-board/README.md`), append one JSON line per event below to
+`.claude/board/events.local.jsonl` (create the file and its directory if
+they don't exist yet). This surfaces what the orchestrator is doing as a
+local Kanban board — see `docs/agent-board.md`.
+
+Emit at four points: the chain announcement in §1 (`workflowSelected`),
+entering/completing a stage or stopping at a required checkpoint in §2
+(`stageEvent`), an applied or refused override in §3 (`deviation`), and the
+run summary in §5 (`workflowCompleted`). Full field reference and the exact
+JSON shape for each `eventType` are in `agent-board/README.md` — don't
+duplicate the schema here.
+
+This write is always best-effort and never blocking: if it fails for any
+reason (missing directory, permissions, anything else), proceed with the
+workflow exactly as if `agent-board/` were not installed. Mirrors LAW-4.6's
+resilience principle — visibility is never a dependency of correctness, and a
+stage, gate, or workflow must never be delayed or failed because its board
+event couldn't be written.

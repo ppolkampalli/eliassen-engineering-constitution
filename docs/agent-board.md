@@ -1,0 +1,143 @@
+# Agent Board — Watching a Workflow Run Locally
+
+A small Vite + React app with its own tiny Node API that renders governed
+workflow activity (WF-FEATURE, WF-BUG, …) as a three-lane Kanban board: **In
+Progress**, **Blocked**, **Done**. A Node server reads a local JSON-lines
+log off disk and exposes it over one HTTP endpoint; the browser just polls
+that endpoint — no file picker, no browser-specific file-access quirks.
+
+## What it is
+
+When `workflow-orchestrator` runs a workflow, it now also appends events to
+`.claude/board/events.local.jsonl` as a best-effort side effect
+(`skills/workflow-orchestrator/SKILL.md` §6). This doc is for the human
+watching that run, not the agent writing to it — see `agent-board/README.md`
+for the full event schema if you're integrating something with the log
+yourself.
+
+## Prerequisites
+
+Node.js 18+ and npm. No other project-wide tooling — this doesn't depend on
+anything else installed by `scripts/install.sh`.
+
+## Install it
+
+One-time setup, done once per project by whoever sets it up for the team:
+
+```bash
+# from inside your application project
+cp -r <path-to-engineering-constitution>/agent-board ./agent-board
+cd agent-board
+npm install
+```
+
+Add the local log to `your-project/.gitignore` (it's generated at runtime
+and is machine/session-specific — never commit it):
+
+```
+.claude/board/events.local.jsonl
+```
+
+That's it. Nothing else in the project needs to change, and this doesn't
+touch anything installed by `scripts/install.sh`.
+
+## Run it
+
+Anyone on the team who wants to watch a workflow run does this from the
+`agent-board/` directory:
+
+```bash
+npm run dev                       # development, hot reload — use this day to day
+# or, for a production-style single run:
+npm run build && npm run preview
+```
+
+Vite prints the URL to open, e.g. `http://localhost:5173`. **If that port is
+already busy (common if you have another Vite app running), it automatically
+tries the next one and prints the URL it actually used** — always use the
+URL from the terminal output, don't assume 5173.
+
+Open that URL — every browser works identically, since the Node server (not
+the browser) is what reads the file; there's no file picker and no
+Chrome/Edge-vs-Firefox/Safari distinction to think about. Leave the tab open
+while a workflow runs; it polls automatically.
+
+**One gotcha:** the default log path (`.claude/board/events.local.jsonl`) is
+resolved relative to **the directory you ran `npm run dev`/`preview`
+from**. Running those commands from inside `agent-board/` itself (as above)
+means the real log is one level up, in the application project root:
+
+```bash
+AGENT_BOARD_LOG=../.claude/board/events.local.jsonl npm run dev
+```
+
+If your team always runs it this way, consider adding that env var to an
+`.env`/README note for the project, or a tiny wrapper script, so nobody has
+to remember it.
+
+## Reading the board
+
+Each card is one work item (a ticket/item id). Its lane reflects the
+*latest* stage event for that item, not a fixed set of stage names — WF-BUG
+and WF-FEATURE have different stages, but every workflow's progress lands in
+one of the same three lanes:
+
+- **In Progress** — the workflow has started and isn't stopped on anything.
+- **Blocked** — stopped: either a stage explicitly reported `blocked`, or it
+  hit a human checkpoint marked `required` and, per SKILL.md, is waiting for
+  you (LAW-6.1, LAW-7.1 — agents never self-approve through these).
+- **Done** — the workflow emitted its end-of-run summary.
+
+Click a card to see the full timeline: every stage it passed through, the
+persona and status at each step, any recorded deviations with their reason
+and who approved them, and the free-text notes the agent left along the way
+— the closest thing this tool has to "what is the agent actually thinking
+right now."
+
+A hard-stage badge marks stages that can't be skipped or softened
+(LAW-6.2); a citation count on each card tells you how many `LAW-X.Y`
+references the work has touched so far.
+
+## Troubleshooting
+
+- **Board shows "No events yet" and never updates.** Either no workflow has
+  run yet in this project, or `AGENT_BOARD_LOG` isn't pointing at the right
+  file (see the cwd gotcha above). Quick check:
+  `cat .claude/board/events.local.jsonl` (from the project root) — if that
+  file doesn't exist or is empty, the orchestrator hasn't written anything
+  yet. Run a workflow (`workflow-orchestrator`) and check again.
+- **Terminal shows a different port than you expected.** Normal — see "Run
+  it" above. Use whatever URL Vite actually printed.
+- **Updates feel delayed.** The board polls every ~1.5s by design, not
+  instantly — that's expected, not a bug.
+- **A work item you expect to see is missing, or a line looks skipped.**
+  Malformed or schema-invalid lines are silently skipped rather than
+  crashing the board (by design — see "What this is not" below). Check the
+  status line at the top of the page: it reports how many lines were
+  skipped. `cat` the raw log file to find the bad line if you need to debug
+  the orchestrator's output itself.
+- **Want to try it before a real workflow has run anything.** Point it at
+  the bundled example instead of a real log:
+  `AGENT_BOARD_LOG=./fixtures/events.sample.jsonl npm run dev` (run from
+  inside `agent-board/`) — shows a fully worked example across all three
+  lanes.
+
+## What this is not
+
+This is a single-project, zero-infrastructure convenience viewer — point it
+at one log file on one machine. It is **not** the centrally-hosted,
+multi-team visibility design in `docs/proposals/agentic-visibility/` (still
+PROPOSED, tied to the not-yet-ratified `AMD-2026-011`), which is meant for
+aggregating many teams' activity behind a dashboard for leadership. If that
+design is ever built, this tool's event log maps onto it with a one-line
+field-name translation — not a redesign — because both use the same plain
+JSON event shape.
+
+There's no authentication, no multi-project rollup, and no CI wiring: the
+log is written by an LLM agent following prose instructions, not enforced by
+type-checked code, so a malformed line is simply skipped by the server
+rather than rejected at write time. The log file path is fixed by the
+`AGENT_BOARD_LOG` environment variable at server start and is never
+accepted from the browser — a deliberate LAW-5.1 control, not an
+oversight. See `agent-board/README.md` for the full scope notes and the
+event schema reference.

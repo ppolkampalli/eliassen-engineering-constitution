@@ -72,6 +72,15 @@ skip the phasing: run `install.sh` on day zero and start governed.
 **Exit criteria:** validate.sh PASS, all gates required, personas in use,
 amendment pipeline receiving proposals.
 
+## Optional: Watching Workflows Run
+
+Any time after Phase 1, teams can add `agent-board/` — a small local Kanban
+viewer (a Vite + React app with a tiny Node API) for governed workflow runs
+(see `docs/agent-board.md`). It's a
+convenience for developers and managers who want to see stage-by-stage
+progress and human-checkpoint stops without reading raw logs; it is not a
+gate and adds no new rollout phase or exit criteria.
+
 ## Staying Current
 
 `scripts/update.sh <project>` pulls registry/config/skill updates and prints each

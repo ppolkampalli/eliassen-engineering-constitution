@@ -5,6 +5,7 @@ node_modules/
 coverage/
 user-training-onboarding/dist/
 crm-demo/dist/
+agent-board/dist/
 
 # Generated knowledge-graph output (regenerable via /graphify)
 graphify-out/

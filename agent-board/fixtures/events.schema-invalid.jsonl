@@ -1,0 +1,5 @@
+{"schemaVersion":"1.0","timestamp":"2026-10-12T10:00:00Z","eventType":"workflowSelected","workItem":"JIRA-9100","workflowId":"WF-REFACTOR"}
+{"schemaVersion":"1.0","timestamp":"2026-10-12T10:01:00Z","eventType":"stageEvent","workItem":"JIRA-9100"}
+{"schemaVersion":"1.0","timestamp":"2026-10-12T10:02:00Z","eventType":"unknownType","workItem":"JIRA-9100","workflowId":"WF-REFACTOR"}
+{"schemaVersion":"1.0","timestamp":"2026-10-12T10:03:00Z","eventType":"deviation","workItem":"JIRA-9100","workflowId":"WF-REFACTOR","stageId":"adr"}
+{"schemaVersion":"1.0","timestamp":"2026-10-12T10:04:00Z","eventType":"stageEvent","workItem":"JIRA-9100","workflowId":"WF-REFACTOR","stageId":"adr","persona":"persona-architect","status":"complete","humanCheckpoint":"none"}
