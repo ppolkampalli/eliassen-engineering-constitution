@@ -20,12 +20,13 @@ function makeGraph(overrides: Partial<WorkflowGraph> = {}): WorkflowGraph {
     ],
     stageEventCounts: { fix: 2, verify: 1 },
     stageActiveCounts: { verify: 1 },
+    usageCount: 3,
     ...overrides,
   };
 }
 
 describe('WorkflowCohortGraph', () => {
-  it('renders a panel per workflowId with its stage node labels and counts', () => {
+  it('renders a panel per workflowId with its stage node labels, counts, and usage count', () => {
     render(<WorkflowCohortGraph graphs={[makeGraph()]} />);
     expect(screen.getByText('WF-BUG')).toBeTruthy();
     expect(screen.getByText('fix')).toBeTruthy();
@@ -33,6 +34,12 @@ describe('WorkflowCohortGraph', () => {
     expect(screen.getByText('human')).toBeTruthy();
     expect(screen.getByText('1 active now')).toBeTruthy();
     expect(screen.getByText('2 events total')).toBeTruthy();
+    expect(screen.getByText('Used 3 times')).toBeTruthy();
+  });
+
+  it('singularizes the usage label when a workflow has only been used once', () => {
+    render(<WorkflowCohortGraph graphs={[makeGraph({ usageCount: 1 })]} />);
+    expect(screen.getByText('Used 1 time')).toBeTruthy();
   });
 
   it('renders one panel per distinct workflowId', () => {

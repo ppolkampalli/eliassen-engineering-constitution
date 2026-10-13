@@ -78,11 +78,13 @@ export function aggregateWorkflowGraph(events: BoardEvent[], workItems: Map<stri
   const workflowIds: string[] = [];
   const chains = new Map<string, string>();
   const stageEventCounts = new Map<string, Map<string, number>>();
+  const usageCounts = new Map<string, number>();
 
   for (const event of events) {
     if (!workflowIds.includes(event.workflowId)) workflowIds.push(event.workflowId);
-    if (event.eventType === 'workflowSelected' && event.chain && !chains.has(event.workflowId)) {
-      chains.set(event.workflowId, event.chain);
+    if (event.eventType === 'workflowSelected') {
+      usageCounts.set(event.workflowId, (usageCounts.get(event.workflowId) ?? 0) + 1);
+      if (event.chain && !chains.has(event.workflowId)) chains.set(event.workflowId, event.chain);
     }
     if (event.eventType === 'stageEvent') {
       const counts = stageEventCounts.get(event.workflowId) ?? new Map<string, number>();
@@ -104,6 +106,7 @@ export function aggregateWorkflowGraph(events: BoardEvent[], workItems: Map<stri
     stages: parseChainStages(chains.get(workflowId) ?? ''),
     stageEventCounts: Object.fromEntries(stageEventCounts.get(workflowId) ?? []),
     stageActiveCounts: Object.fromEntries(activeCounts.get(workflowId) ?? []),
+    usageCount: usageCounts.get(workflowId) ?? 0,
   }));
 }
 

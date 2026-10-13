@@ -132,15 +132,18 @@ describe('aggregateWorkflowGraph', () => {
     expect(bug?.stageEventCounts).toEqual({ 'reproduce-and-fix': 2, verify: 2 });
     // JIRA-3411 finished (workflowCompleted) — a completed item sits at no stage.
     expect(bug?.stageActiveCounts).toEqual({});
+    expect(bug?.usageCount).toBe(1);
 
     const feature = graphs.find((graph) => graph.workflowId === 'WF-FEATURE');
     expect(feature?.stageEventCounts).toEqual({ requirements: 1, 'test-definition': 1, implement: 1, 'code-review': 1 });
     // JIRA-3500's latest non-deviation event is the blocked code-review stage.
     expect(feature?.stageActiveCounts).toEqual({ 'code-review': 1 });
+    expect(feature?.usageCount).toBe(1);
 
     const refactor = graphs.find((graph) => graph.workflowId === 'WF-REFACTOR');
     expect(refactor?.stageEventCounts).toEqual({ adr: 1, baseline: 1, refactor: 1 });
     expect(refactor?.stageActiveCounts).toEqual({ refactor: 1 });
+    expect(refactor?.usageCount).toBe(1);
   });
 
   it('returns an empty-stages graph for a workflowId whose workflowSelected event has no chain', () => {
@@ -153,11 +156,11 @@ describe('aggregateWorkflowGraph', () => {
     };
     const workItems = deriveWorkItems([noChain]);
     expect(aggregateWorkflowGraph([noChain], workItems)).toEqual([
-      { workflowId: 'WF-NO-CHAIN', stages: [], stageEventCounts: {}, stageActiveCounts: {} },
+      { workflowId: 'WF-NO-CHAIN', stages: [], stageEventCounts: {}, stageActiveCounts: {}, usageCount: 1 },
     ]);
   });
 
-  it('keeps the first-seen chain when a workflowId has more than one workflowSelected event', () => {
+  it('counts every workflowSelected event toward usageCount, even across different work items', () => {
     const first: WorkflowSelectedEvent = {
       schemaVersion: '1.0',
       timestamp: '2026-10-12T00:00:00Z',
@@ -174,11 +177,31 @@ describe('aggregateWorkflowGraph', () => {
     };
     const workItems = deriveWorkItems([first, second]);
     const [graph] = aggregateWorkflowGraph([first, second], workItems);
+    // Keeps the first-seen chain for the stage graph...
     expect(graph?.stages.map((stage) => stage.stageId)).toEqual(['design']);
+    // ...but still counts both selections toward usage.
+    expect(graph?.usageCount).toBe(2);
   });
 
   it('returns an empty list for an empty event log', () => {
     expect(aggregateWorkflowGraph([], new Map())).toEqual([]);
+  });
+
+  it('reports usageCount 0 for a workflowId seen only via stageEvents, with no workflowSelected on record', () => {
+    const stageOnly: StageEvent = {
+      schemaVersion: '1.0',
+      timestamp: '2026-10-12T00:00:00Z',
+      eventType: 'stageEvent',
+      workItem: 'JIRA-1',
+      workflowId: 'WF-NO-SELECTION',
+      stageId: 'verify',
+      persona: 'persona-quality',
+      status: 'entered',
+      humanCheckpoint: 'none',
+    };
+    const workItems = deriveWorkItems([stageOnly]);
+    const [graph] = aggregateWorkflowGraph([stageOnly], workItems);
+    expect(graph?.usageCount).toBe(0);
   });
 });
 
@@ -221,6 +244,7 @@ describe('buildFlowElements', () => {
       stages: [{ persona: 'quality', stageId: 'verify', hard: true, conditional: false, humanRequired: false }],
       stageEventCounts: {},
       stageActiveCounts: {},
+      usageCount: 1,
     });
     expect(nodes).toHaveLength(1);
     expect(edges).toEqual([]);
@@ -232,6 +256,7 @@ describe('buildFlowElements', () => {
       stages: [],
       stageEventCounts: {},
       stageActiveCounts: {},
+      usageCount: 0,
     });
     expect(nodes).toEqual([]);
     expect(edges).toEqual([]);

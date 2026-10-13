@@ -85,4 +85,6 @@ export interface WorkflowGraph {
   stages: ChainStage[];
   stageEventCounts: Record<string, number>;
   stageActiveCounts: Record<string, number>;
+  /** How many times this workflow was selected for a work item (count of `workflowSelected` events). */
+  usageCount: number;
 }
