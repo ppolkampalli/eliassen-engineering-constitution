@@ -22,7 +22,7 @@
       "node": true
     }
   },
-  "ignorePatterns": ["dist", "coverage", "vite.config.ts", "jest.config.js", "test/style-mock.js"],
+  "ignorePatterns": ["dist", "coverage", "vite.config.ts", "jest.config.js", "test/style-mock.js", "test/resize-observer-mock.js"],
   "rules": {
     "@typescript-eslint/naming-convention": [
       "error",

@@ -30,6 +30,11 @@ function laneOf(workItem: string): string | null {
 }
 
 describe('App against real fixtures', () => {
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 });
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 280 });
+  });
+
   beforeEach(() => {
     global.fetch = jest.fn();
   });
@@ -89,5 +94,18 @@ describe('App against real fixtures', () => {
     mockFetchOnce({ events: [], skippedCount: 0, mtimeMs: null }, false);
     render(<App />);
     await waitFor(() => expect(screen.getByText(/request failed: 500/)).toBeTruthy());
+  });
+
+  it('switches to the Constitution Cohort tab and hides the Kanban board', async () => {
+    mockFetchOnce(loadFixtureResponse('events.sample.jsonl'));
+    render(<App />);
+    await waitFor(() => expect(screen.getByText('JIRA-3411')).toBeTruthy());
+
+    fireEvent.click(screen.getByRole('tab', { name: 'Constitution Cohort' }));
+    expect(screen.queryByText('JIRA-3411')).toBeNull();
+    expect(screen.getByRole('group', { name: 'Cohort type' })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('tab', { name: 'Kanban Board' }));
+    expect(screen.getByText('JIRA-3411')).toBeTruthy();
   });
 });

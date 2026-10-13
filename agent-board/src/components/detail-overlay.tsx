@@ -1,3 +1,4 @@
+import { IconButton } from '@mui/material';
 import { useEffect } from 'react';
 
 import { TimelineRow } from './timeline-row';
@@ -25,9 +26,9 @@ export function DetailOverlay({ item, onClose }: DetailOverlayProps): JSX.Elemen
       }}
     >
       <div className="detail-panel">
-        <button type="button" className="detail-close" aria-label="Close detail view" onClick={onClose}>
+        <IconButton aria-label="Close detail view" onClick={onClose} sx={{ position: 'absolute', top: 12, right: 12 }}>
           &times;
-        </button>
+        </IconButton>
         <h2>
           {item.workItem} <span className="detail-workflow">{item.workflowId}</span>
         </h2>

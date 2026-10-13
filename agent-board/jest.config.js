@@ -11,12 +11,14 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': '<rootDir>/test/style-mock.js',
   },
+  setupFiles: ['<rootDir>/test/resize-observer-mock.js'],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     'server/**/*.ts',
     '!src/**/*.spec.{ts,tsx}',
     '!server/**/*.spec.ts',
     '!src/main.tsx',
+    '!src/theme.ts',
   ],
   coverageThreshold: {
     global: { lines: 80, branches: 80, functions: 80, statements: 80 },

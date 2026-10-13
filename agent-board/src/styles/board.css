@@ -193,19 +193,6 @@ body {
   position: relative;
 }
 
-.detail-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: none;
-  color: var(--color-muted);
-  font-size: 22px;
-  line-height: 1;
-  padding: 4px 8px;
-  cursor: pointer;
-}
-
 .detail-chain {
   color: var(--color-muted);
   font-size: 13px;

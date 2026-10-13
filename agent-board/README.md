@@ -8,8 +8,11 @@ waiting on me, and what has it actually found or done?*
 
 A Node server (not the browser) reads the local JSONL event log and exposes
 it over one HTTP endpoint, `GET /api/events`; the React app polls that
-endpoint and renders three Kanban lanes — **In Progress**, **Blocked**,
-**Done**.
+endpoint and renders two tabs: the **Kanban Board** (three lanes — **In
+Progress**, **Blocked**, **Done**) and **Constitution Cohort**, a rollup
+view for "how is work distributed across workflows, laws, and personas"
+rather than "what is this one work item doing right now." See
+"Constitution Cohort tab" below.
 
 This is **not** the centrally-hosted, multi-team visibility design in
 `docs/proposals/agentic-visibility/` (still PROPOSED, tied to the
@@ -167,6 +170,31 @@ citation count) without moving it to a different lane — even when it's the
 chronologically last event for that work item (see
 `fixtures/events.deviation-latest.jsonl`).
 
+## Constitution Cohort tab
+
+A second tab, next to the Kanban board, answering a different question —
+not "what is each work item doing" but "how is work distributed across the
+things the Constitution cares about." A selector switches between three
+views, all derived client-side from the same `GET /api/events` response
+(`src/lib/cohort-model.ts`, 100% test coverage, no new API calls):
+
+- **Workflow** — one small node-graph (via [`@xyflow/react`](https://reactflow.dev))
+  per distinct `workflowId`, built straight from the chain each
+  `workflowSelected` event announces (`persona(stageId*) -> ...`). Each stage
+  node shows its hard/conditional/human-checkpoint badges and two counts:
+  how many work items are **currently** sitting there, and how many
+  `stageEvent`s have **ever** touched it.
+- **Laws** — a horizontal bar chart (via [`recharts`](https://recharts.org))
+  of how many times each `LAW-X.Y` id has been cited across every event.
+- **Personas** — the same bar chart shape, counting `stageEvent`s per
+  `persona`.
+
+This is a read-only lens on data the Kanban board already has — no new
+server route, no new write-side contract. It's a deliberately different
+tool from the separate, still-PROPOSED `docs/proposals/agentic-visibility/`
+multi-team dashboard: this cohort view rolls up *one* project's log
+client-side; that design aggregates *many* teams' logs behind a server.
+
 ## Directory layout
 
 ```
@@ -178,8 +206,10 @@ agent-board/
   src/
     main.tsx, app.tsx
     lib/board-model.ts        # pure parsing/lane-derivation logic (100% test coverage)
+    lib/cohort-model.ts       # pure law/persona/workflow-graph aggregation (100% test coverage)
     hooks/                    # polling + elapsed-time-ticker hooks
-    components/                # Board, Lane, Card, DetailOverlay, TimelineRow, …
+    components/                # Board, Lane, Card, DetailOverlay, TimelineRow,
+                                # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph, …
     styles/board.css
   server/
     create-events-handler.ts  # the GET /api/events request handler (100% test coverage)

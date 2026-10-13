@@ -1,10 +1,13 @@
 # Agent Board — Watching a Workflow Run Locally
 
 A small Vite + React app with its own tiny Node API that renders governed
-workflow activity (WF-FEATURE, WF-BUG, …) as a three-lane Kanban board: **In
-Progress**, **Blocked**, **Done**. A Node server reads a local JSON-lines
-log off disk and exposes it over one HTTP endpoint; the browser just polls
-that endpoint — no file picker, no browser-specific file-access quirks.
+workflow activity (WF-FEATURE, WF-BUG, …) in two tabs: a three-lane Kanban
+board (**In Progress**, **Blocked**, **Done**), and a **Constitution
+Cohort** tab — node-graph and bar-chart rollups of the same log by
+workflow, law, and persona, for a manager who wants a distribution view
+rather than a per-item one. A Node server reads a local JSON-lines log off
+disk and exposes it over one HTTP endpoint; the browser just polls that
+endpoint — no file picker, no browser-specific file-access quirks.
 
 ## What it is
 
@@ -97,6 +100,15 @@ right now."
 A hard-stage badge marks stages that can't be skipped or softened
 (LAW-6.2); a citation count on each card tells you how many `LAW-X.Y`
 references the work has touched so far.
+
+## Reading the Constitution Cohort tab
+
+Click the **Constitution Cohort** tab and pick **Workflow**, **Laws**, or
+**Personas**. Workflow shows each distinct workflow's stage chain as a small
+graph, with per-stage counts of how many items are there now vs. have ever
+passed through; Laws and Personas show a bar chart of citation/activity
+counts. See `agent-board/README.md`'s "Constitution Cohort tab" section for
+the full breakdown of what each view computes.
 
 ## Troubleshooting
 

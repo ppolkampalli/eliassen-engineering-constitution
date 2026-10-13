@@ -66,3 +66,23 @@ export interface EventsResponse {
   skippedCount: number;
   mtimeMs: number | null;
 }
+
+export interface CohortBucket {
+  key: string;
+  count: number;
+}
+
+export interface ChainStage {
+  persona: string;
+  stageId: string;
+  hard: boolean;
+  conditional: boolean;
+  humanRequired: boolean;
+}
+
+export interface WorkflowGraph {
+  workflowId: string;
+  stages: ChainStage[];
+  stageEventCounts: Record<string, number>;
+  stageActiveCounts: Record<string, number>;
+}
