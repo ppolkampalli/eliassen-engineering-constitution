@@ -1,8 +1,10 @@
 import { IconButton } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { TimelineRow } from './timeline-row';
+import { ItemFlowChart } from './item-flow-chart';
 import type { WorkItem } from '../lib/types';
+
+const MAXIMIZED_CANVAS_HEIGHT_PX = 480;
 
 interface DetailOverlayProps {
   item: WorkItem;
@@ -10,6 +12,8 @@ interface DetailOverlayProps {
 }
 
 export function DetailOverlay({ item, onClose }: DetailOverlayProps): JSX.Element {
+  const [isMaximized, setIsMaximized] = useState(false);
+
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent): void {
       if (event.key === 'Escape') onClose();
@@ -20,12 +24,19 @@ export function DetailOverlay({ item, onClose }: DetailOverlayProps): JSX.Elemen
 
   return (
     <div
-      className="detail-overlay"
+      className={`detail-overlay${isMaximized ? ' detail-overlay-maximized' : ''}`}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="detail-panel">
+      <div className={`detail-panel${isMaximized ? ' detail-panel-maximized' : ''}`}>
+        <IconButton
+          aria-label={isMaximized ? 'Restore detail view' : 'Maximize detail view'}
+          onClick={() => setIsMaximized((previous) => !previous)}
+          sx={{ position: 'absolute', top: 12, right: 52 }}
+        >
+          {isMaximized ? '⤡' : '⤢'}
+        </IconButton>
         <IconButton aria-label="Close detail view" onClick={onClose} sx={{ position: 'absolute', top: 12, right: 12 }}>
           &times;
         </IconButton>
@@ -37,11 +48,7 @@ export function DetailOverlay({ item, onClose }: DetailOverlayProps): JSX.Elemen
             <strong>Chain:</strong> {item.chain}
           </p>
         )}
-        <ol className="timeline">
-          {item.events.map((event, index) => (
-            <TimelineRow event={event} key={`${event.timestamp}-${index}`} />
-          ))}
-        </ol>
+        <ItemFlowChart item={item} canvasHeight={isMaximized ? MAXIMIZED_CANVAS_HEIGHT_PX : undefined} />
       </div>
     </div>
   );

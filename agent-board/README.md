@@ -128,7 +128,8 @@ One JSON object per line (JSONL). Every line has this envelope:
 | `eventType` | string | yes | One of `workflowSelected`, `stageEvent`, `deviation`, `workflowCompleted`. |
 | `workItem` | string | yes | The ticket/item id — the Kanban card's grouping key, e.g. `"JIRA-3411"`. |
 | `workflowId` | string | yes | e.g. `"WF-FEATURE"`, `"WF-BUG"`. |
-| `note` | string | no | Free-text "what I'm doing/finding right now" — the thinking surfaced on the card. |
+| `note` | string | no | Free-text "what I'm doing/finding right now" — the thinking surfaced on the card. Kept short. |
+| `detail` | string | no | The full decision content when a stage produced a structured artifact — e.g. the actual Acceptance Criteria text, an ADR's full rationale, a test list, a security finding. May be multi-line. Shown only in the per-item flowchart's detail panel, never in compact views. |
 | `lawCitations` | string[] | no | `LAW-X.Y` ids relevant to this event. |
 
 Additional fields by `eventType`:
@@ -170,6 +171,27 @@ A `deviation` event annotates the current card (updates its note and
 citation count) without moving it to a different lane — even when it's the
 chronologically last event for that work item (see
 `fixtures/events.deviation-latest.jsonl`).
+
+## Kanban card detail view
+
+Clicking a card opens a process flowchart (via
+[`@xyflow/react`](https://reactflow.dev), `src/lib/item-flow-model.ts` +
+`src/components/item-flow-chart.tsx`, 100%/≥70% test coverage) of that one
+work item's **actual** event history, left to right in the order it
+happened — not the workflow's full declared chain, just what this item
+really did. Repeated `stageEvent`s at the same stage (entered → blocked →
+complete) collapse into one node showing its latest status; a stage
+skipped entirely via an applied `deviation` (no `stageEvent` of its own)
+gets a distinct dashed "skipped" node, since an override is itself a
+decision worth seeing, not something to hide.
+
+Clicking a node opens a detail panel below the chart with everything
+recorded for that step: the persona, status, hard/human-checkpoint badges,
+the short `note`, the full `detail` (the actual Acceptance Criteria, ADR
+rationale, test list, etc. — see "Event schema" above), `LAW-X.Y` citations,
+any attached deviation's reason/approver, and every underlying event's
+timestamp. The panel defaults to the item's current/latest step on open so
+it's never empty.
 
 ## Constitution Cohort tab
 
@@ -254,9 +276,10 @@ agent-board/
     main.tsx, app.tsx
     lib/board-model.ts        # pure parsing/lane-derivation logic (100% test coverage)
     lib/cohort-model.ts       # pure law/persona/workflow-graph aggregation (100% test coverage)
+    lib/item-flow-model.ts    # pure per-item event-history-to-flowchart logic (100% test coverage)
     lib/token-cost-model.ts   # pure usage-parsing/attribution/pricing/aggregation (100% test coverage)
     hooks/                    # polling + elapsed-time-ticker hooks; on-demand token-usage fetch
-    components/                # Board, Lane, Card, DetailOverlay, TimelineRow,
+    components/                # Board, Lane, Card, DetailOverlay, ItemFlowChart, ItemStageNode,
                                 # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph,
                                 # TokenCostDashboard, TokenCostTimeSeries, TokenCostStatTile, …
     styles/board.css

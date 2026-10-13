@@ -14,6 +14,8 @@ interface EventEnvelope {
   workItem: string;
   workflowId: string;
   note?: string;
+  /** Full decision content — ACs, ADR rationale, a test list, a security finding, etc. May be multi-line. */
+  detail?: string;
   lawCitations?: string[];
 }
 

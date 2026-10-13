@@ -193,6 +193,17 @@ body {
   position: relative;
 }
 
+.detail-overlay-maximized {
+  padding: 16px;
+}
+
+.detail-panel-maximized {
+  max-width: none;
+  width: 95vw;
+  height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
 .detail-chain {
   color: var(--color-muted);
   font-size: 13px;
@@ -202,61 +213,6 @@ body {
   color: var(--color-muted);
   font-size: 14px;
   font-weight: normal;
-}
-
-.timeline {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  border-left: 2px solid var(--color-border);
-}
-
-.timeline-row {
-  padding: 0 0 16px 16px;
-  margin-left: -1px;
-  border-left: 2px solid var(--color-border);
-}
-
-.timeline-row:last-child {
-  border-left: 2px solid transparent;
-}
-
-.timeline-time {
-  font-size: 11px;
-  color: var(--color-muted);
-}
-
-.timeline-stage,
-.timeline-deviation,
-.timeline-selected,
-.timeline-completed {
-  margin-top: 2px;
-  font-size: 14px;
-}
-
-.timeline-deviation {
-  color: var(--color-blocked);
-}
-
-.timeline-note {
-  margin-top: 4px;
-  font-size: 13px;
-  color: var(--color-text);
-}
-
-.pills {
-  display: inline-flex;
-  gap: 4px;
-  margin-top: 6px;
-  flex-wrap: wrap;
-}
-
-.pill {
-  background: #e3fcef;
-  color: var(--color-complete);
-  border-radius: 3px;
-  font-size: 11px;
-  padding: 1px 6px;
 }
 
 code {

@@ -132,6 +132,15 @@ run summary in §5 (`workflowCompleted`). Full field reference and the exact
 JSON shape for each `eventType` are in `agent-board/README.md` — don't
 duplicate the schema here.
 
+When a stage's output is itself a structured artifact worth full human
+review — acceptance criteria, an ADR's rationale, a test list, a security
+finding — include the complete content in the event's `detail` field, not
+just a one-line summary in `note`. `note` stays short ("what I'm doing/
+finding right now"); `detail` is the full, as-detailed-as-possible record
+of the decision, surfaced in the board's per-item process view for human
+transparency. Best-effort like the rest of this section: most stages don't
+need it, and a stage producing nothing structured just omits it.
+
 This write is always best-effort and never blocking: if it fails for any
 reason (missing directory, permissions, anything else), proceed with the
 workflow exactly as if `agent-board/` were not installed. Mirrors LAW-4.6's

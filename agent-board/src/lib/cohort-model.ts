@@ -3,7 +3,7 @@ import { MarkerType, type Edge, type Node } from '@xyflow/react';
 import type { BoardEvent, ChainStage, CohortBucket, WorkItem, WorkflowGraph } from './types';
 
 const CHAIN_SEGMENT_PATTERN = /^([\w-]+)\(([\w-]+)([*^]*)(\+human)?\)$/;
-const STAGE_NODE_GAP_PX = 260;
+export const STAGE_NODE_GAP_PX = 260;
 
 export interface WorkflowStageNodeData extends ChainStage {
   eventCount: number;

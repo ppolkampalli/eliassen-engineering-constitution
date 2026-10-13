@@ -94,11 +94,18 @@ one of the same three lanes:
   you (LAW-6.1, LAW-7.1 — agents never self-approve through these).
 - **Done** — the workflow emitted its end-of-run summary.
 
-Click a card to see the full timeline: every stage it passed through, the
-persona and status at each step, any recorded deviations with their reason
-and who approved them, and the free-text notes the agent left along the way
-— the closest thing this tool has to "what is the agent actually thinking
-right now."
+Click a card to see a process flowchart of every stage it actually passed
+through, in order — including a distinct dashed node for a stage skipped
+entirely via an applied deviation. Click a step to see its full detail
+below the chart: persona, status, hard/human-checkpoint badges, any
+recorded deviation's reason and who approved it, the short status note,
+and — when the stage produced one — the **full decision content**: the
+actual Acceptance Criteria text, an ADR's full rationale, a test list, a
+security finding, not just a one-line summary. That full-content field
+(`detail` in the event schema) is the closest thing this tool has to "what
+did the agent actually decide, in full, right now" — see
+`agent-board/README.md`'s "Kanban card detail view" section for the
+complete breakdown.
 
 A hard-stage badge marks stages that can't be skipped or softened
 (LAW-6.2); a citation count on each card tells you how many `LAW-X.Y`
