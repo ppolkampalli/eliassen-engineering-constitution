@@ -1,0 +1,4 @@
+{"type":"mode","mode":"normal","sessionId":"s1"}
+{"type":"permission-mode","permissionMode":"auto","sessionId":"s1"}
+{"cwd":"/fake/project-a","timestamp":"2026-10-13T10:00:00.000Z","sessionId":"s1","message":{"role":"user","content":"hi"}}
+{"cwd":"/fake/project-a","timestamp":"2026-10-13T10:00:05.000Z","sessionId":"s1","message":{"role":"assistant","model":"claude-sonnet-5","usage":{"input_tokens":10,"output_tokens":5,"cache_read_input_tokens":0,"cache_creation_input_tokens":0}}}

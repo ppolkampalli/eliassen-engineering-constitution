@@ -1,13 +1,16 @@
 # Agent Board — Watching a Workflow Run Locally
 
 A small Vite + React app with its own tiny Node API that renders governed
-workflow activity (WF-FEATURE, WF-BUG, …) in two tabs: a three-lane Kanban
-board (**In Progress**, **Blocked**, **Done**), and a **Constitution
+workflow activity (WF-FEATURE, WF-BUG, …) in three tabs: a three-lane
+Kanban board (**In Progress**, **Blocked**, **Done**), a **Constitution
 Cohort** tab — node-graph and bar-chart rollups of the same log by
 workflow, law, and persona, for a manager who wants a distribution view
-rather than a per-item one. A Node server reads a local JSON-lines log off
-disk and exposes it over one HTTP endpoint; the browser just polls that
-endpoint — no file picker, no browser-specific file-access quirks.
+rather than a per-item one — and a **Token & Cost** tab, which joins that
+same log against Claude Code's own session transcripts to show
+approximately what each work item/stage cost in tokens and dollars
+(LAW-9.3). A Node server reads a local JSON-lines log off disk and exposes
+it over one HTTP endpoint; the browser just polls that endpoint — no file
+picker, no browser-specific file-access quirks.
 
 ## What it is
 
@@ -110,6 +113,28 @@ passed through; Laws and Personas show a bar chart of citation/activity
 counts. See `agent-board/README.md`'s "Constitution Cohort tab" section for
 the full breakdown of what each view computes.
 
+## Reading the Token & Cost tab
+
+Click the **Token & Cost** tab to see total spend, a cost-per-hour time
+series, and breakdowns by work item, workflow, stage, persona, and model.
+It works by matching this project's Claude Code session transcripts
+(`~/.claude/projects/.../*.jsonl`) against the board's own event log,
+attributing each transcript turn to whichever work item/stage was open at
+that turn's timestamp — an approximate, time-window join, not a precise
+instrumentation link, so a turn outside any open window shows up as
+**unattributed** rather than being guessed. Dollar totals come from the
+user-editable `agent-board/model-pricing.json` rate table; an unrecognized
+model string is reported as **unpriced** rather than silently costed at
+$0 — check that file's `_comment` field for its pricing provenance/date
+before trusting a total for a budget decision. Only numeric usage fields
+(token counts, model, timestamp) are ever read out of a transcript — never
+raw message content (LAW-7.2). Unlike the Kanban/Cohort tabs, this one
+isn't polled automatically; it fetches once on open and on **Refresh**,
+since rescanning transcript files on every tick would be wasteful. See
+`agent-board/README.md`'s "Token & Cost tab" section for the full design
+and its known cwd gotcha (auto-corrected by default, but overridable via
+`AGENT_BOARD_PROJECT_CWD` for non-standard layouts).
+
 ## Troubleshooting
 
 - **Board shows "No events yet" and never updates.** Either no workflow has
@@ -133,6 +158,11 @@ the full breakdown of what each view computes.
   `AGENT_BOARD_LOG=./fixtures/events.sample.jsonl npm run dev` (run from
   inside `agent-board/`) — shows a fully worked example across all three
   lanes.
+- **Want to see the Token & Cost tab with real-looking numbers.** There's a
+  larger demo dataset (7 work items, every workflow type, every persona,
+  multiple models) with matching fake transcripts — see
+  `agent-board/README.md`'s "Demo dataset" section for the one-line command
+  to point `npm run preview` at it.
 
 ## What this is not
 

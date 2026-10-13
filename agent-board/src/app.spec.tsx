@@ -5,6 +5,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { App } from './app';
 import { parseLog } from './lib/board-model';
+import type { CostReport } from './lib/token-cost-model';
 import type { EventsResponse } from './lib/types';
 
 const FIXTURES_DIR = join(__dirname, '../fixtures');
@@ -21,6 +22,10 @@ function mockFetchOnce(payload: EventsResponse, ok = true): void {
     status: ok ? 200 : 500,
     json: () => Promise.resolve(payload),
   });
+}
+
+function mockTokenUsageFetchOnce(report: CostReport): void {
+  (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true, status: 200, json: () => Promise.resolve(report) });
 }
 
 function laneOf(workItem: string): string | null {
@@ -107,5 +112,26 @@ describe('App against real fixtures', () => {
 
     fireEvent.click(screen.getByRole('tab', { name: 'Kanban Board' }));
     expect(screen.getByText('JIRA-3411')).toBeTruthy();
+  });
+
+  it('switches to the Token & Cost tab and loads its own report', async () => {
+    mockFetchOnce(loadFixtureResponse('events.sample.jsonl'));
+    render(<App />);
+    await waitFor(() => expect(screen.getByText('JIRA-3411')).toBeTruthy());
+
+    mockTokenUsageFetchOnce({
+      totalCostUsd: 1.5,
+      unpricedRecordCount: 0,
+      unattributedRecordCount: 0,
+      byWorkItem: [],
+      byWorkflow: [],
+      byStage: [],
+      byPersona: [],
+      byModel: [],
+      timeSeries: [],
+    });
+    fireEvent.click(screen.getByRole('tab', { name: 'Token & Cost' }));
+    expect(screen.queryByText('JIRA-3411')).toBeNull();
+    await waitFor(() => expect(screen.getByText('$1.50')).toBeTruthy());
   });
 });

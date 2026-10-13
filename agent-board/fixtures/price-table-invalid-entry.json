@@ -1,0 +1,6 @@
+{
+  "_comment": "one valid entry, one entry missing a field, one entry that isn't an object",
+  "claude-sonnet-5": { "input": 2, "cacheWrite5m": 2.5, "cacheWrite1h": 4, "cacheRead": 0.2, "output": 10 },
+  "claude-incomplete": { "input": 1, "output": 5 },
+  "claude-not-an-object": "nope"
+}

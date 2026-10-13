@@ -6,12 +6,14 @@ import { DetailOverlay } from './components/detail-overlay';
 import { EmptyState } from './components/empty-state';
 import { StatusBar } from './components/status-bar';
 import { Tabs } from './components/tabs';
+import { TokenCostDashboard } from './components/token-cost-dashboard';
 import { useBoardEvents } from './hooks/use-board-events';
 import { deriveWorkItems, statusMessage } from './lib/board-model';
 
 const TAB_DEFS = [
   { id: 'kanban', label: 'Kanban Board' },
   { id: 'cohort', label: 'Constitution Cohort' },
+  { id: 'tokenCost', label: 'Token & Cost' },
 ];
 
 export function App(): JSX.Element {
@@ -29,13 +31,10 @@ export function App(): JSX.Element {
         <Tabs tabs={TAB_DEFS} active={activeTab} onChange={setActiveTab} />
       </header>
       <main className="board-root">
-        {activeTab === 'cohort' ? (
-          <ConstitutionCohort events={events} workItems={workItems} />
-        ) : workItems.size === 0 ? (
-          <EmptyState />
-        ) : (
-          <Board workItems={workItems} onSelect={setSelectedWorkItem} />
-        )}
+        {activeTab === 'cohort' && <ConstitutionCohort events={events} workItems={workItems} />}
+        {activeTab === 'tokenCost' && <TokenCostDashboard />}
+        {activeTab === 'kanban' &&
+          (workItems.size === 0 ? <EmptyState /> : <Board workItems={workItems} onSelect={setSelectedWorkItem} />)}
       </main>
       {activeTab === 'kanban' && selectedItem && (
         <DetailOverlay item={selectedItem} onClose={() => setSelectedWorkItem(null)} />

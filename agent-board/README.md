@@ -8,11 +8,12 @@ waiting on me, and what has it actually found or done?*
 
 A Node server (not the browser) reads the local JSONL event log and exposes
 it over one HTTP endpoint, `GET /api/events`; the React app polls that
-endpoint and renders two tabs: the **Kanban Board** (three lanes — **In
-Progress**, **Blocked**, **Done**) and **Constitution Cohort**, a rollup
-view for "how is work distributed across workflows, laws, and personas"
-rather than "what is this one work item doing right now." See
-"Constitution Cohort tab" below.
+endpoint and renders three tabs: the **Kanban Board** (three lanes — **In
+Progress**, **Blocked**, **Done**), **Constitution Cohort**, a rollup view
+for "how is work distributed across workflows, laws, and personas" rather
+than "what is this one work item doing right now" (see "Constitution
+Cohort tab" below), and **Token & Cost**, a Grafana-style view of what this
+work actually costs in tokens and dollars (see "Token & Cost tab" below).
 
 This is **not** the centrally-hosted, multi-team visibility design in
 `docs/proposals/agentic-visibility/` (still PROPOSED, tied to the
@@ -195,25 +196,78 @@ tool from the separate, still-PROPOSED `docs/proposals/agentic-visibility/`
 multi-team dashboard: this cohort view rolls up *one* project's log
 client-side; that design aggregates *many* teams' logs behind a server.
 
+## Token & Cost tab
+
+A third tab, answering "how much is this agentic work actually costing in
+tokens and dollars, and where." Built as a read-only correlation layer over
+two things already on disk — the board's own event log (for *when* each
+work item/stage was open) and Claude Code's own session transcripts (for
+*what tokens were spent when*) — with **no changes to the orchestrator's
+write contract**.
+
+- **What it reads**: every `*.jsonl` file under `~/.claude/projects/` whose
+  recorded `cwd` matches this project. Files are matched by content, not by
+  guessing Claude Code's project-directory name encoding — a real project
+  directory was found encoding a space as `-20` (its hex code), proving
+  that scheme isn't a simple `/`-to-`-` replace, so content-matching is the
+  robust choice (`server/transcript-source.ts`).
+- **What it extracts**: only the numeric `usage` fields (input/output/
+  cache-read/cache-write tokens), the `model` string, and the `timestamp`
+  from each assistant turn — raw transcript message content is never read
+  for any other purpose, and never appears in the `GET /api/token-usage`
+  response (LAW-7.2).
+- **Attribution is approximate, by design**: a transcript turn is
+  attributed to whichever work item/stage was open (per the board's own
+  event timestamps) at that turn's time. A turn outside any open window, or
+  inside more than one (ambiguous), is reported as `unattributed` rather
+  than guessed — the dashboard shows this count explicitly, it's not hidden.
+- **Dollar amounts depend on `model-pricing.json`** (a user-editable file
+  at the project root, seeded with Anthropic's public list price as of the
+  date in its `_comment` field). **Verify it against your actual contract
+  or negotiated rates before trusting a total for a budget decision.** A
+  `model` string not found in the table is reported as "unpriced," never
+  silently priced at $0.
+- **Not polled** like the Kanban board — scanning potentially-large
+  transcript files every 1.5s would be wasteful. The tab fetches once on
+  open and has a manual Refresh button.
+- **The cwd gotcha has a built-in fix here**: Claude Code records a
+  session's `cwd` as the project root, but the documented way to run this
+  tool is `cd your-project/agent-board && npm run dev` — so
+  `GET /api/token-usage` defaults to matching against the **parent** of
+  `process.cwd()` whenever that directory is literally named `agent-board`
+  (`AGENT_BOARD_PROJECT_CWD` overrides this for any other layout). Unlike
+  the Kanban board's `AGENT_BOARD_LOG` gotcha, this one is corrected
+  automatically rather than just documented.
+
 ## Directory layout
 
 ```
 agent-board/
   package.json, tsconfig.json, vite.config.ts, jest.config.js, .eslintrc.json
   index.html                  # Vite entry shell
+  model-pricing.json           # user-editable $/MTok rate table for the Token & Cost tab
   fixtures/                   # sample JSONL logs, used by tests and for manual testing
+    transcripts/               # fixture ~/.claude/projects/-style directory trees
   test/style-mock.js          # Jest CSS-import stub
+  test/resize-observer-mock.js # ReactFlow/recharts need a ResizeObserver in jsdom
   src/
     main.tsx, app.tsx
     lib/board-model.ts        # pure parsing/lane-derivation logic (100% test coverage)
     lib/cohort-model.ts       # pure law/persona/workflow-graph aggregation (100% test coverage)
-    hooks/                    # polling + elapsed-time-ticker hooks
+    lib/token-cost-model.ts   # pure usage-parsing/attribution/pricing/aggregation (100% test coverage)
+    hooks/                    # polling + elapsed-time-ticker hooks; on-demand token-usage fetch
     components/                # Board, Lane, Card, DetailOverlay, TimelineRow,
-                                # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph, …
+                                # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph,
+                                # TokenCostDashboard, TokenCostTimeSeries, TokenCostStatTile, …
     styles/board.css
   server/
-    create-events-handler.ts  # the GET /api/events request handler (100% test coverage)
-    vite-plugin-board-api.ts  # wires the handler into `vite`/`vite preview`
+    create-events-handler.ts        # the GET /api/events request handler (100% test coverage)
+    vite-plugin-board-api.ts        # wires it into `vite`/`vite preview`
+    transcript-source.ts            # finds & reads this project's Claude Code session transcripts
+    price-table.ts                  # loads and validates model-pricing.json
+    create-token-usage-handler.ts   # the GET /api/token-usage request handler (100% test coverage)
+    vite-plugin-token-usage-api.ts  # wires it into `vite`/`vite preview`
+    http-errors.ts                   # shared ENOENT/error-message helpers for both handlers
 ```
 
 ## Fixtures and tests
@@ -230,12 +284,36 @@ npm run test:coverage   # with coverage (100% on src/lib/ and server/, 90% on sr
 | `fixtures/events.malformed-mixed.jsonl` | Unparseable lines are skipped, not fatal |
 | `fixtures/events.schema-invalid.jsonl` | Valid JSON but missing required fields / unknown `eventType` → skipped |
 | `fixtures/events.deviation-latest.jsonl` | A trailing `deviation` doesn't move the card's lane |
+| `fixtures/events.token-usage.jsonl` | A board log whose timestamps line up with `fixtures/transcripts/project-a/` for attribution tests |
+| `fixtures/transcripts/` | Fixture project directories (real transcripts open with session-metadata lines before any line carries `cwd` — matched here too, not just a happy-path first line) |
+| `fixtures/price-table-*.json` | Malformed JSON, a non-object, and an entry missing a required rate field |
 
 To check against a real log manually:
 
 ```bash
 AGENT_BOARD_LOG=/path/to/events.local.jsonl npm run preview
 curl http://localhost:4173/api/events | jq '{eventCount: (.events|length), skippedCount, mtimeMs}'
+curl http://localhost:4173/api/token-usage | jq '{totalCostUsd, unattributedRecordCount, unpricedRecordCount}'
+```
+
+### Demo dataset (manual exploration, not used by any test)
+
+`fixtures/events.demo.jsonl` + `fixtures/transcripts-demo/crm-project/` is a
+larger, hand-built dataset meant for looking at the UI, not for assertions —
+no spec file references it. It's 7 work items across all 4 workflow types
+(WF-FEATURE, WF-BUG, WF-SECBUG, WF-REFACTOR), all 6 personas, 3 priced
+models plus one deliberately-unrecognized model string (to populate the
+"unpriced" stat), one item that was blocked then approved, one still
+genuinely in progress (so the Kanban board shows all three lanes at once),
+and a handful of usage records timestamped in the gaps between items (to
+populate "unattributed" realistically rather than leaving it at zero).
+Run it with:
+
+```bash
+AGENT_BOARD_LOG=fixtures/events.demo.jsonl \
+AGENT_BOARD_TRANSCRIPTS_ROOT=fixtures/transcripts-demo \
+AGENT_BOARD_PROJECT_CWD=/Users/demo/crm-project \
+npm run preview -- --port 4199
 ```
 
 ## What this is not (scope)
