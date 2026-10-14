@@ -90,3 +90,14 @@ export interface WorkflowGraph {
   /** How many times this workflow was selected for a work item (count of `workflowSelected` events). */
   usageCount: number;
 }
+
+export interface AdrRecord {
+  filename: string;
+  title: string;
+  content: string;
+}
+
+export interface AdrResponse {
+  records: AdrRecord[];
+  mtimeMs: number | null;
+}

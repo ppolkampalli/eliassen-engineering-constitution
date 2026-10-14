@@ -261,6 +261,44 @@ write contract**.
   the Kanban board's `AGENT_BOARD_LOG` gotcha, this one is corrected
   automatically rather than just documented.
 
+## ADR Records tab
+
+A fourth tab, answering "which architecture decisions has this project's
+agentic work actually recorded." A left-nav list of every `.md` file in the
+project's ADR folder, plus a markdown preview pane on the right that always
+defaults to the **first** file in the list (by filename — the
+`NNNN-<kebab-title>.md` zero-padded convention from `templates/adr-template.md`
+sorts correctly as a plain string sort).
+
+- **What it reads**: `GET /api/adr` resolves `AGENT_BOARD_ADR_DIR` from the
+  environment **once, at server start** (default `docs/adr`, same
+  once-at-startup posture as `AGENT_BOARD_LOG` — see "Security" above) and
+  returns every `.md` file's full filename, derived title, and content in one
+  response (`server/adr-source.ts`, `server/create-adr-handler.ts`, both 100%
+  test coverage). Returning all files in one shot — not a per-filename route
+  — means there's no client-controlled filename anywhere in this endpoint
+  (LAW-5.1), mirroring `/api/events` and `/api/token-usage`. A missing
+  directory returns an empty list, not an error.
+- **Title derivation**: the first `# Heading` line in the file's content; if
+  none is found, the filename with `.md` stripped.
+- **Markdown rendering is a hand-rolled parser** (`src/lib/markdown-model.ts`,
+  100% test coverage), not a dependency. `react-markdown`, `marked`, and
+  `markdown-to-jsx` are all ESM-only in their current major versions, which
+  breaks under this project's Jest config (`ts-jest`, no Babel, no
+  `transformIgnorePatterns` override) without extra tooling — and the actual
+  markdown this project's ADRs use is a narrow, bounded subset. The parser
+  supports headings (`#`–`######`), paragraphs, unordered/ordered lists,
+  fenced code blocks, and inline bold/italic/code/links; it renders through
+  real React elements (`src/components/markdown-view.tsx`), never
+  `dangerouslySetInnerHTML`. **Stated gap**: anything outside that subset
+  (tables, images, nested emphasis, blockquotes) renders as literal text, not
+  garbled HTML — visible and honest rather than silently mishandled.
+- **Polls like the Kanban board**, but on a longer 5s default interval
+  (`src/hooks/use-adr-records.ts`, 100% test coverage) — ADR files change far
+  less often than board events, and this endpoint returns full file content
+  on every tick, not a compact event log.
+- Read-only — no editing or writing from the UI.
+
 ## Directory layout
 
 ```
@@ -278,10 +316,12 @@ agent-board/
     lib/cohort-model.ts       # pure law/persona/workflow-graph aggregation (100% test coverage)
     lib/item-flow-model.ts    # pure per-item event-history-to-flowchart logic (100% test coverage)
     lib/token-cost-model.ts   # pure usage-parsing/attribution/pricing/aggregation (100% test coverage)
+    lib/markdown-model.ts     # pure markdown-subset parser for the ADR Records tab (100% test coverage)
     hooks/                    # polling + elapsed-time-ticker hooks; on-demand token-usage fetch
     components/                # Board, Lane, Card, DetailOverlay, ItemFlowChart, ItemStageNode,
                                 # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph,
-                                # TokenCostDashboard, TokenCostTimeSeries, TokenCostStatTile, …
+                                # TokenCostDashboard, TokenCostTimeSeries, TokenCostStatTile,
+                                # AdrRecords, MarkdownView, …
     styles/board.css
   server/
     create-events-handler.ts        # the GET /api/events request handler (100% test coverage)
@@ -290,6 +330,9 @@ agent-board/
     price-table.ts                  # loads and validates model-pricing.json
     create-token-usage-handler.ts   # the GET /api/token-usage request handler (100% test coverage)
     vite-plugin-token-usage-api.ts  # wires it into `vite`/`vite preview`
+    adr-source.ts                    # lists/reads ADR .md files from AGENT_BOARD_ADR_DIR (100% test coverage)
+    create-adr-handler.ts            # the GET /api/adr request handler (100% test coverage)
+    vite-plugin-adr-api.ts           # wires it into `vite`/`vite preview`
     http-errors.ts                   # shared ENOENT/error-message helpers for both handlers
 ```
 
@@ -310,6 +353,7 @@ npm run test:coverage   # with coverage (100% on src/lib/ and server/, 90% on sr
 | `fixtures/events.token-usage.jsonl` | A board log whose timestamps line up with `fixtures/transcripts/project-a/` for attribution tests |
 | `fixtures/transcripts/` | Fixture project directories (real transcripts open with session-metadata lines before any line carries `cwd` — matched here too, not just a happy-path first line) |
 | `fixtures/price-table-*.json` | Malformed JSON, a non-object, and an entry missing a required rate field |
+| `fixtures/adr/` | ADR Records tab: headings/bold/inline-code/links/list in one file, a fenced code block in another, a file with no `# ` heading (title fallback), a non-`.md` file and a directory named `*.md` (both filtered out) |
 
 To check against a real log manually:
 

@@ -1,16 +1,19 @@
 # Agent Board — Watching a Workflow Run Locally
 
 A small Vite + React app with its own tiny Node API that renders governed
-workflow activity (WF-FEATURE, WF-BUG, …) in three tabs: a three-lane
+workflow activity (WF-FEATURE, WF-BUG, …) in four tabs: a three-lane
 Kanban board (**In Progress**, **Blocked**, **Done**), a **Constitution
 Cohort** tab — node-graph and bar-chart rollups of the same log by
 workflow, law, and persona, for a manager who wants a distribution view
-rather than a per-item one — and a **Token & Cost** tab, which joins that
+rather than a per-item one — a **Token & Cost** tab, which joins that
 same log against Claude Code's own session transcripts to show
 approximately what each work item/stage cost in tokens and dollars
-(LAW-9.3). A Node server reads a local JSON-lines log off disk and exposes
-it over one HTTP endpoint; the browser just polls that endpoint — no file
-picker, no browser-specific file-access quirks.
+(LAW-9.3), and an **ADR Records** tab, a left-nav/preview-pane viewer for
+the Architecture Decision Records a workflow's `design` stage writes under
+`docs/adr/` (LAW-4.5), defaulting to the first ADR on open. A Node server
+reads a local JSON-lines log off disk and exposes it over one HTTP
+endpoint; the browser just polls that endpoint — no file picker, no
+browser-specific file-access quirks.
 
 ## What it is
 

@@ -6,7 +6,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { App } from './app';
 import { parseLog } from './lib/board-model';
 import type { CostReport } from './lib/token-cost-model';
-import type { EventsResponse } from './lib/types';
+import type { AdrResponse, EventsResponse } from './lib/types';
 
 const FIXTURES_DIR = join(__dirname, '../fixtures');
 
@@ -26,6 +26,10 @@ function mockFetchOnce(payload: EventsResponse, ok = true): void {
 
 function mockTokenUsageFetchOnce(report: CostReport): void {
   (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true, status: 200, json: () => Promise.resolve(report) });
+}
+
+function mockAdrFetchOnce(response: AdrResponse): void {
+  (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: true, status: 200, json: () => Promise.resolve(response) });
 }
 
 function laneOf(workItem: string): string | null {
@@ -133,5 +137,19 @@ describe('App against real fixtures', () => {
     fireEvent.click(screen.getByRole('tab', { name: 'Token & Cost' }));
     expect(screen.queryByText('JIRA-3411')).toBeNull();
     await waitFor(() => expect(screen.getByText('$1.50')).toBeTruthy());
+  });
+
+  it('switches to the ADR Records tab and loads its own records', async () => {
+    mockFetchOnce(loadFixtureResponse('events.sample.jsonl'));
+    render(<App />);
+    await waitFor(() => expect(screen.getByText('JIRA-3411')).toBeTruthy());
+
+    mockAdrFetchOnce({
+      records: [{ filename: '0001-first.md', title: 'ADR-0001: First', content: '# ADR-0001: First\n\nBody text.' }],
+      mtimeMs: 1,
+    });
+    fireEvent.click(screen.getByRole('tab', { name: 'ADR Records' }));
+    expect(screen.queryByText('JIRA-3411')).toBeNull();
+    await waitFor(() => expect(screen.getByText('Body text.')).toBeTruthy());
   });
 });

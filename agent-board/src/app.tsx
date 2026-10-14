@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import { AdrRecords } from './components/adr-records';
 import { Board } from './components/board';
 import { ConstitutionCohort } from './components/constitution-cohort';
 import { DetailOverlay } from './components/detail-overlay';
@@ -14,6 +15,7 @@ const TAB_DEFS = [
   { id: 'kanban', label: 'Kanban Board' },
   { id: 'cohort', label: 'Constitution Cohort' },
   { id: 'tokenCost', label: 'Token & Cost' },
+  { id: 'adr', label: 'ADR Records' },
 ];
 
 export function App(): JSX.Element {
@@ -33,6 +35,7 @@ export function App(): JSX.Element {
       <main className="board-root">
         {activeTab === 'cohort' && <ConstitutionCohort events={events} workItems={workItems} />}
         {activeTab === 'tokenCost' && <TokenCostDashboard />}
+        {activeTab === 'adr' && <AdrRecords />}
         {activeTab === 'kanban' &&
           (workItems.size === 0 ? <EmptyState /> : <Board workItems={workItems} onSelect={setSelectedWorkItem} />)}
       </main>
