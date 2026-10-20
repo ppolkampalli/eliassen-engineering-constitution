@@ -100,8 +100,11 @@ agent guardrail applies in full: a failing test is fixed or its requirement
 formally changed — never silenced.
 
 ### 5. code-review — Quality *(hard, human checkpoint)*
-Fresh context reviews the diff (LAW-10.5); the two human approvals of LAW-6.1
-always stand regardless of how many agent passes preceded them.
+A fresh subagent reviews the diff (LAW-10.5 — `workflow-orchestrator/
+SKILL.md` §2's fresh-context dispatch, piloted 2026-10-20): it receives only
+the ACs, diff, and test list, never the implementer's reasoning. The two
+human approvals of LAW-6.1 always stand regardless of how many agent passes
+preceded them.
 
 ### 6. security-review — Security
 See Deviation Notes — skippable only when the diff genuinely has no

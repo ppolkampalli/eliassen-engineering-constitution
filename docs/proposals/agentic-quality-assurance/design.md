@@ -86,7 +86,7 @@ about: a reviewer with no access to *why* a decision was made flags a
 deliberate, correct choice as a defect, burning human time re-litigating
 context that was deliberately withheld.
 
-### Option 2A — Structured subagent handoff at hard, human-checkpointed stages only
+### Option 2A — Structured subagent handoff at LAW-10.5-gated stages — **SELECTED AND IMPLEMENTED, 2026-10-20**
 
 `workflow-orchestrator/SKILL.md` already has the right primitive available
 (the same Agent/subagent mechanism used to run this very research) — it's
@@ -106,9 +106,21 @@ The structured payload is what prevents "losing the requirement" — the
 reviewer still has the ACs and test list, just not the writer's self-
 justification — while still achieving real independence from the writer's
 confirmation bias.
-- **Proportionality:** this is not proposed for every stage. WF-BUG's
-  `verify` stage (not `human_checkpoint: required`) keeps today's model; the
-  heavier mechanism applies only where the law already targets it.
+- **Proportionality, corrected during implementation:** this sub-design
+  originally scoped the trigger to stages that are `hard: true` AND
+  `human_checkpoint: required`, which reads as WF-FEATURE's `code-review`
+  only. Implementation found **WF-BUG's `verify` stage already explicitly
+  gates on LAW-10.5** (`gates: [LAW-3.5, LAW-10.5]`) despite
+  `human_checkpoint: none` — the correct, implemented trigger is "this
+  stage's `gates` cites LAW-10.5," not the hard+required combination. See
+  `docs/adr/0004-fresh-context-subagent-dispatch.md` for the full record of
+  this correction.
+
+**Implemented 2026-10-20** in `skills/workflow-orchestrator/SKILL.md` §2
+step 3, applying today to WF-FEATURE's `code-review` and WF-BUG's `verify`
+— both workflow files' narratives updated to name the real mechanism. Any
+future stage whose `gates` cites LAW-10.5 triggers this automatically, with
+no further orchestrator change needed.
 
 ### Option 2B — Second-model-family review for the highest-risk gates only
 
@@ -223,11 +235,14 @@ already has vs. what the research supports adding:
 
 ## Consequences (if, and only if, options are later prioritized)
 
-- **New, if 1A/1B chosen:** a Stryker config + CI job, a commit-tag CI check
-  — both additive, no existing CI job removed or weakened.
-- **New, if 2A chosen:** a scoped change to `workflow-orchestrator/
-  SKILL.md`'s `code-review` handling — a real, separately-reviewable
-  change to the skill that drives every workflow, not a trivial edit.
+- **New (1A implemented):** a Stryker config + mutation-score baseline, no
+  CI job yet (informational only). **If 1B chosen:** a commit-tag CI check,
+  additive, no existing CI job removed or weakened.
+- **New (2A implemented):** a scoped change to `workflow-orchestrator/
+  SKILL.md` §2 and the `code-review`/`verify` stage narratives in
+  `WF-FEATURE.md`/`WF-BUG.md` — a real, separately-reviewable change to the
+  skill that drives every workflow, recorded in
+  `docs/adr/0004-fresh-context-subagent-dispatch.md`.
 - **New, if 3A chosen:** an event-schema extension (additive) + a new
   `agent-board` tab + a `workflow-orchestrator` emission change — the
   largest of the three sub-designs, warranting its own ADR per LAW-4.5 if

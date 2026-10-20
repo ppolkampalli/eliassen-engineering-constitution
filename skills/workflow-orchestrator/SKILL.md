@@ -40,19 +40,37 @@ Stage by stage, in order:
 2. **Assume the stage's persona** — fully: its skill, review lens, citation
    output format, and authority limits. One persona at a time (the
    persona-council pattern: no blended perspectives).
-3. **Perform the action**; produce the stage's output with citations.
-4. **Verify exit criteria and gates.** Each gate is a law — check it against
+3. **Fresh-context dispatch (LAW-10.5).** If this stage's `gates` list
+   includes `LAW-10.5`, this stage's action does not happen in the current
+   session: launch a fresh subagent (a new, context-isolated agent instance)
+   and hand it a structured payload only — the Acceptance Criteria (from the
+   `requirements` stage's recorded exit output), the diff, and the test list
+   (from `test-definition`, where the workflow has one). Never pass the
+   implementing context's reasoning, chat history, or rationale — carrying
+   that forward is the exact bias this law exists to remove. The subagent's
+   findings become this stage's output in step 4; the implementing context
+   incorporates them, it does not re-derive or override them. Piloted
+   2026-10-20 on the two stages in the org catalog that currently gate on
+   LAW-10.5 — WF-FEATURE's `code-review` and WF-BUG's `verify` — and extends
+   automatically to any future stage whose `gates` cites LAW-10.5, since the
+   trigger is the law citation, not a hardcoded stage list (see
+   `docs/proposals/agentic-quality-assurance/design.md` Option 2A and
+   `docs/adr/0004-fresh-context-subagent-dispatch.md`).
+4. **Perform the action**; produce the stage's output with citations. (Per
+   step 3, this runs inside the dispatched subagent when LAW-10.5 gates this
+   stage.)
+5. **Verify exit criteria and gates.** Each gate is a law — check it against
    the actual work, not the intention. A failed gate on a hard stage stops the
    line (LAW-6.2's logic); on a soft stage it stops unless a recorded override
    applies.
-5. **Honor human checkpoints**: `required` means stop and wait — agents never
+6. **Honor human checkpoints**: `required` means stop and wait — agents never
    self-approve through a human checkpoint (LAW-6.1, LAW-7.1). `recommended`
    means offer, and proceed only on explicit or standing instruction.
-6. **Record stage completion** on the work item (one line per stage: persona,
+7. **Record stage completion** on the work item (one line per stage: persona,
    outcome, evidence pointer).
-7. **Emit a board event** (best-effort, non-blocking — see §6) for this
+8. **Emit a board event** (best-effort, non-blocking — see §6) for this
    stage's transition: on entering the stage (step 2), on stopping at a
-   required human checkpoint (step 5), and on completing it (this step).
+   required human checkpoint (step 6), and on completing it (this step).
 
 ## 3. Overrides — conversational, validated, recorded
 

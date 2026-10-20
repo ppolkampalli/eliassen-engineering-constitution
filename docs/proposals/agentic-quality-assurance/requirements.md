@@ -91,10 +91,18 @@ to be asserted in law text but unimplemented in the orchestrator), LAW-10.6
 
 ## Decision Record
 
-**Partially decided.** On 2026-10-20 the user selected **Option 1A** from
-`design.md` Sub-Design 1 (pilot StrykerJS mutation testing on
-`agent-board/src/lib/`) — piloted and merged; see `design.md` Option 1A for
-the real baseline result and `agent-board/README.md`'s "Mutation testing
-pilot (LAW-3.6)" section for how to re-run it. Options 1B, 1C, and all of
-Sub-Designs 2 and 3 **remain undecided** — `prioritize` for those is still
-the user's call to make.
+**Partially decided.** On 2026-10-20 the user selected:
+
+- **Option 1A** from `design.md` Sub-Design 1 (pilot StrykerJS mutation
+  testing on `agent-board/src/lib/`) — piloted and merged; see `design.md`
+  Option 1A for the real baseline result and `agent-board/README.md`'s
+  "Mutation testing pilot (LAW-3.6)" section for how to re-run it.
+- **Option 2A** from `design.md` Sub-Design 2 (structured fresh-subagent
+  dispatch for LAW-10.5-gated stages) — implemented in
+  `skills/workflow-orchestrator/SKILL.md` §2 step 3, recorded in
+  `docs/adr/0004-fresh-context-subagent-dispatch.md`. The implementation
+  corrected the original trigger condition (see that ADR's Decision
+  section) after checking the actual workflow catalog.
+
+Option 1B, Option 1C, Option 2B/2C, and all of Sub-Design 3 **remain
+undecided** — `prioritize` for those is still the user's call to make.

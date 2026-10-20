@@ -52,9 +52,11 @@ reveals the defect is in requirements (the code does what was asked; what was
 asked is wrong), route directly to stage 3.
 
 ### 2. verify — Quality *(hard)*
-Fresh context (LAW-10.5): confirms the original symptom is gone — not merely
-that the new test passes — and that the reproducing test is honest (LAW-3.5).
-The distinction matters: agents under pressure fix the test, not the bug.
+A fresh subagent (LAW-10.5 — `workflow-orchestrator/SKILL.md` §2's
+fresh-context dispatch, piloted 2026-10-20) confirms the original symptom is
+gone — not merely that the new test passes — and that the reproducing test
+is honest (LAW-3.5). The distinction matters: agents under pressure fix the
+test, not the bug.
 
 ### 3. resolve-or-escalate — Product Owner *(conditional)*
 The loop-breaker. When verification fails repeatedly, the root cause exceeds
