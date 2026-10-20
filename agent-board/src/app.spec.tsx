@@ -6,7 +6,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { App } from './app';
 import { parseLog } from './lib/board-model';
 import type { CostReport } from './lib/token-cost-model';
-import type { AdrResponse, EventsResponse } from './lib/types';
+import type { AdrResponse, EventsResponse, StageEvent } from './lib/types';
 
 const FIXTURES_DIR = join(__dirname, '../fixtures');
 
@@ -151,5 +151,28 @@ describe('App against real fixtures', () => {
     fireEvent.click(screen.getByRole('tab', { name: 'ADR Records' }));
     expect(screen.queryByText('JIRA-3411')).toBeNull();
     await waitFor(() => expect(screen.getByText('Body text.')).toBeTruthy());
+  });
+
+  it('switches to the Traceability tab and loads its own matrix from the events feed', async () => {
+    mockFetchOnce(loadFixtureResponse('events.sample.jsonl'));
+    render(<App />);
+    await waitFor(() => expect(screen.getByText('JIRA-3411')).toBeTruthy());
+
+    const stageEvent: StageEvent = {
+      schemaVersion: '1.0',
+      eventType: 'stageEvent',
+      timestamp: '2026-01-01T00:00:00Z',
+      workItem: 'JIRA-9000',
+      workflowId: 'WF-FEATURE',
+      stageId: 'requirements',
+      persona: 'product-owner',
+      status: 'entered',
+      humanCheckpoint: 'none',
+      acceptanceCriteria: [{ id: 'AC-1', text: 'Traceability tab shows the matrix' }],
+    };
+    mockFetchOnce({ events: [stageEvent], skippedCount: 0, mtimeMs: 1 });
+    fireEvent.click(screen.getByRole('tab', { name: 'Traceability' }));
+    expect(screen.queryByText('JIRA-3411')).toBeNull();
+    await waitFor(() => expect(screen.getByText('Traceability tab shows the matrix')).toBeTruthy());
   });
 });

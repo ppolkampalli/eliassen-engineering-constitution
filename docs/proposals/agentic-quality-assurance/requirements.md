@@ -103,6 +103,13 @@ to be asserted in law text but unimplemented in the orchestrator), LAW-10.6
   `docs/adr/0004-fresh-context-subagent-dispatch.md`. The implementation
   corrected the original trigger condition (see that ADR's Decision
   section) after checking the actual workflow catalog.
+- **Option 3A** from `design.md` Sub-Design 3 (requirements traceability
+  tab) — implemented: `acceptanceCriteria`/`testResults` fields on
+  `StageEvent`, `src/lib/traceability-model.ts`, the new Traceability tab,
+  and the emission contract in `workflow-orchestrator/SKILL.md`'s
+  "Traceability fields" section. Recorded in
+  `docs/adr/0005-requirements-traceability-tab.md`, including the honesty
+  requirement the spike's own QA critique demanded.
 
-Option 1B, Option 1C, Option 2B/2C, and all of Sub-Design 3 **remain
-undecided** — `prioritize` for those is still the user's call to make.
+Option 1B, Option 1C, and Option 2B/2C **remain undecided** — `prioritize`
+for those is still the user's call to make.

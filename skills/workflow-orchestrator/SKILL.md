@@ -165,3 +165,36 @@ workflow exactly as if `agent-board/` were not installed. Mirrors LAW-4.6's
 resilience principle — visibility is never a dependency of correctness, and a
 stage, gate, or workflow must never be delayed or failed because its board
 event couldn't be written.
+
+### Traceability fields (`acceptanceCriteria`, `testResults`)
+
+If the project has the Traceability tab installed (`agent-board/README.md`'s
+"Traceability tab" section), two additional optional fields ride on the same
+`stageEvent` — no new event type, no new API route:
+
+- At the stage that writes Acceptance Criteria (typically `requirements`),
+  include `acceptanceCriteria: { id, text }[]` — stable ids assigned once
+  (`AC-1`, `AC-2`, …) and referenced by that id for the rest of the work
+  item's life. A later stage re-declaring `acceptanceCriteria` replaces the
+  set wholesale — don't re-emit it unless the ACs actually changed.
+- At a stage that actually runs the test suite (typically `implement` or
+  `code-review`), include `testResults: { acId, testId, testType, status,
+  testFile? }[]` — **populated only by parsing the test runner's own
+  machine-readable output** (e.g. `jest --json`, a JUnit XML report),
+  **never from a self-reported narrative belief that tests passed.** This is
+  not optional caution: `docs/proposals/agentic-quality-assurance/
+  design.md`'s QA critique of this exact field is that a self-reported
+  status field is "a more elaborate way to display the exact problem this
+  spike started from." Map each real test result to the AC it verifies via
+  a naming convention — prefix the test's description with the AC it
+  verifies, e.g. `it('[AC-1] renders the empty state', ...)` — and parse
+  that tag out of the real result's test name/`fullName`. A test with no
+  `[AC-n]` tag has no traceability entry; don't guess an AC for it. Include
+  `testFile` (the spec file's path relative to the project root) whenever
+  the test-runner output names it — this is what lets a human reviewing the
+  Traceability tab go open and read the actual test, not just trust a
+  status label. A test genuinely not yet written (`status: 'pending'`) has
+  no file to point at yet; omit `testFile` rather than guessing one.
+
+Both fields are additive and optional — a project without this convention
+simply never emits them, and the board's other tabs are unaffected.

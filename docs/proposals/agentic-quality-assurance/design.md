@@ -167,7 +167,7 @@ discrete test result at all. Today, tracing an AC to its test requires a
 human reading free-text blobs across separate stage events and matching
 them by eye.
 
-### Option 3A — Structured schema + new "Traceability" tab
+### Option 3A — Structured schema + new "Traceability" tab — **SELECTED AND IMPLEMENTED, 2026-10-20**
 
 Extend the event schema, additive only (no breaking change to existing
 fields):
@@ -183,9 +183,13 @@ per AC with pass/fail status. `shtracer`'s markdown-tag precedent
 (`findings.md` finding 6) confirms this lightweight, log-based approach over
 a heavyweight ALM tool is proven elsewhere, not a novel risk.
 
-**Requires** a follow-on change to `workflow-orchestrator/SKILL.md` to
-actually emit the new fields — not built in this spike, named here as the
-scoped WF-FEATURE this would become if prioritized.
+**Implemented 2026-10-20**: `src/lib/types.ts` (the two fields),
+`src/lib/traceability-model.ts` (100% coverage), `src/components/
+traceability-board.tsx` (95.34%/86.36% coverage), the new tab wired into
+`app.tsx`, and the corresponding `workflow-orchestrator/SKILL.md` emission
+contract (including the honesty requirement from this section's own QA
+critique, below). Recorded in
+`docs/adr/0005-requirements-traceability-tab.md`.
 
 ### Option 3B — Minimal version: structured sub-fields inside the existing `detail` blob
 
@@ -243,10 +247,10 @@ already has vs. what the research supports adding:
   `WF-FEATURE.md`/`WF-BUG.md` — a real, separately-reviewable change to the
   skill that drives every workflow, recorded in
   `docs/adr/0004-fresh-context-subagent-dispatch.md`.
-- **New, if 3A chosen:** an event-schema extension (additive) + a new
+- **New (3A implemented):** an event-schema extension (additive) + a new
   `agent-board` tab + a `workflow-orchestrator` emission change — the
-  largest of the three sub-designs, warranting its own ADR per LAW-4.5 if
-  prioritized (a structural change to the shared event schema).
+  largest of the three sub-designs, recorded in its own ADR per LAW-4.5
+  (`docs/adr/0005-requirements-traceability-tab.md`).
 - **Unchanged regardless:** every existing law, workflow file, and `agent-
   board` tab — this spike proposes additions, not replacements.
 

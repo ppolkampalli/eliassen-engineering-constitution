@@ -25,6 +25,24 @@ export interface WorkflowSelectedEvent extends EventEnvelope {
   chain?: string;
 }
 
+export interface AcceptanceCriterion {
+  id: string;
+  text: string;
+}
+
+export type TestType = 'unit' | 'integration' | 'e2e';
+
+export type TestStatus = 'pass' | 'fail' | 'pending';
+
+export interface TestResult {
+  acId: string;
+  testId: string;
+  testType: TestType;
+  status: TestStatus;
+  /** The spec file this test lives in (e.g. `src/lib/segment-model.spec.ts`), so a human can go open and review it directly. */
+  testFile?: string;
+}
+
 export interface StageEvent extends EventEnvelope {
   eventType: 'stageEvent';
   stageId: string;
@@ -32,6 +50,10 @@ export interface StageEvent extends EventEnvelope {
   status: StageStatus;
   humanCheckpoint: HumanCheckpoint;
   hard?: boolean;
+  /** Declared once (typically at `requirements`), with stable ids referenced by `testResults.acId` for the rest of the work item's life. */
+  acceptanceCriteria?: AcceptanceCriterion[];
+  /** Populated only from a real test-runner's machine-readable output — never a self-reported claim. See agent-board/README.md's Traceability tab section. */
+  testResults?: TestResult[];
 }
 
 export interface DeviationEvent extends EventEnvelope {

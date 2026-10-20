@@ -144,6 +144,14 @@ Additional fields by `eventType`:
 - `status` (string, required) — one of `entered`, `blocked`, `complete`
 - `humanCheckpoint` (string, required) — one of `none`, `recommended`, `required`
 - `hard` (boolean, optional) — whether this is a hard (non-overridable) stage
+- `acceptanceCriteria` (`{ id: string, text: string }[]`, optional) — see
+  "Traceability tab" below
+- `testResults` (`{ acId: string, testId: string, testType: 'unit' |
+  'integration' | 'e2e', status: 'pass' | 'fail' | 'pending', testFile?:
+  string }[]`, optional) — see "Traceability tab" below. One AC maps to
+  many tests (any number of unit/integration/e2e entries can share the same
+  `acId`); `testFile` is the spec file's path, shown so a reviewer can go
+  open the actual test.
 
 **`deviation`** — emitted when a soft stage is overridden:
 - `stageId` (string, required)
@@ -299,6 +307,49 @@ sorts correctly as a plain string sort).
   on every tick, not a compact event log.
 - Read-only — no editing or writing from the UI.
 
+## Traceability tab
+
+A fifth tab, answering the traditional-SDLC question "Product Requirement →
+Acceptance Criteria → Testing — which ACs does this work item have, and does
+each one actually have a passing test?" Derived entirely from the same
+`GET /api/events` response every other tab already polls — **no new server
+route** — via two new optional `stageEvent` fields (see "Event schema"
+above) and a pure client-side join
+(`src/lib/traceability-model.ts`, 100% test coverage).
+
+- **Layout**: a work-item selector across the top (defaults to whichever
+  work item's latest event is most recent), an Acceptance-Criteria left-nav
+  for the selected work item, and a right pane showing that AC's test
+  results grouped by type (unit/integration/e2e). **One AC maps to many
+  tests** — every test reported against an AC is listed (not summarized
+  away), each with a pass/fail/pending status chip, the test's name, and —
+  when the orchestrator reported one — the spec file it lives in, so a
+  human can go open and read the actual test rather than trust the status
+  label alone.
+- **The honesty requirement, stated plainly**: `testResults[].status` is
+  only meaningful if it traces back to a real test-runner exit code. This
+  tab has no way to verify that on its own — it renders whatever
+  `workflow-orchestrator` emits. See `skills/workflow-orchestrator/
+  SKILL.md`'s "Traceability fields" section for the actual emission
+  contract (parse real `jest --json`-style output, tag test names with the
+  AC they verify, e.g. `it('[AC-1] renders the empty state', ...)`; never a
+  self-reported belief that a test passed). Without that discipline on the
+  write side, this tab is a more elaborate way to display an unverified
+  claim — a risk named explicitly in `docs/proposals/
+  agentic-quality-assurance/design.md`'s QA critique of this feature.
+- **An AC with no test results yet** renders "No test results reported yet
+  for AC-n," not an error or a false "pending" status for tests that were
+  never declared.
+- **No work items with any `acceptanceCriteria` yet** → "No acceptance
+  criteria reported yet for `<workItem>`." **No work items at all** → "No
+  work items yet." Same non-error, non-blocking posture as every other tab.
+
+To try it manually against a hand-written log:
+
+```bash
+AGENT_BOARD_LOG=/path/to/a/log/with/acceptanceCriteria-and-testResults.jsonl npm run preview
+```
+
 ## Directory layout
 
 ```
@@ -318,11 +369,12 @@ agent-board/
     lib/item-flow-model.ts    # pure per-item event-history-to-flowchart logic (100% test coverage)
     lib/token-cost-model.ts   # pure usage-parsing/attribution/pricing/aggregation (100% test coverage)
     lib/markdown-model.ts     # pure markdown-subset parser for the ADR Records tab (100% test coverage)
+    lib/traceability-model.ts # pure AC-to-test-result join for the Traceability tab (100% test coverage)
     hooks/                    # polling + elapsed-time-ticker hooks; on-demand token-usage fetch
     components/                # Board, Lane, Card, DetailOverlay, ItemFlowChart, ItemStageNode,
                                 # Tabs, ConstitutionCohort, BarCohortChart, WorkflowCohortGraph,
                                 # TokenCostDashboard, TokenCostTimeSeries, TokenCostStatTile,
-                                # AdrRecords, MarkdownView, …
+                                # AdrRecords, MarkdownView, TraceabilityBoard, …
     styles/board.css
   server/
     create-events-handler.ts        # the GET /api/events request handler (100% test coverage)

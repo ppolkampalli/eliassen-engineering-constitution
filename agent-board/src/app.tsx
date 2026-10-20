@@ -8,6 +8,7 @@ import { EmptyState } from './components/empty-state';
 import { StatusBar } from './components/status-bar';
 import { Tabs } from './components/tabs';
 import { TokenCostDashboard } from './components/token-cost-dashboard';
+import { TraceabilityBoard } from './components/traceability-board';
 import { useBoardEvents } from './hooks/use-board-events';
 import { deriveWorkItems, statusMessage } from './lib/board-model';
 
@@ -16,6 +17,7 @@ const TAB_DEFS = [
   { id: 'cohort', label: 'Constitution Cohort' },
   { id: 'tokenCost', label: 'Token & Cost' },
   { id: 'adr', label: 'ADR Records' },
+  { id: 'traceability', label: 'Traceability' },
 ];
 
 export function App(): JSX.Element {
@@ -36,6 +38,7 @@ export function App(): JSX.Element {
         {activeTab === 'cohort' && <ConstitutionCohort events={events} workItems={workItems} />}
         {activeTab === 'tokenCost' && <TokenCostDashboard />}
         {activeTab === 'adr' && <AdrRecords />}
+        {activeTab === 'traceability' && <TraceabilityBoard />}
         {activeTab === 'kanban' &&
           (workItems.size === 0 ? <EmptyState /> : <Board workItems={workItems} onSelect={setSelectedWorkItem} />)}
       </main>
