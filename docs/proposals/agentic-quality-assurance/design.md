@@ -26,18 +26,29 @@ relabeling judgment as automation). The target is narrower and sharper:
 **the two mechanisms this constitution already designed for the self-grading
 problem, but never built.**
 
-### Option 1A — Pilot StrykerJS mutation testing on `agent-board/src/lib/`
+### Option 1A — Pilot StrykerJS mutation testing on `agent-board/src/lib/` — **SELECTED AND PILOTED, 2026-10-20**
 
 LAW-3.6 already specifies Stryker and already says "JS/TS calibration is
 pending pilot" (`findings.md` Part A). `agent-board/src/lib/` is the natural
 pilot target: it's the one directory already held to 100% coverage, so a
 mutation score baseline there is meaningful rather than noise.
-- **Cost:** low — one `stryker.conf.json`, one new CI job, run against one
-  directory first.
+- **Cost:** low — `stryker.conf.json` + `@stryker-mutator/core`/
+  `jest-runner` (Apache-2.0, LAW-9.4 clean), no new CI job (deliberately —
+  see below).
 - **What it catches:** the exact failure mode LAW-3.6 cites (coverage %
   high, mutation score near-zero, tests that run code without asserting
   anything real) — the deterministic complement to LAW-3.5's judgment-only
   "no hollow tests" review today.
+- **Real result**: 92.22% mutation score, not near-zero — this repo's
+  existing `src/lib/` tests are substantively real, not hollow, though not
+  perfect (68 survived mutants across 5 files; `markdown-model.ts` lowest at
+  85.79%). This is itself evidence *against* the worst-case self-grading
+  failure mode for this specific codebase, while still surfacing concrete,
+  individually-named gaps 100% coverage alone didn't show. Full breakdown:
+  `agent-board/README.md`'s "Mutation testing pilot" section.
+- **No CI gate added.** Per the QA critique below, `thresholds.break` is
+  `null` — informational only, until a deliberate follow-up decision sets a
+  real floor against this now-real baseline.
 
 ### Option 1B — CI check for the `[Claude-assisted]` commit tag
 

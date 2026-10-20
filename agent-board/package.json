@@ -11,6 +11,7 @@
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "mutation-test": "stryker run",
     "format": "prettier --write src server"
   },
   "dependencies": {
@@ -23,6 +24,8 @@
     "recharts": "3.10.1"
   },
   "devDependencies": {
+    "@stryker-mutator/core": "10.0.0",
+    "@stryker-mutator/jest-runner": "10.0.0",
     "@testing-library/react": "14.3.1",
     "@types/jest": "29.5.13",
     "@types/node": "20.16.10",

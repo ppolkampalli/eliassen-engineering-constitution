@@ -91,7 +91,10 @@ to be asserted in law text but unimplemented in the orchestrator), LAW-10.6
 
 ## Decision Record
 
-**Not yet made.** `prioritize` (Product Owner, hard, human checkpoint) is the
-user's call: select, sequence, or decline any option in `design.md`. This
-document plus `findings.md` and `design.md` are the complete
-framing/investigate/ideate record.
+**Partially decided.** On 2026-10-20 the user selected **Option 1A** from
+`design.md` Sub-Design 1 (pilot StrykerJS mutation testing on
+`agent-board/src/lib/`) — piloted and merged; see `design.md` Option 1A for
+the real baseline result and `agent-board/README.md`'s "Mutation testing
+pilot (LAW-3.6)" section for how to re-run it. Options 1B, 1C, and all of
+Sub-Designs 2 and 3 **remain undecided** — `prioritize` for those is still
+the user's call to make.

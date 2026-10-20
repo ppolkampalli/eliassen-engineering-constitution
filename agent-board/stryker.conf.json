@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "LAW-3.6 pilot, scoped to src/lib only per docs/proposals/agentic-quality-assurance/design.md Option 1A. thresholds.break is intentionally null: no blocking floor until a real baseline score exists.",
+  "packageManager": "npm",
+  "testRunner": "jest",
+  "coverageAnalysis": "off",
+  "mutate": ["src/lib/**/*.ts", "!src/lib/**/*.spec.ts"],
+  "jest": {
+    "projectType": "custom",
+    "configFile": "jest.config.js",
+    "enableFindRelatedTests": true
+  },
+  "reporters": ["clear-text", "progress", "html"],
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": null
+  }
+}

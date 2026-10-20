@@ -304,6 +304,7 @@ sorts correctly as a plain string sort).
 ```
 agent-board/
   package.json, tsconfig.json, vite.config.ts, jest.config.js, .eslintrc.json
+  stryker.conf.json           # mutation-testing pilot config (LAW-3.6), scoped to src/lib/
   index.html                  # Vite entry shell
   model-pricing.json           # user-editable $/MTok rate table for the Token & Cost tab
   fixtures/                   # sample JSONL logs, used by tests and for manual testing
@@ -382,6 +383,39 @@ AGENT_BOARD_TRANSCRIPTS_ROOT=fixtures/transcripts-demo \
 AGENT_BOARD_PROJECT_CWD=/Users/demo/crm-project \
 npm run preview -- --port 4199
 ```
+
+## Mutation testing pilot (LAW-3.6)
+
+LAW-3.6 requires mutation testing but its own text says JS/TS calibration is
+"pending pilot" — this is that pilot, scoped to `src/lib/` only (the one
+directory already held to 100% line/branch coverage, so a mutation score is
+meaningful here rather than noise). See `docs/proposals/
+agentic-quality-assurance/design.md` Option 1A for why this directory and
+why a pilot, not a blanket mandate.
+
+```bash
+npm run mutation-test   # runs Stryker (@stryker-mutator/core + jest-runner), config: stryker.conf.json
+```
+
+**Baseline result** (first real run, not a guessed number): **92.22%**
+mutation score across `src/lib/`'s 5 files, 582 killed / 68 survived / 224
+timeout mutants. Per-file: `cohort-model.ts` 98.28%, `token-cost-model.ts`
+94.62%, `board-model.ts` 94.01%, `item-flow-model.ts` 87.76%,
+`markdown-model.ts` 85.79%. The full breakdown (which specific lines
+survived, e.g. a `??` weakened to `&&`, a `.trim()` dropped, a `!== null`
+check weakened to `true`) is in the generated HTML report
+(`reports/mutation/mutation.html`, gitignored, regenerate via the script
+above) — each survived mutant is a concrete, real test-quality gap that
+100% line/branch coverage alone did not surface.
+
+**This is intentionally not a CI gate yet.** `stryker.conf.json`'s
+`thresholds.break` is `null` — the run reports a score, it does not fail a
+build. Per the QA-persona critique in `design.md`: setting a blocking floor
+before a real baseline existed would have repeated the exact mistake this
+pilot exists to avoid (a number that looks rigorous but was never
+calibrated). Whether and where to set a blocking floor, and whether to wire
+this into CI, is a separate, explicit follow-up decision — not made by this
+pilot.
 
 ## What this is not (scope)
 

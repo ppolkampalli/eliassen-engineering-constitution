@@ -7,6 +7,10 @@ user-training-onboarding/dist/
 crm-demo/dist/
 agent-board/dist/
 
+# Stryker mutation-testing output (regenerable via `npm run mutation-test`)
+.stryker-tmp/
+agent-board/reports/
+
 # Generated knowledge-graph output (regenerable via /graphify)
 graphify-out/
 
