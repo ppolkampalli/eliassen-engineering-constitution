@@ -12,6 +12,25 @@ project-local `workflows/` overrides taking precedence by ID.
 
 ## 1. Select
 
+- **Check for prior history first** (resume detection — see
+  `docs/proposals/agentic-context-management/design.md` Option 1A,
+  recorded in `docs/adr/0006-workflow-resume-from-existing-logs.md`):
+  before treating a work item as a fresh start, check for existing state.
+  If `agent-board/` is installed, read `.claude/board/events.local.jsonl`
+  for any event matching this work item's id. If `memory-service` is
+  installed, call `query_decisions({ workItem })`. Either returns prior
+  events or decisions → this is a **resume**, not a fresh start:
+  reconstruct the acceptance criteria, completed stages, and recorded
+  decisions from what's found, and announce it as a resume (format below),
+  continuing from the latest recorded stage rather than re-running the
+  chain from the top. Reconstruction is incomplete (only one source has
+  data, or neither tool is installed) → say so explicitly rather than
+  silently assuming completeness (LAW-7.5): *"No prior stage history found
+  for JIRA-3411; treating as a fresh start"* or *"Partial history found: 4
+  stage events, no decision log — confirm before proceeding."* This check
+  is best-effort like §6's board events — if neither tool is installed or
+  the read fails, proceed as a fresh start exactly as before this step
+  existed (LAW-4.6).
 - Match the work item to a workflow trigger, or accept an explicit selection
   ("run WF-BUG on JIRA-3411").
 - Resolution order: project-local `workflows/WF-*.md` → installed org catalog.
@@ -19,7 +38,7 @@ project-local `workflows/` overrides taking precedence by ID.
   validation** (below).
 - No matching workflow? Say so and propose the closest fit or a custom
   sequence; never silently invent a process for governed work.
-- Announce the selection and the planned chain before executing:
+- Announce the selection and the planned chain before executing (fresh start):
 
 ```text
 WORKFLOW: WF-BUG v1.0 on JIRA-3411
@@ -28,8 +47,19 @@ CHAIN: software-engineer(reproduce-and-fix*) → quality(verify*)
 (* = hard stage)
 ```
 
+Or, when resuming:
+
+```text
+RESUMING: WF-FEATURE v1.0 on JIRA-3411 — last recorded stage: code-review
+(status: blocked, human_checkpoint: required)
+RECONSTRUCTED: 5 acceptance criteria (requirements), test list
+(test-definition), diff evidence (implement)
+Continuing from code-review.
+```
+
 If `agent-board/` is installed in the project, emit a `workflowSelected`
-board event here (see §6).
+board event here (see §6) for a fresh start only — a resume does not
+re-announce the chain as newly selected.
 
 ## 2. Execute
 
