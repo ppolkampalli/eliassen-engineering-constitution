@@ -110,6 +110,7 @@ describe('GetStartedPage', () => {
 
   it('should render console blocks for steps that have commands', () => {
     renderPage(<GetStartedPage />);
-    expect(screen.getByText(/install\.sh \/path\/to\/your-project/)).toBeTruthy();
+    // Two matches: the Claude Code command and the Cursor (--ide cursor) variant.
+    expect(screen.getAllByText(/install\.sh \/path\/to\/your-project/).length).toBeGreaterThan(0);
   });
 });

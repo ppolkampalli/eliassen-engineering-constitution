@@ -184,6 +184,24 @@ Every call across a network boundary gets timeouts, bounded retries with jitter,
         lawRefs: ['LAW-4.1', 'LAW-4.5', 'LAW-4.6'],
       },
       {
+        id: 'greenfield-cursor',
+        title: 'Using Cursor instead of Claude Code',
+        body: `The constitution is not tied to one coding tool. LAW-7.4 says the standards are identical no matter who — or what agent — is doing the work; the installer honors that for Cursor users too.
+
+AGENTS.md needs nothing extra: Cursor reads it natively at your project root (and in subdirectories), so every build/test command, naming rule, and Article 10 agentic rule in it already applies the moment install.sh runs — regardless of which --ide flag you pass.
+
+The one real gap is the 17 skills (8 personas, workflow-orchestrator, and the enforcement skills), which are built on Claude Code's own skill format. Installing with --ide cursor converts each one into Cursor's own mechanisms instead of copying .claude/skills/:
+
+- .cursor/rules/*.mdc — auto-attaches by description, the same way a Claude skill auto-activates
+- .cursor/commands/*.md — explicit /persona-security, /workflow-orchestrator, etc.
+
+./scripts/install.sh /path/to/your-project --ide cursor
+./scripts/install.sh /path/to/your-project --ide both   # mixed Claude Code / Cursor team
+
+Both are generated from the exact same skills/*/SKILL.md source — not a separately maintained copy — so the personas, the authority ladder, and the workflow gates a Cursor user sees are the same ones a Claude Code user sees, word for word.`,
+        lawRefs: ['LAW-7.4', 'LAW-1.3', 'LAW-10.4'],
+      },
+      {
         id: 'greenfield-reliability',
         title: 'SLOs and error budgets from day one',
         body: `Before your service takes production traffic, write its SLO document: availability and latency targets for the critical user journeys, each with a measured SLI, signed off by product, development, and operations.
@@ -264,6 +282,20 @@ And test recovery before you need it: rollback, failover, and restore are exerci
         explanation:
           'LAW-9.6: the budget converts reliability-vs-velocity from a per-incident negotiation into a pre-agreed contract. Agreeing during an incident is renegotiation under pressure — prohibited.',
         lawRef: 'LAW-9.6',
+      },
+      {
+        id: 'greenfield-q6',
+        prompt: 'A teammate uses Cursor instead of Claude Code. Does the constitution apply to them?',
+        options: [
+          'No — the personas and workflows are Claude Code-only',
+          'Yes — AGENTS.md already works natively in Cursor, and --ide cursor converts the 17 skills into .cursor/rules and .cursor/commands from the same source files',
+          'Only the law registry, not the personas or workflows',
+          'Only if they manually rewrite each skill for Cursor',
+        ],
+        correctIndex: 1,
+        explanation:
+          'LAW-7.4: standards are identical regardless of tool. install.sh --ide cursor generates .cursor/rules/*.mdc and .cursor/commands/*.md from the same skills/*/SKILL.md source Claude Code uses — not a separately maintained fork.',
+        lawRef: 'LAW-7.4',
       },
     ],
   },

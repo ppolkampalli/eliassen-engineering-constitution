@@ -57,6 +57,16 @@ cd engineering-constitution
 
 The installer copies CLAUDE.md and AGENTS.md, tooling configs, the pre-commit hook, CI workflows, the PR template, all Claude skills (including personas), checklists, and the law registry (`docs/constitution/`) into your project, then prints the devDependencies and package.json scripts to add.
 
+**Using Cursor instead of Claude Code?** `AGENTS.md` already works there natively — for the
+personas, workflow orchestrator, and enforcement skills, pass `--ide cursor` (or `--ide both`
+for a mixed-IDE team):
+
+```bash
+./scripts/install.sh /path/to/your-project --ide cursor
+```
+
+See the [Cursor install guide](docs/cursor-install.md).
+
 ### Validate an installation
 
 ```bash

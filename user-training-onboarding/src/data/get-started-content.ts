@@ -23,13 +23,15 @@ export const startSteps: StartStep[] = [
     id: 'install',
     title: 'Install the constitution into your project',
     narrative:
-      'One command delivers the whole kit: lint/type/test configs, the pre-commit hook, CI workflows, the PR template, eight personas, every enforcement skill, both agent steering files, and the full law registry for offline citation. No meetings about coding standards. Ever. (Want just the personas and skills to develop with — not the full stack? Install the Claude Code plugin instead, second command below.)',
+      'One command delivers the whole kit: lint/type/test configs, the pre-commit hook, CI workflows, the PR template, eight personas, every enforcement skill, both agent steering files, and the full law registry for offline citation. No meetings about coding standards. Ever. (Want just the personas and skills to develop with — not the full stack? Install the Claude Code plugin instead, second command below. On Cursor instead of Claude Code? Same installer, add --ide cursor — see the Cursor lesson in the Greenfield module.)',
     commands: [
       'git clone <engineering-constitution-repo>',
       './engineering-constitution/scripts/install.sh /path/to/your-project',
       '# — or, for the agentic layer only, inside Claude Code —',
       '/plugin marketplace add ppolkampalli/eliassen-engineering-constitution',
       '/plugin install engineering-constitution',
+      '# — or, on Cursor —',
+      './engineering-constitution/scripts/install.sh /path/to/your-project --ide cursor',
     ],
     checkpoint: 'install.sh reports ~36 files installed; or the plugin shows 17 skills available.',
     lawRefs: ['LAW-1.3'],

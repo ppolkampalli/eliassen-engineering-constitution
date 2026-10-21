@@ -77,6 +77,29 @@ Then every agent in that project gets the six tools. In a multi-agent platform,
 give the same stdio command to each agent so they share one memory and one decision
 log — the architecture in Figure 2 of the article.
 
+**Cursor (project scope):** same `mcpServers` shape, different file —
+`.cursor/mcp.json` at your project root (or `~/.cursor/mcp.json` for user
+scope, available in every project):
+
+```json
+{
+  "mcpServers": {
+    "constitution-memory": {
+      "command": "node",
+      "args": ["./memory-service/dist/server.js"],
+      "env": {
+        "CONSTITUTION_ROOT": "./docs/constitution-source",
+        "MEMORY_LOG_PATH": "./.memory/decisions.local.jsonl"
+      }
+    }
+  }
+}
+```
+
+See [docs/cursor-install.md](../docs/cursor-install.md) for the rest of the
+Cursor install path (personas, workflow orchestrator, and enforcement skills
+as `.cursor/rules/`/`.cursor/commands/`).
+
 ## How this maps to the article
 
 - **Figure 2 (Central Memory Service):** this server is the MemoryGraph. The “57

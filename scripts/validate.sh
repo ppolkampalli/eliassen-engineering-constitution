@@ -125,6 +125,16 @@ else
 fi
 
 echo ""
+echo "Cursor IDE support (optional — only checked if .cursor/ was installed)"
+if [ -d "$TARGET/.cursor" ]; then
+  check_file ".cursor/rules/persona-security.mdc"
+  check_file ".cursor/rules/workflow-orchestrator.mdc"
+  check_file ".cursor/commands/workflow-orchestrator.md"
+else
+  echo "  SKIP  .cursor/ not present — install with --ide cursor|both to enable"
+fi
+
+echo ""
 if [ $fails -eq 0 ]; then
   echo "RESULT: PASS ($checks checks)"
   exit 0

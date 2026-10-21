@@ -39,7 +39,7 @@ describe('LearningPathPage', () => {
   it('should show module progress advancing when units complete', () => {
     renderModule('greenfield');
     fireEvent.click(screen.getAllByText('Mark lesson complete')[0] as HTMLElement);
-    // greenfield: 5 lessons + 1 quiz = 6 units; 1 done ≈ 17%
-    expect(screen.getAllByText('17%').length).toBeGreaterThan(0);
+    // greenfield: 6 lessons + 1 quiz = 7 units; 1 done ≈ 14%
+    expect(screen.getAllByText('14%').length).toBeGreaterThan(0);
   });
 });
